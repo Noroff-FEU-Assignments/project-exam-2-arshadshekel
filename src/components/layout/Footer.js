@@ -1,9 +1,9 @@
 import React from "react";
-import facebook from "../../images/facebook.png";
-import twitter from "../../images/twitter.png";
-import instagram from "../../images/instagram.png";
 import { LinkContainer } from "react-router-bootstrap";
-import { Link } from "react-router-dom";
+import { Nav } from "react-bootstrap";
+import { FaFacebookF } from "react-icons/fa";
+import { FaTwitter } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
 
 function Footer() {
   return (
@@ -11,13 +11,13 @@ function Footer() {
       <div className="footer-content container">
         <span>About HoliDaze</span>
         <LinkContainer to="/contact-us">
-          <Link className="footer-link">Contact admin</Link>
+          <Nav.Link className="footer-link">Contact admin</Nav.Link>
         </LinkContainer>
         <span>Frequently asked questions</span>
         <div className="footer-content-socials">
-          <img src={facebook} alt="facebook social" />
-          <img src={twitter} alt="twitter social" />
-          <img src={instagram} alt="instagram social" />
+          <FaFacebookF />
+          <FaTwitter />
+          <FaInstagram />
         </div>
       </div>
       <span className="footer-copyright text-center">

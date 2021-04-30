@@ -1,0 +1,53 @@
+.jumbotron-img {
+    background-image: url("../../images/bergen.jpg");
+    background-size: cover;
+    height: 90vh;
+    margin-bottom: 0px;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+h2 {
+    color: $color-primary;
+    text-align: center;
+}
+
+.jumbotron-content {
+    text-align: center;
+}
+
+.landingpage-title {
+    font-size: 78px;
+}
+
+.landingpage-subtitle {
+    font-size: 48px;
+    color: white;
+}
+
+.hotel-card {
+    padding: 16px;
+    border: 1px solid rgb(226, 226, 226);
+    display: flex;
+    margin-bottom: 16px;
+
+    &:hover {
+        box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+        cursor: pointer;
+    }
+}
+
+.hotel-card-img {
+    width: 200px;
+    height: 100%;
+}
+
+@media only screen and (max-width: 824px) {
+    .hotel-card {
+        flex-direction: column;
+    }
+    .hotel-card-img {
+        margin-bottom: 30px;
+    }
+}

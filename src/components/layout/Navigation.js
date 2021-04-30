@@ -1,6 +1,6 @@
 import { Navbar, Nav } from "react-bootstrap";
-import loginLogo from "../../images/login.png";
 import logo from "../../images/logo.svg";
+import { FaUserCircle } from "react-icons/fa";
 
 import { LinkContainer } from "react-router-bootstrap";
 
@@ -25,10 +25,12 @@ function Navigation() {
             </LinkContainer>
           </Nav>
           <LinkContainer to="/login">
-            <Nav.Link>
-              <img src={loginLogo} alt="login logo" className="mr-3" />
-              Login
-            </Nav.Link>
+            <Nav>
+              <Nav.Link className="px-0">
+                <FaUserCircle className="mr-2 login-icon" />
+                LOGIN
+              </Nav.Link>
+            </Nav>
           </LinkContainer>
         </Navbar.Collapse>
       </Navbar>

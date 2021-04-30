@@ -1,28 +1,83 @@
-import { Jumbotron, Button, Container } from "react-bootstrap";
-import bgimage from "../../images/bergen.jpg";
+import {
+  Jumbotron,
+  Container,
+  InputGroup,
+  FormControl,
+  Row,
+  Col,
+} from "react-bootstrap";
+
+import { useEffect, useState } from "react";
+import { API } from "../../constants/Api";
+
+import { FaSearch } from "react-icons/fa";
+import Hotelcard from "../hotelcard/Hotelcard";
 
 function HomePage() {
+  const [hotels, setHotels] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(
+    function () {
+      async function fetchData() {
+        try {
+          const response = await fetch(API);
+
+          if (response.ok) {
+            const json = await response.json();
+            console.log(json);
+            setHotels(json);
+            console.log(hotels);
+          } else {
+            setError("An error occured");
+          }
+        } catch (error) {
+          setError(error.toString());
+        } finally {
+          setLoading(false);
+        }
+      }
+      fetchData();
+    },
+    []
+  );
+
   return (
     <div>
-      <Jumbotron
-        style={{
-          backgroundImage: `url(${bgimage})`,
-          backgroundSize: "cover",
-                  height: "calc(90vh)",
-                  marginBottom: "0px",
-        }}
-      >
-        <Container>
-          <h1>Hello, world!</h1>
-          <p>
-            This is a simple hero unit, a simple jumbotron-style component for
-            calling extra attention to featured content or information.
-          </p>
-          <p>
-            <Button variant="primary">Learn more </Button>
-          </p>
+      <Jumbotron className="jumbotron-img">
+        <Container className="jumbotron-content">
+          <h1 className="landingpage-title">DISCOVER BERGEN</h1>
+          <h2 className="landingpage-subtitle">Book a hotel today!</h2>
+
+          <InputGroup className="my-5">
+            <InputGroup.Prepend>
+              <InputGroup.Text>
+                <FaSearch />
+              </InputGroup.Text>
+            </InputGroup.Prepend>
+            <FormControl aria-label="Amount (to the nearest dollar)" />
+          </InputGroup>
         </Container>
       </Jumbotron>
+      <h2 className="my-5 font-weight-bold">Some featured hotels</h2>
+      <div className="px-5">
+        <Row>
+          {hotels.map((hotel) => {
+            return (
+              <Col xs={12} xl={6}>
+                <Hotelcard
+                  key={hotel.id}
+                  id={hotel.id}
+                  name={hotel.name}
+                  email={hotel.name}
+                  picture={hotel.picture.url}
+                />
+              </Col>
+            );
+          })}
+        </Row>
+      </div>
     </div>
   );
 }
