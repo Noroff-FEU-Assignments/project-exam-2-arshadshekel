@@ -14,11 +14,11 @@ function Footer() {
           <Nav.Link className="footer-link">Contact admin</Nav.Link>
         </LinkContainer>
         <span>Frequently asked questions</span>
-        <div className="footer-content-socials">
+        <span className="footer-content-socials">
           <FaFacebookF />
           <FaTwitter />
           <FaInstagram />
-        </div>
+        </span>
       </div>
       <span className="footer-copyright text-center">
         Copyright © Holidaze - Exam project by Arshad Shakil

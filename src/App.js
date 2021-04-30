@@ -6,6 +6,7 @@ import Hotels from "./components/pages/Hotels";
 import "./sass/style.scss";
 import ContactUs from "./components/pages/ContactUs";
 import Hoteldetails from "./components/hotel/Hoteldetails";
+import Login from "./components/login/Login";
 
 function App() {
   return (
@@ -20,7 +21,8 @@ function App() {
           <HomePage />
         </Route>
         <Route exact path="/hotels">
-          <Hotels />
+          
+          <Login />
         </Route>
         <Route path="/hotels/:id">
           <Hoteldetails />

@@ -1,10 +1,17 @@
-import { Navbar, Nav } from "react-bootstrap";
+import { Navbar, Nav, Modal, Button } from "react-bootstrap";
 import logo from "../../images/logo.svg";
 import { FaUserCircle } from "react-icons/fa";
+import { useState } from "react";
+import Login  from "../login/Login";
 
 import { LinkContainer } from "react-router-bootstrap";
 
 function Navigation() {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
     <div className="container">
       <Navbar expand="lg" className="px-0">
@@ -24,7 +31,7 @@ function Navigation() {
               <Nav.Link>CONTACT US</Nav.Link>
             </LinkContainer>
           </Nav>
-          <LinkContainer to="/login">
+          <LinkContainer to="/login" onClick={handleShow}>
             <Nav>
               <Nav.Link className="px-0">
                 <FaUserCircle className="mr-2 login-icon" />
@@ -34,6 +41,27 @@ function Navigation() {
           </LinkContainer>
         </Navbar.Collapse>
       </Navbar>
+
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Login</Modal.Title>
+        </Modal.Header>
+        <Modal.Body></Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Login
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }
