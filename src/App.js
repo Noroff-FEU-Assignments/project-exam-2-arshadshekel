@@ -5,6 +5,7 @@ import HomePage from "./components/pages/HomePage";
 import Hotels from "./components/pages/Hotels";
 import "./sass/style.scss";
 import ContactUs from "./components/pages/ContactUs";
+import Hoteldetails from "./components/hotel/Hoteldetails";
 
 function App() {
   return (
@@ -18,8 +19,11 @@ function App() {
         <Route exact path="/home">
           <HomePage />
         </Route>
-        <Route path="/hotels">
+        <Route exact path="/hotels">
           <Hotels />
+        </Route>
+        <Route path="/hotels/:id">
+          <Hoteldetails />
         </Route>
         <Route path="/contact-us">
           <ContactUs />

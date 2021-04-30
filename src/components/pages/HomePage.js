@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import { API } from "../../constants/Api";
 
 import { FaSearch } from "react-icons/fa";
-import Hotelcard from "../hotelcard/Hotelcard";
+import Hotelcard from "../hotel/Hotelcard";
 
 function HomePage() {
   const [hotels, setHotels] = useState([]);
@@ -26,9 +26,7 @@ function HomePage() {
 
           if (response.ok) {
             const json = await response.json();
-            console.log(json);
             setHotels(json);
-            console.log(hotels);
           } else {
             setError("An error occured");
           }
@@ -42,6 +40,14 @@ function HomePage() {
     },
     []
   );
+
+      if (loading) {
+        return <div className="mt-5">Loading...</div>;
+      }
+
+      if (error) {
+        return <div className="mt-5">An error occured: {error}</div>;
+      }
 
   return (
     <div>
@@ -70,7 +76,7 @@ function HomePage() {
                   key={hotel.id}
                   id={hotel.id}
                   name={hotel.name}
-                  email={hotel.name}
+                  email={hotel.email}
                   picture={hotel.picture.url}
                 />
               </Col>
