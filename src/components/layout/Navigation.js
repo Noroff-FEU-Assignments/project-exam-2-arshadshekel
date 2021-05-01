@@ -1,10 +1,9 @@
-import { Navbar, Nav, Modal, Button } from "react-bootstrap";
+import { Navbar, Nav, Modal } from "react-bootstrap";
 import logo from "../../images/logo.svg";
 import { FaUserCircle } from "react-icons/fa";
 import { useState } from "react";
-import Login  from "../login/Login";
-
 import { LinkContainer } from "react-router-bootstrap";
+import Login from "../login/Login";
 
 function Navigation() {
   const [show, setShow] = useState(false);
@@ -52,15 +51,9 @@ function Navigation() {
         <Modal.Header closeButton>
           <Modal.Title>Login</Modal.Title>
         </Modal.Header>
-        <Modal.Body></Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Login
-          </Button>
-        </Modal.Footer>
+        <Modal.Body>
+          <Login handleClose={handleClose} />
+        </Modal.Body>
       </Modal>
     </div>
   );

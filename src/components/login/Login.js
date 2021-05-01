@@ -1,12 +1,9 @@
-import { useState, useContext } from "react";
+import { useState} from "react";
 import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
 import { LOGINURL } from "../../constants/Api";
-
-
 import Form from "react-bootstrap/Form";
 
 const url = LOGINURL;
@@ -16,17 +13,13 @@ const schema = yup.object().shape({
   password: yup.string().required("Please enter your password"),
 });
 
-export default function Login() {
+export default function Login({handleClose}) {
   const [submitting, setSubmitting] = useState(false);
   const [loginError, setLoginError] = useState(null);
 
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
   });
-
-  const history = useHistory();
-
-
 
   async function onSubmit(data) {
     setSubmitting(true);
@@ -35,9 +28,12 @@ export default function Login() {
     console.log(data);
 
     try {
-        const response = await axios.post(url, data);
-        console.log(response);
-
+      await axios.post(url, data).then((response) => {
+        console.log(response.status);
+        if (response.status === 200) {
+          handleClose();
+        }
+      });
     } catch (error) {
       console.log("error", error);
       setLoginError(error.toString());
@@ -55,7 +51,11 @@ export default function Login() {
         <fieldset disabled={submitting}>
           <Form.Group controlId="exampleForm.ControlInput1">
             <Form.Label>Username</Form.Label>
-            <Form.Control name="identifier" placeholder="arshad" ref={register} />
+            <Form.Control
+              name="identifier"
+              placeholder="admin@admin.com"
+              ref={register}
+            />
             {errors.identifier && (
               <span className="text-danger">{errors.identifier.message}</span>
             )}
@@ -64,7 +64,7 @@ export default function Login() {
             <Form.Label>Password</Form.Label>
             <Form.Control
               name="password"
-              placeholder="password1234"
+              placeholder="Pass1234"
               ref={register}
               type="password"
             />
@@ -74,6 +74,13 @@ export default function Login() {
           </Form.Group>
           <button className="btn btn-primary">
             {submitting ? "Loggin in..." : "Login"}
+          </button>
+          <button
+            variant="secondary"
+            className="btn btn-secondary ml-3"
+            onClick={handleClose}
+          >
+            Close
           </button>
         </fieldset>
       </Form>

@@ -18,36 +18,33 @@ function HomePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(
-    function () {
-      async function fetchData() {
-        try {
-          const response = await fetch(API);
+  useEffect(function () {
+    async function fetchData() {
+      try {
+        const response = await fetch(API);
 
-          if (response.ok) {
-            const json = await response.json();
-            setHotels(json);
-          } else {
-            setError("An error occured");
-          }
-        } catch (error) {
-          setError(error.toString());
-        } finally {
-          setLoading(false);
+        if (response.ok) {
+          const json = await response.json();
+          setHotels(json);
+        } else {
+          setError("An error occured");
         }
+      } catch (error) {
+        setError(error.toString());
+      } finally {
+        setLoading(false);
       }
-      fetchData();
-    },
-    []
-  );
+    }
+    fetchData();
+  }, []);
 
-      if (loading) {
-        return <div className="mt-5">Loading...</div>;
-      }
+  if (loading) {
+    return <div className="mt-5">Loading...</div>;
+  }
 
-      if (error) {
-        return <div className="mt-5">An error occured: {error}</div>;
-      }
+  if (error) {
+    return <div className="mt-5">An error occured: {error}</div>;
+  }
 
   return (
     <div>
@@ -71,9 +68,8 @@ function HomePage() {
         <Row>
           {hotels.map((hotel) => {
             return (
-              <Col xs={12} xl={6}>
+              <Col xs={12} xl={6} key={hotel.id}>
                 <Hotelcard
-                  key={hotel.id}
                   id={hotel.id}
                   name={hotel.name}
                   email={hotel.email}
