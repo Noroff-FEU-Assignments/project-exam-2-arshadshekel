@@ -1,5 +1,4 @@
 import { Button } from "react-bootstrap";
-import { API } from "../../constants/Api";
 import { LinkContainer } from "react-router-bootstrap";
 
 function Hotelcard(props) {

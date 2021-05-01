@@ -6,11 +6,12 @@ import Hotels from "./components/pages/Hotels";
 import "./sass/style.scss";
 import ContactUs from "./components/pages/ContactUs";
 import Hoteldetails from "./components/hotel/Hoteldetails";
-import Login from "./components/login/Login";
+import { AuthProvider } from "./context/AuthContext";
+import AdminPage from "./components/admin/AdminPage"
 
 function App() {
   return (
-    /*    <AuthProvider> */
+    <AuthProvider> 
     <Router>
       <Navigation />
       <Switch>
@@ -21,8 +22,10 @@ function App() {
           <HomePage />
         </Route>
         <Route exact path="/hotels">
-          
-          <Login />
+          <Hotels />
+        </Route>
+        <Route path="/admin">
+          <AdminPage />
         </Route>
         <Route path="/hotels/:id">
           <Hoteldetails />
@@ -33,7 +36,7 @@ function App() {
       </Switch>
       <Footer />
     </Router>
-    /*   </AuthProvider> */
+      </AuthProvider> 
   );
 }
 

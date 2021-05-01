@@ -1,10 +1,11 @@
-import { useState} from "react";
+import { useState, useContext} from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
 import { LOGINURL } from "../../constants/Api";
 import Form from "react-bootstrap/Form";
+import AuthContext from "../../context/AuthContext";
 
 const url = LOGINURL;
 
@@ -21,6 +22,8 @@ export default function Login({handleClose}) {
     resolver: yupResolver(schema),
   });
 
+  const [auth, setAuth] = useContext(AuthContext);
+
   async function onSubmit(data) {
     setSubmitting(true);
     setLoginError(null);
@@ -32,6 +35,7 @@ export default function Login({handleClose}) {
         console.log(response.status);
         if (response.status === 200) {
           handleClose();
+          setAuth(response.data);
         }
       });
     } catch (error) {

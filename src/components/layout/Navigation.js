@@ -1,15 +1,26 @@
 import { Navbar, Nav, Modal } from "react-bootstrap";
 import logo from "../../images/logo.svg";
 import { FaUserCircle } from "react-icons/fa";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import Login from "../login/Login";
+import AuthContext from "../../context/AuthContext";
+import { useHistory } from "react-router-dom";
 
 function Navigation() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const [auth, setAuth] = useContext(AuthContext);
+
+  const history = useHistory();
+
+  function logout() {
+    setAuth(null);
+    history.push("/");
+  }
 
   return (
     <div className="container">
@@ -30,12 +41,33 @@ function Navigation() {
               <Nav.Link>CONTACT US</Nav.Link>
             </LinkContainer>
           </Nav>
-          <LinkContainer to="/login" onClick={handleShow}>
+          <LinkContainer to="/login">
             <Nav>
-              <Nav.Link className="px-0">
-                <FaUserCircle className="mr-2 login-icon" />
-                LOGIN
-              </Nav.Link>
+              {auth ? (
+                <>
+                  <LinkContainer to="/admin" className="pl-lg-3">
+                    <Nav.Link>
+                      ADMIN
+                      <button
+                        onClick={logout}
+                        className="btn-sm btn-primary ml-3 py-0 mr-auto mt-3 mt-lg-0"
+                      >
+                        Log out
+                      </button>
+                    </Nav.Link>
+                  </LinkContainer>
+                  <LinkContainer to="/admin" className="pl-lg-3">
+                    <Nav.Link></Nav.Link>
+                  </LinkContainer>
+                </>
+              ) : (
+                <LinkContainer to="/login" onClick={handleShow}>
+                  <Nav.Link>
+                    <FaUserCircle className="mr-2 login-icon" />
+                    LOGIN
+                  </Nav.Link>
+                </LinkContainer>
+              )}
             </Nav>
           </LinkContainer>
         </Navbar.Collapse>
