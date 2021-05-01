@@ -7,36 +7,36 @@ import "./sass/style.scss";
 import ContactUs from "./components/pages/ContactUs";
 import Hoteldetails from "./components/hotel/Hoteldetails";
 import { AuthProvider } from "./context/AuthContext";
-import AdminPage from "./components/admin/AdminPage"
+import AdminPage from "./components/admin/AdminPage";
 
 function App() {
   return (
-    <AuthProvider> 
-    <Router>
-      <Navigation />
-      <Switch>
-        <Route exact path="/">
-          <HomePage />
-        </Route>
-        <Route exact path="/home">
-          <HomePage />
-        </Route>
-        <Route exact path="/hotels">
-          <Hotels />
-        </Route>
-        <Route path="/admin">
-          <AdminPage />
-        </Route>
-        <Route path="/hotels/:id">
-          <Hoteldetails />
-        </Route>
-        <Route path="/contact-us">
-          <ContactUs />
-        </Route>
-      </Switch>
-      <Footer />
-    </Router>
-      </AuthProvider> 
+    <AuthProvider>
+      <Router>
+        <Navigation />
+        <Switch>
+          <Route exact path="/">
+            <HomePage />
+          </Route>
+          <Route exact path="/home">
+            <HomePage />
+          </Route>
+          <Route exact path="/hotels">
+            <Hotels />
+          </Route>
+          <Route exact path="/admin">
+            <AdminPage />
+          </Route>
+          <Route path="/hotels/:id">
+            <Hoteldetails />
+          </Route>
+          <Route path="/contact-us">
+            <ContactUs />
+          </Route>
+        </Switch>
+        <Footer />
+      </Router>
+    </AuthProvider>
   );
 }
 

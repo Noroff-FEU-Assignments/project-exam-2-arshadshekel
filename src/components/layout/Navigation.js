@@ -1,26 +1,42 @@
-import { Navbar, Nav, Modal } from "react-bootstrap";
+import { Navbar, Nav, Modal, Button } from "react-bootstrap";
 import logo from "../../images/logo.svg";
 import { FaUserCircle } from "react-icons/fa";
-import { useState, useContext } from "react";
+import { useState, useContext, useRef } from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import Login from "../login/Login";
 import AuthContext from "../../context/AuthContext";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 function Navigation() {
   const [show, setShow] = useState(false);
+  const [confirmShow, setConfirmShow] = useState(false);
+  /*   const admin = useRef(null);
+  const adminNode = admin.current; */
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const handleCloseConfirm = () => setConfirmShow(false);
+  const handleOpenConfirm = () => setConfirmShow(true);
+
   const [auth, setAuth] = useContext(AuthContext);
 
   const history = useHistory();
+  const location = useLocation();
 
   function logout() {
     setAuth(null);
     history.push("/");
+    handleCloseConfirm();
   }
+  /* 
+  if (location.pathname === "/admin") {
+    adminNode.classList.add("active");
+  } else {
+    adminNode.classList.remove("active");
+  }
+    /*  (location.pathname === "/admin") ? 
+    : adminNode.classList.remove("active"); */
 
   return (
     <div className="container">
@@ -30,8 +46,8 @@ function Navigation() {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mx-auto">
-            <LinkContainer to="/home">
+          <Nav className="w-100">
+            <LinkContainer to="/home" className="ml-lg-auto">
               <Nav.Link>HOME</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/hotels">
@@ -40,36 +56,35 @@ function Navigation() {
             <LinkContainer to="/contact-us">
               <Nav.Link>CONTACT US</Nav.Link>
             </LinkContainer>
-          </Nav>
-          <LinkContainer to="/login">
-            <Nav>
-              {auth ? (
-                <>
-                  <LinkContainer to="/admin" className="pl-lg-3">
-                    <Nav.Link>
-                      ADMIN
-                      <button
-                        onClick={logout}
-                        className="btn-sm btn-primary ml-3 py-0 mr-auto mt-3 mt-lg-0"
-                      >
-                        Log out
-                      </button>
-                    </Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer to="/admin" className="pl-lg-3">
-                    <Nav.Link></Nav.Link>
-                  </LinkContainer>
-                </>
-              ) : (
-                <LinkContainer to="/login" onClick={handleShow}>
-                  <Nav.Link>
-                    <FaUserCircle className="mr-2 login-icon" />
-                    LOGIN
+
+            {auth ? (
+              <>
+                {console.log(auth)}
+                <LinkContainer to="/admin" className="ml-lg-auto">
+                  <Nav.Link /* ref={admin} */>
+                    {auth.user.username}
+                    <button
+                      onClick={handleOpenConfirm}
+                      className="btn-sm btn-primary ml-3 py-0 mr-auto mt-3 mt-lg-0"
+                    >
+                      Log out
+                    </button>
                   </Nav.Link>
                 </LinkContainer>
-              )}
-            </Nav>
-          </LinkContainer>
+              </>
+            ) : (
+              <LinkContainer
+                to={location.pathname}
+                onClick={handleShow}
+                className="ml-lg-auto"
+              >
+                <Nav.Link>
+                  <FaUserCircle className="mr-2 login-icon" />
+                  LOGIN
+                </Nav.Link>
+              </LinkContainer>
+            )}
+          </Nav>
         </Navbar.Collapse>
       </Navbar>
 
@@ -86,6 +101,28 @@ function Navigation() {
         <Modal.Body>
           <Login handleClose={handleClose} />
         </Modal.Body>
+      </Modal>
+
+      <Modal
+        show={confirmShow}
+        onHide={handleCloseConfirm}
+        backdrop="static"
+        keyboard={false}
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Logout?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Do you wish to log out?</Modal.Body>
+
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseConfirm}>
+            No
+          </Button>
+          <Button variant="primary" onClick={logout}>
+            Yes
+          </Button>
+        </Modal.Footer>
       </Modal>
     </div>
   );
