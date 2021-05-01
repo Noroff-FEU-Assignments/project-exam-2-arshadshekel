@@ -1,18 +1,16 @@
 import { Navbar, Nav, Modal, Button } from "react-bootstrap";
 import logo from "../../images/logo.svg";
 import { FaUserCircle } from "react-icons/fa";
-import { useState, useContext, useRef } from "react";
+import { useState, useContext} from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import Login from "../login/Login";
 import AuthContext from "../../context/AuthContext";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 function Navigation() {
   const [show, setShow] = useState(false);
   const [confirmShow, setConfirmShow] = useState(false);
-  /*   const admin = useRef(null);
-  const adminNode = admin.current; */
-
+ 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -22,28 +20,24 @@ function Navigation() {
   const [auth, setAuth] = useContext(AuthContext);
 
   const history = useHistory();
-  const location = useLocation();
+ 
 
   function logout() {
     setAuth(null);
     history.push("/");
     handleCloseConfirm();
   }
-  /* 
-  if (location.pathname === "/admin") {
-    adminNode.classList.add("active");
-  } else {
-    adminNode.classList.remove("active");
-  }
-    /*  (location.pathname === "/admin") ? 
-    : adminNode.classList.remove("active"); */
+
 
   return (
     <div className="container">
       <Navbar expand="lg" className="px-0">
-        <Navbar.Brand href="#home">
-          <img src={logo} alt="logo" height="50px" className="mt-3" />
-        </Navbar.Brand>
+        <LinkContainer to="/home">
+          <Navbar.Brand>
+            <img src={logo} alt="logo" height="50px" className="mt-3" />
+          </Navbar.Brand>
+        </LinkContainer>
+
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="w-100">
@@ -58,10 +52,9 @@ function Navigation() {
             </LinkContainer>
 
             {auth ? (
-              <>
-                {console.log(auth)}
+            
                 <LinkContainer to="/admin" className="ml-lg-auto">
-                  <Nav.Link /* ref={admin} */>
+                  <Nav.Link>
                     {auth.user.username}
                     <button
                       onClick={handleOpenConfirm}
@@ -71,18 +64,20 @@ function Navigation() {
                     </button>
                   </Nav.Link>
                 </LinkContainer>
-              </>
+              
             ) : (
-              <LinkContainer
-                to={location.pathname}
-                onClick={handleShow}
-                className="ml-lg-auto"
-              >
-                <Nav.Link>
-                  <FaUserCircle className="mr-2 login-icon" />
-                  LOGIN
-                </Nav.Link>
-              </LinkContainer>
+              
+                <LinkContainer
+                  to="/admin"
+                  onClick={handleShow}
+                  className="ml-lg-auto"
+                >
+                  <Nav.Link>
+                    <FaUserCircle className="mr-2 login-icon" />
+                    LOGIN
+                  </Nav.Link>
+                </LinkContainer>
+              
             )}
           </Nav>
         </Navbar.Collapse>
