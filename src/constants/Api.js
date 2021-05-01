@@ -1,4 +1,4 @@
-export const API = "https://vast-brook-39076.herokuapp.com/hotels";
+export const API = "https://vast-brook-39076.herokuapp.com/hotels/";
 export const LOGINURL = "https://vast-brook-39076.herokuapp.com/auth/local";
 
 /*
