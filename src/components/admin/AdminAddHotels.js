@@ -13,11 +13,11 @@ const schema = yup.object().shape({
   Firstname: yup
     .string()
     .required("Please enter your first name")
-    .min(3, "The message must be at least 3 characters"),
+    .min(2, "The name must be at least 2 characters"),
   Lastname: yup
     .string()
     .required("Please enter your last name")
-    .min(4, "The message must be at least 4 characters"),
+    .min(2, "The name must be at least 2 characters"),
   email: yup
     .string()
     .required("Please enter an email address")
@@ -36,20 +36,18 @@ function AdminAddHotels() {
   });
 
   async function onSubmit(data) {
-   
-      
-      console.log(submitted)
+    console.log(submitted);
 
     try {
-        await axios.post(url, data).then((response) => {
-          console.log(response)
+      await axios.post(url, data).then((response) => {
+        console.log(response);
         if (response.status === 200) {
-            setSubmitted(true);
+          setSubmitted(true);
         }
-        });
+      });
     } catch (error) {
-      console.log("error", error)
-    } 
+      console.log("error", error);
+    }
   }
 
   return (

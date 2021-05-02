@@ -3,7 +3,7 @@ import logo from "../../images/logo.svg";
 import { FaUserCircle } from "react-icons/fa";
 import { useState, useContext} from "react";
 import { LinkContainer } from "react-router-bootstrap";
-import Login from "../login/Login";
+import LoginForm from "../forms/LoginForm";
 import AuthContext from "../../context/AuthContext";
 import { useHistory } from "react-router-dom";
 
@@ -94,7 +94,7 @@ function Navigation() {
           <Modal.Title>Login</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Login handleClose={handleClose} />
+          <LoginForm handleClose={handleClose} />
         </Modal.Body>
       </Modal>
 
