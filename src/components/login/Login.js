@@ -1,4 +1,4 @@
-import { useState, useContext} from "react";
+import { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -14,7 +14,7 @@ const schema = yup.object().shape({
   password: yup.string().required("Please enter your password"),
 });
 
-export default function Login({handleClose}) {
+export default function Login({ handleClose }) {
   const [submitting, setSubmitting] = useState(false);
   const [loginError, setLoginError] = useState(null);
 
@@ -22,17 +22,14 @@ export default function Login({handleClose}) {
     resolver: yupResolver(schema),
   });
 
-  const [auth, setAuth] = useContext(AuthContext);
+  const [, setAuth] = useContext(AuthContext);
 
   async function onSubmit(data) {
     setSubmitting(true);
     setLoginError(null);
-
-    console.log(data);
-
+    
     try {
       await axios.post(url, data).then((response) => {
-        console.log(response.status);
         if (response.status === 200) {
           handleClose();
           setAuth(response.data);

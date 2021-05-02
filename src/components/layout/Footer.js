@@ -7,7 +7,7 @@ import { FaInstagram } from "react-icons/fa";
 
 function Footer() {
   return (
-    <div className="footer">
+    <footer className="footer">
       <div className="footer-content container">
         <span>About HoliDaze</span>
         <LinkContainer to="/contact-us">
@@ -23,7 +23,7 @@ function Footer() {
       <span className="footer-copyright text-center">
         Copyright © Holidaze - Exam project by Arshad Shakil
       </span>
-    </div>
+    </footer>
   );
 }
 

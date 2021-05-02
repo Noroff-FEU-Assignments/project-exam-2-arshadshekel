@@ -8,11 +8,12 @@ import ContactUs from "./components/pages/ContactUs";
 import Hoteldetails from "./components/hotel/Hoteldetails";
 import { AuthProvider } from "./context/AuthContext";
 import AdminPage from "./components/admin/AdminPage";
+import AdminAddHotels from "./components/admin/AdminAddHotels";
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
+    <AuthProvider >
+      <Router >
         <Navigation />
         <Switch>
           <Route exact path="/">
@@ -26,6 +27,9 @@ function App() {
           </Route>
           <Route exact path="/admin">
             <AdminPage />
+          </Route>
+          <Route path="/admin/add">
+            <AdminAddHotels/>
           </Route>
           <Route path="/hotels/:id">
             <Hoteldetails />

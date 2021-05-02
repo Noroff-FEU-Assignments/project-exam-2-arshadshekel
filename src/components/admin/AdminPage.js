@@ -1,17 +1,19 @@
 import { React, useContext } from "react";
 import AuthContext from "../../context/AuthContext";
+import AdminDashboard from "./AdminDashboard";
 
 function AdminPage() {
-  const [auth, setAuth] = useContext(AuthContext);
+  const [auth] = useContext(AuthContext);
   return (
     <div>
       {auth ? (
         <div className="container">
-          <h1>Logged in</h1>
+          <AdminDashboard />
         </div>
       ) : (
-        <div className="container">
+        <div className="container text-center">
           <h1>Not Logged in</h1>
+          <p>Please log in to access admin pages</p>
         </div>
       )}
     </div>

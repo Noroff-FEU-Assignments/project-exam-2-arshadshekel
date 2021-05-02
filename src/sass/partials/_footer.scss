@@ -1,6 +1,7 @@
 .footer {
     background: $color-primary;
     color: white;
+      margin-top: auto;
 }
 
 .footer-link {
@@ -41,4 +42,21 @@
         justify-content: flex-start;
         gap: 20px;
     }
+}
+
+/* sticky footer */
+
+html,
+body,
+#root {
+    height: 100vh;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    margin-top: auto;
 }
