@@ -52,7 +52,7 @@ function AdminAddHotels() {
 
   return (
     <div className="container">
-      <h1 className="text-center">Contact us</h1>
+      <h1 className="text-center">Add hotel</h1>
 
       {submitted ? (
         <h1>THanks for submitting</h1>

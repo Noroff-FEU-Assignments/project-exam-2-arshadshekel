@@ -36,7 +36,12 @@ function EnquiryForm({ handleClose, hotelName }) {
   async function onSubmit(data) {
       data.Hotel = hotelName;
     try {
-      await axios.post(url, data);
+      await axios.post(url, data).then((response) => {
+        console.log(response.status);
+        if (response.status === 200) {
+          handleClose();
+        }
+      });;
     } catch (error) {
       console.log("error", error);
     }
@@ -67,8 +72,8 @@ function EnquiryForm({ handleClose, hotelName }) {
         <Form.Group controlId="exampleForm.ControlInput3">
           <Form.Label>Email</Form.Label>
           <Form.Control placeholder="Email" name="Email" ref={register} />
-          {errors.email && (
-            <span className="text-danger">{errors.email.message}</span>
+          {errors.Email && (
+            <span className="text-danger">{errors.Email.message}</span>
           )}
         </Form.Group>
 
