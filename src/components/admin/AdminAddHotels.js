@@ -1,67 +1,64 @@
-import { React, useContext, useState } from "react";
-import AuthContext from "../../context/AuthContext";
+import { React, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button"; 
+import Button from "react-bootstrap/Button";
 import axios from "axios";
-import {CONTACTURL} from "../../constants/Api"
-
+import { CONTACTURL } from "../../constants/Api";
 
 const url = CONTACTURL;
 
 const schema = yup.object().shape({
-    Firstname: yup
-        .string()
-        .required("Please enter your first name")
-        .min(3, "The message must be at least 3 characters"),
-    Lastname: yup
-        .string()
-        .required("Please enter your last name")
-        .min(4, "The message must be at least 4 characters"),
-    email: yup
-        .string()
-        .required("Please enter an email address")
-        .email("Please enter a valid email address"),
-    Message: yup
-        .string()
-        .required("Please enter your message")
-        .min(10, "The message must be at least 10 characters"),
+  Firstname: yup
+    .string()
+    .required("Please enter your first name")
+    .min(3, "The message must be at least 3 characters"),
+  Lastname: yup
+    .string()
+    .required("Please enter your last name")
+    .min(4, "The message must be at least 4 characters"),
+  email: yup
+    .string()
+    .required("Please enter an email address")
+    .email("Please enter a valid email address"),
+  Message: yup
+    .string()
+    .required("Please enter your message")
+    .min(10, "The message must be at least 10 characters"),
 });
 
 function AdminAddHotels() {
-    const [auth,] = useContext(AuthContext);
-    const token = auth.jwt;
-      const [submitting, setSubmitting] = useState(false);
-      const [contactError, setContactError] = useState(null);
+  const [submitted, setSubmitted] = useState(false);
 
-    const { register, handleSubmit, errors } = useForm({
-        resolver: yupResolver(schema),
-    });
+  const { register, handleSubmit, errors } = useForm({
+    resolver: yupResolver(schema),
+  });
 
-    async function onSubmit(data) {
-           setSubmitting(true);
-           setContactError(null);
-    
+  async function onSubmit(data) {
+   
+      
+      console.log(submitted)
+
     try {
-       await axios.post(url, data);
+        await axios.post(url, data).then((response) => {
+          console.log(response)
+        if (response.status === 200) {
+            setSubmitted(true);
+        }
+        });
     } catch (error) {
-      console.log("error", error);
-      setContactError(error.toString());
-    } finally {
-      setSubmitting(false);
-    }
-    }
+      console.log("error", error)
+    } 
+  }
 
-    console.log(errors);
+  return (
+    <div className="container">
+      <h1 className="text-center">Contact us</h1>
 
-
-
-    return (
-      <div className="container">
-        <h1 className="text-center">Contact us</h1>
-
+      {submitted ? (
+        <h1>THanks for submitting</h1>
+      ) : (
         <Form noValidate onSubmit={handleSubmit(onSubmit)}>
           <Form.Group controlId="exampleForm.ControlInput1">
             <Form.Label>First name</Form.Label>
@@ -100,6 +97,7 @@ function AdminAddHotels() {
               as="textarea"
               rows={3}
               name="Message"
+              placeholder="Please enter a message"
               ref={register}
             />
             {errors.Message && (
@@ -107,14 +105,12 @@ function AdminAddHotels() {
             )}
           </Form.Group>
           <Button variant="primary" type="submit">
-            {submitting ? "Submitting..." : "Submit"}
+            Submit
           </Button>
         </Form>
-      </div>
-    );
+      )}
+    </div>
+  );
 }
 
 export default AdminAddHotels;
-
-
-
