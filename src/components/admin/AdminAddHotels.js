@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 import axios from "axios";
 import { ADDHOTELS } from "../../constants/Api";
 import AuthContext from "../../context/AuthContext";
+import  defaultThumbnail from "../../images/hotel-thumbnail.png";
 
 const url = ADDHOTELS;
 
@@ -33,8 +34,8 @@ const schema = yup.object().shape({
 });
 
 function AdminAddHotels() {
-  const [submitted, setSubmitted] = useState(false);
-  const [auth, setAuth] = useContext(AuthContext);
+  
+  const [auth] = useContext(AuthContext);
   const [file, setFile] = useState(null);
 
   const { register, handleSubmit, errors } = useForm({
@@ -47,9 +48,7 @@ function AdminAddHotels() {
 
   async function onSubmit(data) {
     const token = auth.jwt;
-    console.log(file);
-    console.log(token);
-
+ 
     let formData = new FormData();
 
     delete data["picture"];
@@ -57,16 +56,9 @@ function AdminAddHotels() {
     formData.append(`files.picture`, file, file.name);
     formData.append("data", JSON.stringify(data));
 
-    const options = {
-      method: "POST",
-      body: formData,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-
     try {
-      const response = await fetch(url, options);
+      axios.defaults.headers.common = { Authorization: `bearer ${token}` };
+      await axios.post(url, formData);
     } catch (error) {
       console.log("error", error);
     }
@@ -113,6 +105,12 @@ function AdminAddHotels() {
             <span className="text-danger">{errors.Message.message}</span>
           )}
         </Form.Group> */}
+        <img
+          src={file ? URL.createObjectURL(file) : defaultThumbnail}
+          alt={file ? file.name : "Default thumbnail"}
+          height="100%"
+          width="150px"
+        />
         <Form.Group controlId="exampleForm.ControlTextarea1">
           <Form.Label className="custom-file-upload">File</Form.Label>
 
