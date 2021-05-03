@@ -1,20 +1,21 @@
-import { React, useState } from "react";
+import { React, useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
-import { CONTACTURL } from "../../constants/Api";
+import { ADDHOTELS } from "../../constants/Api";
+import AuthContext from "../../context/AuthContext";
 
-const url = CONTACTURL;
+const url = ADDHOTELS;
 
 const schema = yup.object().shape({
-  Firstname: yup
+  name: yup
     .string()
     .required("Please enter your first name")
     .min(2, "The name must be at least 2 characters"),
-  Lastname: yup
+  /*   Lastname: yup
     .string()
     .required("Please enter your last name")
     .min(2, "The name must be at least 2 characters"),
@@ -25,42 +26,49 @@ const schema = yup.object().shape({
   Message: yup
     .string()
     .required("Please enter your message")
-    .min(10, "The message must be at least 10 characters"),
+    .min(10, "The message must be at least 10 characters"), */
+  picture: yup
+    .mixed()
+    .test("fileExists", "Please upload a file", (value) => !!value.length),
 });
 
 function AdminAddHotels() {
   const [submitted, setSubmitted] = useState(false);
-  const [uploadError, setUploadError] = useState(false);
+  const [auth, setAuth] = useContext(AuthContext);
+  const [file, setFile] = useState(null);
 
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
   });
 
+  const handleInputChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
   async function onSubmit(data) {
-    console.log(data.File);
+    const token = auth.jwt;
+    console.log(file);
+    console.log(token);
 
-    if (data.File.length === 0) {
-      setUploadError(true);
-    } else {
-      try {
-        await axios.post(url, data).then((response) => {
-          if (response.status === 200) {
-            setSubmitted(true);
-            console.log("uploaded");
-          }
-        });
-      } catch (error) {
-        console.log("error", error);
-      }
-    }
-  }
+    let formData = new FormData();
 
-  function updateErrorMsg(event) {
-    console.log(event.target.files[0]);
-    if (event.target.files[0] !== undefined) {
-      setUploadError(false);
-    } else {
-      setUploadError(true);
+    delete data["picture"];
+
+    formData.append(`files.picture`, file, file.name);
+    formData.append("data", JSON.stringify(data));
+
+    const options = {
+      method: "POST",
+      body: formData,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    try {
+      const response = await fetch(url, options);
+    } catch (error) {
+      console.log("error", error);
     }
   }
 
@@ -71,16 +79,12 @@ function AdminAddHotels() {
       <Form noValidate onSubmit={handleSubmit(onSubmit)}>
         <Form.Group controlId="exampleForm.ControlInput1">
           <Form.Label>First name</Form.Label>
-          <Form.Control
-            placeholder="Firstname"
-            name="Firstname"
-            ref={register}
-          />
-          {errors.Firstname && (
-            <span className="text-danger">{errors.Firstname.message}</span>
+          <Form.Control placeholder="Firstname" name="name" ref={register} />
+          {errors.name && (
+            <span className="text-danger">{errors.name.message}</span>
           )}
         </Form.Group>
-        <Form.Group controlId="exampleForm.ControlInput2">
+        {/*  <Form.Group controlId="exampleForm.ControlInput2">
           <Form.Label>Last name</Form.Label>
           <Form.Control placeholder="Lastname" name="Lastname" ref={register} />
           {errors.Lastname && (
@@ -108,14 +112,18 @@ function AdminAddHotels() {
           {errors.Message && (
             <span className="text-danger">{errors.Message.message}</span>
           )}
-        </Form.Group>
+        </Form.Group> */}
         <Form.Group controlId="exampleForm.ControlTextarea1">
           <Form.Label className="custom-file-upload">File</Form.Label>
 
-          <Form.Control name="File" type="file" onChange={updateErrorMsg} ref={register}/>
-
-          {uploadError && (
-            <span className="text-danger">Please upload a picture</span>
+          <Form.Control
+            name="picture"
+            type="file"
+            ref={register}
+            onChange={handleInputChange}
+          />
+          {errors.picture && (
+            <span className="text-danger">{errors.picture.message}</span>
           )}
         </Form.Group>
         <Button variant="primary" type="submit">
