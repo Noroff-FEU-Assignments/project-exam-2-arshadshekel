@@ -30,83 +30,98 @@ const schema = yup.object().shape({
 
 function AdminAddHotels() {
   const [submitted, setSubmitted] = useState(false);
+  const [uploadError, setUploadError] = useState(false);
 
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
   });
 
   async function onSubmit(data) {
-    console.log(submitted);
+    console.log(data.File);
 
-    try {
-      await axios.post(url, data).then((response) => {
-        console.log(response);
-        if (response.status === 200) {
-          setSubmitted(true);
-        }
-      });
-    } catch (error) {
-      console.log("error", error);
+    if (data.File.length === 0) {
+      setUploadError(true);
+    } else {
+      try {
+        await axios.post(url, data).then((response) => {
+          if (response.status === 200) {
+            setSubmitted(true);
+            console.log("uploaded");
+          }
+        });
+      } catch (error) {
+        console.log("error", error);
+      }
+    }
+  }
+
+  function updateErrorMsg(event) {
+    console.log(event.target.files[0]);
+    if (event.target.files[0] !== undefined) {
+      setUploadError(false);
+    } else {
+      setUploadError(true);
     }
   }
 
   return (
     <div className="container">
-      <h1 className="text-center">Add hotel</h1>
+      <h1 className="text-center">Contact us</h1>
 
-      {submitted ? (
-        <h1>THanks for submitting</h1>
-      ) : (
-        <Form noValidate onSubmit={handleSubmit(onSubmit)}>
-          <Form.Group controlId="exampleForm.ControlInput1">
-            <Form.Label>First name</Form.Label>
-            <Form.Control
-              placeholder="Firstname"
-              name="Firstname"
-              ref={register}
-            />
-            {errors.Firstname && (
-              <span className="text-danger">{errors.Firstname.message}</span>
-            )}
-          </Form.Group>
-          <Form.Group controlId="exampleForm.ControlInput2">
-            <Form.Label>Last name</Form.Label>
-            <Form.Control
-              placeholder="Lastname"
-              name="Lastname"
-              ref={register}
-            />
-            {errors.Lastname && (
-              <span className="text-danger">{errors.Lastname.message}</span>
-            )}
-          </Form.Group>
+      <Form noValidate onSubmit={handleSubmit(onSubmit)}>
+        <Form.Group controlId="exampleForm.ControlInput1">
+          <Form.Label>First name</Form.Label>
+          <Form.Control
+            placeholder="Firstname"
+            name="Firstname"
+            ref={register}
+          />
+          {errors.Firstname && (
+            <span className="text-danger">{errors.Firstname.message}</span>
+          )}
+        </Form.Group>
+        <Form.Group controlId="exampleForm.ControlInput2">
+          <Form.Label>Last name</Form.Label>
+          <Form.Control placeholder="Lastname" name="Lastname" ref={register} />
+          {errors.Lastname && (
+            <span className="text-danger">{errors.Lastname.message}</span>
+          )}
+        </Form.Group>
 
-          <Form.Group controlId="exampleForm.ControlInput3">
-            <Form.Label>Email</Form.Label>
-            <Form.Control placeholder="Email" name="email" ref={register} />
-            {errors.email && (
-              <span className="text-danger">{errors.email.message}</span>
-            )}
-          </Form.Group>
+        <Form.Group controlId="exampleForm.ControlInput3">
+          <Form.Label>Email</Form.Label>
+          <Form.Control placeholder="Email" name="email" ref={register} />
+          {errors.email && (
+            <span className="text-danger">{errors.email.message}</span>
+          )}
+        </Form.Group>
 
-          <Form.Group controlId="exampleForm.ControlTextarea1">
-            <Form.Label>Message</Form.Label>
-            <Form.Control
-              as="textarea"
-              rows={3}
-              name="Message"
-              placeholder="Please enter a message"
-              ref={register}
-            />
-            {errors.Message && (
-              <span className="text-danger">{errors.Message.message}</span>
-            )}
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
-        </Form>
-      )}
+        <Form.Group controlId="exampleForm.ControlTextarea1">
+          <Form.Label>Message</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={3}
+            name="Message"
+            placeholder="Please enter a message"
+            ref={register}
+          />
+          {errors.Message && (
+            <span className="text-danger">{errors.Message.message}</span>
+          )}
+        </Form.Group>
+        <Form.Group controlId="exampleForm.ControlTextarea1">
+          <Form.Label className="custom-file-upload">File</Form.Label>
+
+          <Form.Control name="File" type="file" onChange={updateErrorMsg} ref={register}/>
+
+          {uploadError && (
+            <span className="text-danger">Please upload a picture</span>
+          )}
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
+      </Form>
     </div>
   );
 }
