@@ -1,16 +1,12 @@
-import React from "react";
-import { Button} from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
+import React from 'react'
+import EditHotelForm from '../forms/EditHotelForm'
 
 function AdminDashboard() {
   return (
     <div>
-      <h1>This is dashboard</h1>
-      <LinkContainer to="/admin/add">
-          <Button>Add hotel</Button>
-      </LinkContainer>
+      <EditHotelForm/>
     </div>
-  );
+  )
 }
 
-export default AdminDashboard;
+export default AdminDashboard

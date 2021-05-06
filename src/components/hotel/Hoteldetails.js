@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { API } from "../../constants/Api";
 
 function Hoteldetails() {
@@ -7,13 +7,7 @@ function Hoteldetails() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  let history = useHistory();
-
   const { id } = useParams();
-
-  if (!id) {
-    history.push("/");
-  }
 
   const url = API + id;
 

@@ -71,16 +71,20 @@ function HomePage() {
       <div className="px-5">
         <Row>
           {hotels.map((hotel) => {
-            return (
-              <Col xs={12} xl={6} key={hotel.id}>
-                <Hotelcard
-                  id={hotel.id}
-                  name={hotel.name}
-                  email={hotel.email}
-                  picture={hotel.picture.url}
-                />
-              </Col>
-            );
+            if (hotel.featured){
+              return (
+                <Col xs={12} xl={6} key={hotel.id}>
+                  <Hotelcard
+                    id={hotel.id}
+                    name={hotel.name}
+                    email={hotel.email}
+                    picture={hotel.picture.url}
+                  />
+                </Col>
+              );
+            } else {
+              return null;
+            }
           })}
         </Row>
       </div>
