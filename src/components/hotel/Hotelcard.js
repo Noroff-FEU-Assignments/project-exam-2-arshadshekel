@@ -1,7 +1,8 @@
 import { Button, Modal } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import EnquiryForm from "../forms/EnquiryForm"
+import AuthContext from "../../context/AuthContext";
 
 function Hotelcard(props) {
     const [show, setShow] = useState(false);
@@ -9,6 +10,7 @@ function Hotelcard(props) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
   
+  const [auth] = useContext(AuthContext);
   return (
     <div className="hotel-card">
       <LinkContainer to={`hotels/` + props.id}>
@@ -19,6 +21,7 @@ function Hotelcard(props) {
         />
       </LinkContainer>
       <div className="pl-md-5">
+        
         <LinkContainer to={`hotels/` + props.id}>
           <div>
             <h3>{props.name}</h3>
@@ -35,8 +38,16 @@ function Hotelcard(props) {
         </Button>
 
         <LinkContainer to={`hotels/` + props.id}>
-          <Button className="mt-3 text-white">View more </Button>
+          <Button className="mr-3 mt-3 text-white">View more </Button>
         </LinkContainer>
+
+        {auth ? (
+          <LinkContainer to={`admin/edit/` + props.id}>
+            <Button variant="success" className="mt-3 text-white">Edit hotel </Button>
+          </LinkContainer>
+        ) : (
+          null
+        )}
       </div>
       <Modal
         show={show}
@@ -46,7 +57,7 @@ function Hotelcard(props) {
         centered
       >
         <Modal.Header className="modal-border-bottom" closeButton>
-          <h3 className="ml-auto">Contact { props.name}</h3>
+          <h3 className="ml-auto">Contact {props.name}</h3>
         </Modal.Header>
         <Modal.Body>
           <EnquiryForm handleClose={handleClose} hotelName={props.name} />

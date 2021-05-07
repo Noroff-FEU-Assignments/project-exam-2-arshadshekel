@@ -1,10 +1,11 @@
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { React, useState, useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 import axios from "axios";
 import { ADDHOTELS } from "../../constants/Api";
 import AuthContext from "../../context/AuthContext";
@@ -33,8 +34,8 @@ function EditHotelForm() {
 
   const { id } = useParams();
 
-  const url = ADDHOTELS + 1;
-
+  const url = ADDHOTELS + id;
+  const [show, setShow] = useState(false);
   const [auth] = useContext(AuthContext);
   const [file, setFile] = useState(null);
   const [uploadedFile, setUploadedFile] = useState(null);
@@ -42,6 +43,11 @@ function EditHotelForm() {
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
   });
+
+    const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  
+  let history = useHistory();
 
   useEffect(
     function () {
@@ -105,6 +111,24 @@ function EditHotelForm() {
   function handleChange(event, field) {
     if (field === "name") {
       hotel.name = event.target.value;
+    }
+  }
+
+  async function deleteItem() {
+    
+    const token = auth.jwt;
+
+    try {
+         axios.defaults.headers.common = { Authorization: `bearer ${token}` };
+        await axios.delete(url, {}).then((response) => {
+          console.log(response.status);
+          if (response.status === 200) {
+            handleClose();
+            history.push("/hotels");
+          }
+        });
+    } catch (error) {
+      console.log("error", error);
     }
   }
 
@@ -204,7 +228,32 @@ function EditHotelForm() {
         <Button variant="primary" type="submit">
           Submit
         </Button>
+        <Button variant="danger" className=" ml-3" onClick={handleShow}>
+          Delete item
+        </Button>
       </Form>
+
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Logout?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Do you wish to log out?</Modal.Body>
+
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            No
+          </Button>
+          <Button variant="danger" onClick={deleteItem}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

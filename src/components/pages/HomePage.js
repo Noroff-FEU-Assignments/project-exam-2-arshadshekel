@@ -25,6 +25,7 @@ function HomePage() {
 
         if (response.ok) {
           const json = await response.json();
+          console.log(json);
           setHotels(json);
         } else {
           setError("An error occured");
@@ -57,13 +58,13 @@ function HomePage() {
           <h1 className="landingpage-title">DISCOVER BERGEN</h1>
           <h2 className="landingpage-subtitle">Book a hotel today!</h2>
 
-          <InputGroup className="my-5">
+          <InputGroup className="my-5 search-max-width">
             <InputGroup.Prepend>
-              <InputGroup.Text>
+              <InputGroup.Text className="rounded-corners">
                 <FaSearch />
               </InputGroup.Text>
             </InputGroup.Prepend>
-            <FormControl aria-label="Amount (to the nearest dollar)" />
+            <FormControl className="rounded-corners" />
           </InputGroup>
         </Container>
       </Jumbotron>
@@ -71,7 +72,7 @@ function HomePage() {
       <div className="px-5">
         <Row>
           {hotels.map((hotel) => {
-            if (hotel.featured){
+            if (hotel.featured) {
               return (
                 <Col xs={12} xl={6} key={hotel.id}>
                   <Hotelcard

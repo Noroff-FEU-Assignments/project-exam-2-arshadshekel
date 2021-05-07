@@ -4,7 +4,7 @@ import EditHotelForm from '../forms/EditHotelForm'
 function AdminDashboard() {
   return (
     <div>
-      <EditHotelForm/>
+      
     </div>
   )
 }
