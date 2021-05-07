@@ -64,7 +64,7 @@ function HomePage() {
                 <FaSearch />
               </InputGroup.Text>
             </InputGroup.Prepend>
-            <FormControl className="rounded-corners" />
+            <FormControl className="rounded-corners" placeholder="Search for a hotel" />
           </InputGroup>
         </Container>
       </Jumbotron>
@@ -78,6 +78,7 @@ function HomePage() {
                   <Hotelcard
                     id={hotel.id}
                     name={hotel.name}
+                    class={hotel.class}
                     email={hotel.email}
                     picture={hotel.picture.url}
                   />

@@ -59,6 +59,7 @@ function Hotels() {
                 <Hotelcard
                   id={hotel.id}
                   name={hotel.name}
+                  class={hotel.class}
                   email={hotel.email}
                   picture={hotel.picture.url}
                 />
