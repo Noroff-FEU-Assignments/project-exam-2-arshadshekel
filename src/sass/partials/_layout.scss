@@ -1,0 +1,20 @@
+.primary-button {
+    border-radius: 25px;
+    background-color: $color-secondary;
+    color: white;
+
+    &:hover{
+        background-color: $color-primary;
+    }
+}
+.secondary-button {
+    border-radius: 25px;
+    background-color: white;
+    border: 1px solid $color-secondary;
+    color: $color-secondary;
+    font-weight: 700;
+     &:hover{
+        background-color: $color-primary;
+    }
+}
+

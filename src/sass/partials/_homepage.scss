@@ -18,6 +18,7 @@ h2 {
 }
 
 .landingpage-title {
+    font-weight: 900;
     font-size: 78px;
 }
 
@@ -33,4 +34,8 @@ h2 {
 .search-max-width {
     max-width: 700px;
     margin: 0 auto;
+}
+
+.overlay{
+    background-color: rgba($color-primary, 0.4);
 }

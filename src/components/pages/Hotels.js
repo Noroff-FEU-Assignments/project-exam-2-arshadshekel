@@ -60,6 +60,7 @@ function Hotels() {
                   id={hotel.id}
                   name={hotel.name}
                   class={hotel.class}
+                  price={hotel.price}
                   email={hotel.email}
                   picture={hotel.picture.url}
                 />

@@ -25,6 +25,7 @@ const schema = yup.object().shape({
     .positive()
     .integer()
     .max(5, "The class must be maximum 5 stars"),
+  price: yup.number().required("Please enter a price").positive().integer(),
 });
 
 function EditHotelForm() {
@@ -44,9 +45,9 @@ function EditHotelForm() {
     resolver: yupResolver(schema),
   });
 
-    const handleClose = () => setShow(false);
+  const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  
+
   let history = useHistory();
 
   useEffect(
@@ -93,8 +94,8 @@ function EditHotelForm() {
     formData.append("data", JSON.stringify(data));
 
     try {
-         axios.defaults.headers.common = { Authorization: `bearer ${token}` };
-        await axios.put(url, formData);
+      axios.defaults.headers.common = { Authorization: `bearer ${token}` };
+      await axios.put(url, formData);
     } catch (error) {
       console.log("error", error);
     }
@@ -115,18 +116,17 @@ function EditHotelForm() {
   }
 
   async function deleteItem() {
-    
     const token = auth.jwt;
 
     try {
-         axios.defaults.headers.common = { Authorization: `bearer ${token}` };
-        await axios.delete(url, {}).then((response) => {
-          console.log(response.status);
-          if (response.status === 200) {
-            handleClose();
-            history.push("/hotels");
-          }
-        });
+      axios.defaults.headers.common = { Authorization: `bearer ${token}` };
+      await axios.delete(url, {}).then((response) => {
+        console.log(response.status);
+        if (response.status === 200) {
+          handleClose();
+          history.push("/hotels");
+        }
+      });
     } catch (error) {
       console.log("error", error);
     }
@@ -177,6 +177,14 @@ function EditHotelForm() {
           />
           {errors.class && (
             <span className="text-danger">{errors.class.message}</span>
+          )}
+        </Form.Group>
+
+        <Form.Group controlId="exampleForm.ControlInput3">
+          <Form.Label>Price</Form.Label>
+          <Form.Control placeholder="price" name="price" ref={register} />
+          {errors.price && (
+            <span className="text-danger">{errors.price.message}</span>
           )}
         </Form.Group>
 

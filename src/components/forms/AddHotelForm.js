@@ -26,6 +26,11 @@ const schema = yup.object().shape({
     .positive()
     .integer()
     .max(5, "The class must be maximum 5 stars"),
+  price: yup
+    .number()
+    .required("Please enter a price")
+    .positive()
+    .integer(),
   description: yup
     .string()
     .required("Please enter your message")
@@ -95,6 +100,14 @@ function AddHotelForm() {
           <Form.Control placeholder="class" name="class" ref={register} />
           {errors.class && (
             <span className="text-danger">{errors.class.message}</span>
+          )}
+        </Form.Group>
+
+        <Form.Group controlId="exampleForm.ControlInput3">
+          <Form.Label>Price</Form.Label>
+          <Form.Control placeholder="price" name="price" ref={register} />
+          {errors.price && (
+            <span className="text-danger">{errors.price.message}</span>
           )}
         </Form.Group>
 

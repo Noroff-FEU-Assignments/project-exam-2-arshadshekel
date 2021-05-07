@@ -3,9 +3,10 @@
     border: 1px solid rgb(226, 226, 226);
     display: flex;
     margin-bottom: 16px;
+    box-shadow: 0 0 4px rgba(33, 33, 33, 0.2);
 
     &:hover {
-        box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+        box-shadow: 0 0 12px rgba(33, 33, 33, 0.2);
         cursor: pointer;
     }
 
@@ -30,5 +31,14 @@
 }
 
 .star-color{
-    color: blue;
+    color:$color-secondary;
+}
+
+.modal-border-bottom{
+    border: none;
+}
+
+.modal-contact .modal-content {
+    background-color: $color-secondary;
+    color: white;
 }

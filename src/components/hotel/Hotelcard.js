@@ -1,43 +1,41 @@
 import { Button, Modal } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useState, useContext } from "react";
-import EnquiryForm from "../forms/EnquiryForm"
+import EnquiryForm from "../forms/EnquiryForm";
 import AuthContext from "../../context/AuthContext";
 import { FaStar, FaRegStar } from "react-icons/fa";
 
 function Hotelcard(props) {
-    const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-  
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const [auth] = useContext(AuthContext);
-  const stars = [];
-    function populateStars() {
-      const stars = [];
-      for (let i = 0; i < 5; i++) {
-        if (i < props.class) {
-          stars.push(
-            <span className="star-color">
-              <FaStar size={32} />
-            </span>
-          );
-        }
-        if (i >= props.class) {
-          stars.push(
-            <span className="star-color">
-              <FaRegStar size={32} />
-            </span>
-          );
-        }
+
+  function populateStars() {
+    const stars = [];
+    for (let i = 0; i < 5; i++) {
+      if (i < props.class) {
+        stars.push(
+          <span className="star-color">
+            <FaStar size={25} />
+          </span>
+        );
       }
-      return stars;
+      if (i >= props.class) {
+        stars.push(
+          <span className="star-color">
+            <FaRegStar size={25} />
+          </span>
+        );
+      }
     }
-
-
+    return stars;
+  }
 
   return (
-    <div className="hotel-card">
+    <div className="hotel-card rounded-corners">
       <LinkContainer to={`hotels/` + props.id}>
         <img
           src={props.picture}
@@ -45,10 +43,10 @@ function Hotelcard(props) {
           className="hotel-card-img mx-auto"
         />
       </LinkContainer>
-      <div className="pl-md-5">
+      <div className="pl-md-5 ">
         <LinkContainer to={`hotels/` + props.id}>
           <div>
-            <h3>{props.name}</h3>
+            <h3 className="color-primary">{props.name}</h3>
             <p>
               {populateStars().map((star) => {
                 return star;
@@ -58,20 +56,24 @@ function Hotelcard(props) {
               Polished hotel along Bryggen wharf, offering 2 restaurants, a
               fitness center & free breakfast.
             </p>
+            <p>Price: {props.price}</p>
           </div>
         </LinkContainer>
 
-        <Button className="mr-3 mt-3 btn-warning" onClick={handleShow}>
+        <Button className="mr-3 mt-3 primary-button" onClick={handleShow}>
           Contact hotel
         </Button>
 
         <LinkContainer to={`hotels/` + props.id}>
-          <Button className="mr-3 mt-3 text-white">View more </Button>
+          <Button className="mr-3 mt-3 secondary-button">View more </Button>
         </LinkContainer>
 
         {auth ? (
           <LinkContainer to={`admin/edit/` + props.id}>
-            <Button variant="success" className="mt-3 text-white">
+            <Button
+              variant="success"
+              className="mt-3 text-white rounded-corners"
+            >
               Edit hotel{" "}
             </Button>
           </LinkContainer>
@@ -83,6 +85,7 @@ function Hotelcard(props) {
         backdrop="static"
         keyboard={false}
         centered
+        className="modal-background"
       >
         <Modal.Header className="modal-border-bottom" closeButton>
           <h3 className="ml-auto">Contact {props.name}</h3>

@@ -7,7 +7,7 @@ import { FaInstagram } from "react-icons/fa";
 
 function Footer() {
   return (
-    <footer className="footer bg-primary">
+    <footer className="footer">
       <div className="footer-content container">
         <span>About HoliDaze</span>
         <LinkContainer to="/contact-us">

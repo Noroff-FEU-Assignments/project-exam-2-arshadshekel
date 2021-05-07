@@ -1,4 +1,12 @@
-$color-primary: #0202b0;
+$color-primary: #105F9A;
+$color-secondary: #3F9ADE;
+
+.color-secondary{
+   color: $color-secondary;
+}
+.color-primary{
+   color: $color-primary;
+}
 
 .login-icon {
     color: $color-primary;

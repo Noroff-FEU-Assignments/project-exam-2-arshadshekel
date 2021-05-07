@@ -5,7 +5,13 @@
 @import "partials/homepage";
 @import "partials/hotel";
 
-.modal-border-bottom{
-    border: none;
-}
+.modal-background .modal-content {
+    background-color: $color-secondary;
+    color: #fff;
+    border-radius: 25px;
+    overflow: hidden;
 
+    .close {
+        color: white !important;
+    }
+}

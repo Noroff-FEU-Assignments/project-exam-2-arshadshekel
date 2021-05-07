@@ -34,7 +34,7 @@ function Navigation() {
       <Navbar expand="lg" className="px-0">
         <LinkContainer to="/home">
           <Navbar.Brand>
-            <img src={logo} alt="logo" height="50px" className="mt-3" />
+            <img src={logo} alt="logo" height="40px" className="py-2" />
           </Navbar.Brand>
         </LinkContainer>
 
