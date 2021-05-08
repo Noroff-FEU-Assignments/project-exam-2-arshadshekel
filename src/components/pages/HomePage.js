@@ -67,7 +67,7 @@ function HomePage() {
                   <FaSearch />
                 </InputGroup.Text>
               </InputGroup.Prepend>
-              <SearchDropDown />
+              <SearchDropDown/>
             </InputGroup>
           </div>
         </Container>

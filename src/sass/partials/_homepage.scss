@@ -39,8 +39,3 @@ h2 {
 .overlay{
     background-color: rgba($color-primary, 0.4);
 }
-
-.input-group > .rbt:not(:first-child) .form-control {
-  border-top-right-radius: 25px;
-  border-bottom-right-radius: 25px;
-}
