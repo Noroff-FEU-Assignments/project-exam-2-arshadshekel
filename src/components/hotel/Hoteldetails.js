@@ -12,7 +12,6 @@ function Hoteldetails() {
 
   const url = API + id;
 
-  
   useEffect(
     function () {
       async function fetchData() {
@@ -49,14 +48,14 @@ function Hoteldetails() {
   function populateStars() {
     const stars = [];
     for (let i = 0; i < 5; i++) {
-      if (i < hotel.class) {
+      if (i < hotel.standard) {
         stars.push(
           <span className="star-color">
             <FaStar size={32} />
           </span>
         );
       }
-      if (i >= hotel.class) {
+      if (i >= hotel.standard) {
         stars.push(
           <span className="star-color">
             <FaRegStar size={32} />
@@ -73,8 +72,6 @@ function Hoteldetails() {
       {populateStars().map((star) => {
         return star;
       })}
-      
-      
     </div>
   );
 }

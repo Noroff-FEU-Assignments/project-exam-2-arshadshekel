@@ -20,17 +20,13 @@ const schema = yup.object().shape({
     .string()
     .required("Please enter your last name")
     .min(2, "The name must be at least 2 characters"),
-  class: yup
+  standard: yup
     .number()
-    .required("Please enter a class")
+    .required("Please enter a standard")
     .positive()
     .integer()
-    .max(5, "The class must be maximum 5 stars"),
-  price: yup
-    .number()
-    .required("Please enter a price")
-    .positive()
-    .integer(),
+    .max(5, "The standard must be maximum 5 stars"),
+  price: yup.number().required("Please enter a price").positive().integer(),
   description: yup
     .string()
     .required("Please enter your message")
@@ -68,7 +64,7 @@ function AddHotelForm() {
     formData.append("data", JSON.stringify(data));
 
     try {
-       axios.defaults.headers.common = { Authorization: `bearer ${token}` };
+      axios.defaults.headers.common = { Authorization: `bearer ${token}` };
       await axios.post(url, formData);
     } catch (error) {
       console.log("error", error);
@@ -96,10 +92,10 @@ function AddHotelForm() {
         </Form.Group>
 
         <Form.Group controlId="exampleForm.ControlInput3">
-          <Form.Label>Class</Form.Label>
-          <Form.Control placeholder="class" name="class" ref={register} />
-          {errors.class && (
-            <span className="text-danger">{errors.class.message}</span>
+          <Form.Label>standard</Form.Label>
+          <Form.Control placeholder="standard" name="standard" ref={register} />
+          {errors.standard && (
+            <span className="text-danger">{errors.standard.message}</span>
           )}
         </Form.Group>
 

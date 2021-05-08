@@ -1,0 +1,58 @@
+import { AsyncTypeahead } from "react-bootstrap-typeahead";
+import { useState, Fragment } from "react";
+import { API } from "../../constants/Api";
+
+const SearchDropDown = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [options, setOptions] = useState([]);
+
+    const handleSearch = (query) => {
+        setIsLoading(true);
+
+        fetch(API).then((response) => {
+            const options = response.map((i) => ({
+                avatar_url: i.picture.formats.thumbnail.url,
+                id: i.id,
+                name: i.name,
+     
+            }))
+            setOptions(options);
+            setIsLoading(false);
+        });
+        
+    };
+  
+
+  // Bypass client-side filtering by returning `true`. Results are already
+  // filtered by the search endpoint, so no need to do it again.
+  const filterBy = () => true;
+
+  return (
+    <AsyncTypeahead
+      filterBy={filterBy}
+      id="async-example"
+      isLoading={isLoading}
+      labelKey="login"
+      minLength={1}
+      onSearch={handleSearch}
+      options={options}
+      placeholder="Search for a hotel..."
+      renderMenuItemChildren={(option) => (
+        <Fragment>
+          <img
+            alt={option.name}
+            src={option.avatar_url}
+            style={{
+              height: "24px",
+              marginRight: "10px",
+              width: "24px",
+            }}
+          />
+          <span>{option.name}</span>
+        </Fragment>
+      )}
+    />
+  );
+};
+
+export default SearchDropDown;

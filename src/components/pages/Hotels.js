@@ -1,8 +1,4 @@
-import {
-
-  Row,
-  Col,
-} from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 
 import { useEffect, useState } from "react";
 import { API } from "../../constants/Api";
@@ -10,7 +6,6 @@ import { API } from "../../constants/Api";
 import { FaSearch } from "react-icons/fa";
 import Hotelcard from "../hotel/Hotelcard";
 
- 
 function Hotels() {
   const [hotels, setHotels] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -59,7 +54,7 @@ function Hotels() {
                 <Hotelcard
                   id={hotel.id}
                   name={hotel.name}
-                  class={hotel.class}
+                  standard={hotel.standard}
                   price={hotel.price}
                   email={hotel.email}
                   picture={hotel.picture.url}

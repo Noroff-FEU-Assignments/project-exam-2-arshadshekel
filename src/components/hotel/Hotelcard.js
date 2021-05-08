@@ -16,16 +16,16 @@ function Hotelcard(props) {
   function populateStars() {
     const stars = [];
     for (let i = 0; i < 5; i++) {
-      if (i < props.class) {
+      if (i < props.standard) {
         stars.push(
-          <span className="star-color">
+          <span className="star-color" key={i}>
             <FaStar size={25} />
           </span>
         );
       }
-      if (i >= props.class) {
+      if (i >= props.standard) {
         stars.push(
-          <span className="star-color">
+          <span className="star-color" key={i}>
             <FaRegStar size={25} />
           </span>
         );
@@ -35,7 +35,7 @@ function Hotelcard(props) {
   }
 
   return (
-    <div className="hotel-card rounded-corners">
+    <div className="hotel-card rounded-corners" key={props.id}>
       <LinkContainer to={`hotels/` + props.id}>
         <img
           src={props.picture}
@@ -46,7 +46,9 @@ function Hotelcard(props) {
       <div className="pl-md-5 ">
         <LinkContainer to={`hotels/` + props.id}>
           <div>
-            <h3 className="color-primary">{props.name}</h3>
+            <h3 className="color-primary" key={props.id}>
+              {props.name}
+            </h3>
             <p>
               {populateStars().map((star) => {
                 return star;

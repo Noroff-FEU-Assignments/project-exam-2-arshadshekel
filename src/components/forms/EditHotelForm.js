@@ -19,13 +19,13 @@ const schema = yup.object().shape({
     .string()
     .required("Please enter your last name")
     .min(2, "The name must be at least 2 characters"),
-  class: yup
+  standard: yup
     .number()
-    .required("Please enter a class")
+    .typeError("Please enter a standard")
     .positive()
     .integer()
-    .max(5, "The class must be maximum 5 stars"),
-  price: yup.number().required("Please enter a price").positive().integer(),
+    .max(5, "The standard must be maximum 5 stars"),
+  price: yup.number().typeError("Please enter a price").positive().integer(),
 });
 
 function EditHotelForm() {
@@ -167,16 +167,16 @@ function EditHotelForm() {
         </Form.Group>
 
         <Form.Group controlId="exampleForm.ControlInput3">
-          <Form.Label>Class</Form.Label>
+          <Form.Label>standard</Form.Label>
           <Form.Control
-            placeholder="class"
-            name="class"
+            placeholder="standard"
+            name="standard"
             ref={register}
-            defaultValue={hotel.class}
-            onChange={handleChange("class")}
+            defaultValue={hotel.standard}
+            onChange={handleChange("standard")}
           />
-          {errors.class && (
-            <span className="text-danger">{errors.class.message}</span>
+          {errors.standard && (
+            <span className="text-danger">{errors.standard.message}</span>
           )}
         </Form.Group>
 

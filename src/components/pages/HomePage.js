@@ -12,6 +12,8 @@ import { API } from "../../constants/Api";
 
 import { FaSearch } from "react-icons/fa";
 import Hotelcard from "../hotel/Hotelcard";
+import SearchDropDown from "../forms/SearchDropDown";
+
 
 function HomePage() {
   const [hotels, setHotels] = useState([]);
@@ -55,7 +57,7 @@ function HomePage() {
     <div>
       <Jumbotron className="jumbotron-img">
         <Container className="jumbotron-content">
-          <div class="overlay py-5">
+          <div className="overlay py-5">
             <h1 className="landingpage-title">DISCOVER BERGEN</h1>
             <h2 className="landingpage-subtitle">Book a hotel today!</h2>
 
@@ -65,10 +67,7 @@ function HomePage() {
                   <FaSearch />
                 </InputGroup.Text>
               </InputGroup.Prepend>
-              <FormControl
-                className="rounded-corners"
-                placeholder="Search for a hotel"
-              />
+              <SearchDropDown />
             </InputGroup>
           </div>
         </Container>

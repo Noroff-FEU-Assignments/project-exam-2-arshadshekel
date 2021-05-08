@@ -41,7 +41,7 @@ function EnquiryForm({ handleClose, hotelName }) {
         if (response.status === 200) {
           handleClose();
         }
-      });;
+      });
     } catch (error) {
       console.log("error", error);
     }
