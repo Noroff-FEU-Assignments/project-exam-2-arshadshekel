@@ -2,7 +2,8 @@ import { Typeahead } from "react-bootstrap-typeahead";
 import { useState, Fragment, useEffect, useRef } from "react";
 import { API } from "../../constants/Api";
 import { useHistory } from "react-router-dom";
-import { Button, InputGroup } from "react-bootstrap";
+import { Button, InputGroup, Form } from "react-bootstrap";
+import { FaSearch } from "react-icons/fa";
 
 const SearchDropDown = () => {
   const [options, setOptions] = useState([]);
@@ -29,50 +30,62 @@ const SearchDropDown = () => {
 
   const history = useHistory();
 
-  function viewHotel() {
+    function viewHotel(event) {
+        event.preventDefault();
     const findHotel = searchInput.current.props.options.filter((hotel) => {
       if (hotel.name === searchInput.current.inputNode.defaultValue)
         return true;
     });
-      
       if (findHotel[0] !== undefined) {
           const hotelID = findHotel[0].id;
             history.push(`hotels/` + hotelID);
       }
-      
   }
 
-  return (
-    <Fragment>
-      <Typeahead
-        filterBy={filterByCallback}
-        id="custom-filtering-example"
-        labelKey="name"
-        options={options}
-        ref={searchInput}
-        placeholder="Search for a hotel..."
-        renderMenuItemChildren={(option) => (
+    return (
+      <Form noValidate onSubmit={viewHotel}>
+        <InputGroup className="my-5 search-max-width">
+          <InputGroup.Prepend>
+            <InputGroup.Text className="rounded-corners">
+              <FaSearch />
+            </InputGroup.Text>
+          </InputGroup.Prepend>
           <Fragment>
-            <img
-              alt={option.name}
-              src={option.avatar_url}
-              style={{
-                height: "24px",
-                marginRight: "10px",
-                width: "24px",
-              }}
+            <Typeahead
+              filterBy={filterByCallback}
+              id="custom-filtering-example"
+              labelKey="name"
+              options={options}
+              ref={searchInput}
+              placeholder="Search for a hotel..."
+              renderMenuItemChildren={(option) => (
+                <div onClick={viewHotel} key={option.id}>
+                  <img
+                    alt={option.name}
+                    src={option.avatar_url}
+                    style={{
+                      height: "24px",
+                      marginRight: "10px",
+                      width: "24px",
+                    }}
+                  />
+                  <span>{option.name}</span>
+                </div>
+              )}
             />
-            <span>{option.name}</span>
+            <InputGroup.Append>
+              <Button
+                className="rounded-corners"
+                variant="primary"
+                type="submit"
+              >
+                View hotel
+              </Button>
+            </InputGroup.Append>
           </Fragment>
-        )}
-      />
-      <InputGroup.Append>
-        <Button onClick={viewHotel} className="rounded-corners" variant="primary">
-         View hotel
-        </Button>
-      </InputGroup.Append>
-    </Fragment>
-  );
+        </InputGroup>
+      </Form>
+    );
 };
 
 export default SearchDropDown;

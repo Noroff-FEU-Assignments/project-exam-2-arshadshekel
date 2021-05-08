@@ -10,7 +10,7 @@ import {
 import { useEffect, useState } from "react";
 import { API } from "../../constants/Api";
 
-import { FaSearch } from "react-icons/fa";
+
 import Hotelcard from "../hotel/Hotelcard";
 import SearchDropDown from "../forms/SearchDropDown";
 
@@ -60,15 +60,7 @@ function HomePage() {
           <div className="overlay py-5">
             <h1 className="landingpage-title">DISCOVER BERGEN</h1>
             <h2 className="landingpage-subtitle">Book a hotel today!</h2>
-
-            <InputGroup className="my-5 search-max-width">
-              <InputGroup.Prepend>
-                <InputGroup.Text className="rounded-corners">
-                  <FaSearch />
-                </InputGroup.Text>
-              </InputGroup.Prepend>
-              <SearchDropDown/>
-            </InputGroup>
+           <SearchDropDown/>
           </div>
         </Container>
       </Jumbotron>

@@ -50,14 +50,14 @@ function Hoteldetails() {
     for (let i = 0; i < 5; i++) {
       if (i < hotel.standard) {
         stars.push(
-          <span className="star-color">
+          <span className="star-color" key={i}>
             <FaStar size={32} />
           </span>
         );
       }
       if (i >= hotel.standard) {
         stars.push(
-          <span className="star-color">
+          <span className="star-color" key={i}>
             <FaRegStar size={32} />
           </span>
         );
