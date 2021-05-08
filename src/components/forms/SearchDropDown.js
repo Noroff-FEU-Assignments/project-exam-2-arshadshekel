@@ -33,9 +33,14 @@ const SearchDropDown = () => {
     function viewHotel(event) {
         event.preventDefault();
     const findHotel = searchInput.current.props.options.filter((hotel) => {
-      if (hotel.name === searchInput.current.inputNode.defaultValue)
+      if (hotel.name === searchInput.current.inputNode.defaultValue) {
         return true;
+      } else {
+        return null;
+      }
+        
     });
+      console.log(findHotel);
       if (findHotel[0] !== undefined) {
           const hotelID = findHotel[0].id;
             history.push(`hotels/` + hotelID);

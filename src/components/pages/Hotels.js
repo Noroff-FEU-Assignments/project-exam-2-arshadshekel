@@ -2,8 +2,6 @@ import { Row, Col } from "react-bootstrap";
 
 import { useEffect, useState } from "react";
 import { API } from "../../constants/Api";
-
-import { FaSearch } from "react-icons/fa";
 import Hotelcard from "../hotel/Hotelcard";
 
 function Hotels() {

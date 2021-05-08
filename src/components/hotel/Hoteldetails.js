@@ -34,7 +34,7 @@ function Hoteldetails() {
       }
       fetchData();
     },
-    [url]
+    [url, hotel]
   );
 
   if (loading) {

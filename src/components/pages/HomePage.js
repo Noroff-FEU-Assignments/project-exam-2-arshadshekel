@@ -1,8 +1,6 @@
 import {
   Jumbotron,
   Container,
-  InputGroup,
-  FormControl,
   Row,
   Col,
 } from "react-bootstrap";
