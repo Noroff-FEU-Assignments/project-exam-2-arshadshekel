@@ -72,7 +72,7 @@ function HomePage() {
                   <Hotelcard
                     id={hotel.id}
                     name={hotel.name}
-                    class={hotel.class}
+                    standard={hotel.standard}
                     price={hotel.price}
                     email={hotel.email}
                     picture={hotel.picture.url}
