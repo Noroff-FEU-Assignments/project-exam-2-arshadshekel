@@ -22,7 +22,6 @@ function Hoteldetails() {
             const json = await response.json();
             console.log(json);
             setHotel(json);
-            console.log(hotel);
           } else {
             setError("An error occured");
           }
@@ -34,7 +33,7 @@ function Hoteldetails() {
       }
       fetchData();
     },
-    [url, hotel]
+    [url]
   );
 
   if (loading) {

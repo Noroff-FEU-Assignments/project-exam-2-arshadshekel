@@ -249,9 +249,9 @@ function EditHotelForm() {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title>Logout?</Modal.Title>
+          <Modal.Title>Delete hotel?</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Do you wish to log out?</Modal.Body>
+        <Modal.Body>Do you wish to delete hotel?</Modal.Body>
 
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

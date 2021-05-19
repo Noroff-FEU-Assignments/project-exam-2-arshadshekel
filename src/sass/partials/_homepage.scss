@@ -39,3 +39,15 @@ h2 {
 .overlay{
     background-color: rgba($color-primary, 0.4);
 }
+
+@media only screen and (max-width: 824px) {
+   .landingpage-title {
+    font-weight: 900;
+    font-size: 45px;
+}
+
+.landingpage-subtitle {
+    font-size: 32px;
+    color: white;
+}
+}

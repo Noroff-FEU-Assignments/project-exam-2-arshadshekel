@@ -3,7 +3,7 @@
     background-color: $color-secondary;
     color: white;
 
-    &:hover{
+    &:hover {
         background-color: $color-primary;
     }
 }
@@ -13,8 +13,41 @@
     border: 1px solid $color-secondary;
     color: $color-secondary;
     font-weight: 700;
-     &:hover{
+    &:hover {
         background-color: $color-primary;
     }
 }
 
+.primary-button-accordion {
+    border: none;
+    background-color: $color-secondary;
+    color: white;
+
+    &:hover {
+        background-color: $color-primary;
+    }
+}
+
+.accordion-title {
+    background-color: white;
+    border: none;
+    color: $color-secondary;
+    &:hover {
+        background-color: $color-secondary;
+    }
+}
+
+.accordion-link {
+    color: $color-secondary !important;
+    text-decoration: none !important;
+    background-color: white;
+
+    &:hover {
+        background-color: $color-secondary;
+        color: white !important;
+    }
+
+    &:focus {
+        box-shadow: none !important;
+    }
+}
