@@ -80,7 +80,7 @@ const SearchDropDown = () => {
             />
             <InputGroup.Append>
               <Button
-                className="rounded-corners"
+                id="submit-search"
                 variant="primary"
                 type="submit"
               >
