@@ -182,7 +182,12 @@ function EditHotelForm() {
 
         <Form.Group controlId="exampleForm.ControlInput3">
           <Form.Label>Price</Form.Label>
-          <Form.Control placeholder="price" name="price" ref={register} />
+          <Form.Control
+            placeholder="price"
+            name="price"
+            ref={register}
+            defaultValue={hotel.price}
+          />
           {errors.price && (
             <span className="text-danger">{errors.price.message}</span>
           )}
