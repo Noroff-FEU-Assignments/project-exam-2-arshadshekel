@@ -4,6 +4,7 @@ import { CONTACTURL, ENQUIRYURL } from "../../constants/Api";
 import AuthContext from "../../context/AuthContext";
 import { Accordion, Card, Button, Modal } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+import moment from "moment";
 
 function AdminDashboard() {
   const [auth] = useContext(AuthContext);
@@ -118,6 +119,14 @@ function AdminDashboard() {
                         <Accordion.Collapse eventKey="0">
                           <Card.Body>
                             <div className="my-2">
+                              Date:{" "}
+                              <span className="ml-3">
+                                {moment(form.created_at).format(
+                                  "MMMM Do YYYY, h:mm:ss a"
+                                )}
+                              </span>
+                            </div>
+                            <div className="my-2">
                               Name:{" "}
                               <span className="ml-3">
                                 {form.Firstname} {form.Lastname}
@@ -181,6 +190,12 @@ function AdminDashboard() {
                         </Card.Header>
                         <Accordion.Collapse eventKey="0">
                           <Card.Body>
+                            <div className="my-2">
+                              Date:{" "}
+                              <span className="ml-3">
+                                {moment(form.created_at).format('MMMM Do YYYY, h:mm:ss a')}
+                              </span>
+                            </div>
                             <div className="my-2">
                               Name:{" "}
                               <span className="ml-3">

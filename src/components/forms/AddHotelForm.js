@@ -73,7 +73,7 @@ function AddHotelForm() {
 
   return (
     <div className="container">
-      <h1 className="text-center">Contact us</h1>
+      <h1 className="text-center">Add new hotel</h1>
 
       <Form noValidate onSubmit={handleSubmit(onSubmit)}>
         <Form.Group controlId="exampleForm.ControlInput1">

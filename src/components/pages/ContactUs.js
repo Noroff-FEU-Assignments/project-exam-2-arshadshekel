@@ -56,7 +56,9 @@ function ContactUs() {
       <h1 className="text-center">Contact us</h1>
 
       {submitted ? (
-        <h1>THanks for submitting</h1>
+        <h2  className="text-center text-bold mt-5 color-primary">
+          Thanks for submitting
+        </h2>
       ) : (
         <Form noValidate onSubmit={handleSubmit(onSubmit)}>
           <Form.Group controlId="exampleForm.ControlInput1">

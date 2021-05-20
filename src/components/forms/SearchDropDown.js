@@ -1,5 +1,5 @@
 import { Typeahead } from "react-bootstrap-typeahead";
-import { useState, Fragment, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { API } from "../../constants/Api";
 import { useHistory } from "react-router-dom";
 import { Button, InputGroup, Form } from "react-bootstrap";
@@ -55,7 +55,7 @@ const SearchDropDown = () => {
               <FaSearch />
             </InputGroup.Text>
           </InputGroup.Prepend>
-          <Fragment>
+          <>
             <Typeahead
               filterBy={filterByCallback}
               id="custom-filtering-example"
@@ -89,7 +89,7 @@ const SearchDropDown = () => {
                 View hotel
               </Button>
             </InputGroup.Append>
-          </Fragment>
+          </>
         </InputGroup>
       </Form>
     );
