@@ -52,32 +52,28 @@ function Navigation() {
             </LinkContainer>
 
             {auth ? (
-            
-                <LinkContainer to="/admin" className="ml-lg-auto">
-                  <Nav.Link>
-                    {auth.user.username}
-                    <button
-                      onClick={handleOpenConfirm}
-                      className="btn-sm btn-primary ml-3 py-0 mr-auto mt-3 mt-lg-0"
-                    >
-                      Log out
-                    </button>
-                  </Nav.Link>
-                </LinkContainer>
-              
+              <LinkContainer to="/admin" className="ml-lg-auto">
+                <Nav.Link>
+                  {auth.user.username}
+                  <Button
+                    onClick={handleOpenConfirm}
+                    className="btn-sm primary-button ml-3 py-0 mr-auto mt-3 mt-lg-0 mb-3 mb-lg-1"
+                  >
+                    Log out
+                  </Button>
+                </Nav.Link>
+              </LinkContainer>
             ) : (
-              
-                <LinkContainer
-                  to="/admin"
-                  onClick={handleShow}
-                  className="ml-lg-auto"
-                >
-                  <Nav.Link>
-                    <FaUserCircle className="mr-2 login-icon" />
-                    LOGIN
-                  </Nav.Link>
-                </LinkContainer>
-              
+              <LinkContainer
+                to="/admin"
+                onClick={handleShow}
+                className="ml-lg-auto"
+              >
+                <Nav.Link>
+                  <FaUserCircle className="mr-2 login-icon" />
+                  LOGIN
+                </Nav.Link>
+              </LinkContainer>
             )}
           </Nav>
         </Navbar.Collapse>

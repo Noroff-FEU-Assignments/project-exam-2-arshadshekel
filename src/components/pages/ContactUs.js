@@ -56,7 +56,7 @@ function ContactUs() {
       <h1 className="text-center">Contact us</h1>
 
       {submitted ? (
-        <h2  className="text-center text-bold mt-5 color-primary">
+        <h2 className="text-center text-bold mt-5 color-primary">
           Thanks for submitting
         </h2>
       ) : (
@@ -105,7 +105,7 @@ function ContactUs() {
               <span className="text-danger">{errors.Message.message}</span>
             )}
           </Form.Group>
-          <Button variant="primary" type="submit">
+          <Button className="primary-button" type="submit">
             Submit
           </Button>
         </Form>

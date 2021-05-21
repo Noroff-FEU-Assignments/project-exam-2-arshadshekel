@@ -50,14 +50,14 @@ function Hoteldetails() {
       if (i < hotel.standard) {
         stars.push(
           <span className="star-color" key={i}>
-            <FaStar size={32} />
+            <FaStar size={22} />
           </span>
         );
       }
       if (i >= hotel.standard) {
         stars.push(
           <span className="star-color" key={i}>
-            <FaRegStar size={32} />
+            <FaRegStar size={22} />
           </span>
         );
       }

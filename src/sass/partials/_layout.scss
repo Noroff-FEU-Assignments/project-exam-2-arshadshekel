@@ -29,18 +29,18 @@
 }
 
 .accordion-title {
-    background-color: white;
+    background-color: $color-secondary;
     border: none;
-    color: $color-secondary;
+    color: white;
     &:hover {
         background-color: $color-secondary;
     }
 }
 
 .accordion-link {
-    color: $color-secondary !important;
+    color: white !important;
     text-decoration: none !important;
-    background-color: white;
+    background-color: $color-secondary;
 
     &:hover {
         background-color: $color-secondary;
@@ -54,4 +54,22 @@
 
 .btn {
     border-radius: 25px !important;
+}
+.btn-sm {
+    border-radius: none
+}
+
+.custom-file-upload {
+    border-radius: 25px;
+    background-color: $color-secondary;
+    color: white;
+    padding: 6px 12px;
+    &:hover {
+        background-color: $color-primary;
+    }
+    cursor: pointer;
+}
+
+#file-upload{
+    display: none;
 }

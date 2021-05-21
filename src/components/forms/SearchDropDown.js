@@ -64,9 +64,12 @@ const SearchDropDown = () => {
               ref={searchInput}
               placeholder="Search for a hotel..."
               renderMenuItemChildren={(option) => (
-                <div onClick={() => {
+                <div
+                  onClick={() => {
                     history.push(`hotels/` + option.id);
-                }} key={option.id}>
+                  }}
+                  key={option.id}
+                >
                   <img
                     alt={option.name}
                     src={option.avatar_url}
@@ -83,7 +86,7 @@ const SearchDropDown = () => {
             <InputGroup.Append>
               <Button
                 id="submit-search"
-                variant="primary"
+                className="primary-button"
                 type="submit"
               >
                 View hotel

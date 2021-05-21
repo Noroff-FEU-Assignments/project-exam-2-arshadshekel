@@ -19,14 +19,14 @@ function Hotelcard(props) {
       if (i < props.standard) {
         stars.push(
           <span className="star-color" key={i}>
-            <FaStar size={25} />
+            <FaStar size={22} />
           </span>
         );
       }
       if (i >= props.standard) {
         stars.push(
           <span className="star-color" key={i}>
-            <FaRegStar size={25} />
+            <FaRegStar size={22} />
           </span>
         );
       }

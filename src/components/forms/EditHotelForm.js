@@ -95,7 +95,12 @@ function EditHotelForm() {
 
     try {
       axios.defaults.headers.common = { Authorization: `bearer ${token}` };
-      await axios.put(url, formData);
+      await axios.put(url, formData).then((response) => {
+        console.log(response.status);
+        if (response.status === 200) {
+          history.push("/hotels/" + id);
+        }
+      });
     } catch (error) {
       console.log("error", error);
     }
@@ -137,7 +142,7 @@ function EditHotelForm() {
   };
 
   return (
-    <div className="mt-5">
+    <div className="my-5 container">
       <Form noValidate onSubmit={handleSubmit(onSubmit)}>
         <Form.Group controlId="exampleForm.ControlInput1">
           <Form.Label>Hotel name</Form.Label>
@@ -224,21 +229,30 @@ function EditHotelForm() {
           alt={uploadedFile ? uploadedFile.name : file.name}
           height="100%"
           width="150px"
+          className="mt-5 my-3"
         />
         <Form.Group controlId="exampleForm.ControlTextarea1">
-          <Form.Label className="custom-file-upload">File</Form.Label>
+          <Form.Label
+            className="custom-file-upload mt-3 mb-5"
+            for="file-upload"
+            type="submit"
+          >
+            Upload a picture
+          </Form.Label>
 
-          <Form.Control
+          <Form.File
             name="picture"
             type="file"
             ref={register}
+            id="file-upload"
             onChange={handleFileChange}
+            accept="image/*"
           />
           {errors.picture && (
             <span className="text-danger">{errors.picture.message}</span>
           )}
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button className="primary-button" type="submit">
           Submit
         </Button>
         <Button variant="danger" className=" ml-3" onClick={handleShow}>
@@ -259,7 +273,7 @@ function EditHotelForm() {
         <Modal.Body>Do you wish to delete hotel?</Modal.Body>
 
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button className="primary-button" onClick={handleClose}>
             No
           </Button>
           <Button variant="danger" onClick={deleteItem}>
