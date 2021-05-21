@@ -20,6 +20,8 @@ export default function LoginForm({ handleClose }) {
   const [submitting, setSubmitting] = useState(false);
   const [loginError, setLoginError] = useState(null);
   const [showToast, setShowToast] = useState(false);
+  const [toastType, setToastType] = useState("");
+  const [toastAction, setToastAction] = useState("");
 
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
@@ -37,13 +39,21 @@ export default function LoginForm({ handleClose }) {
       await axios.post(url, data).then((response) => {
         console.log(response.status);
         if (response.status === 200) {
-          handleClose();
+          
           setAuth(response.data);
-          setShowToast(true);
+           setShowToast(true);
+           setToastType("success");
+           setToastAction("login");
+           setTimeout(() => setShowToast(false), 3000);
+           setTimeout(() => handleClose(), 3000);
         }
       });
     } catch (error) {
       console.log("error", error);
+       setShowToast(true);
+       setToastType("fail");
+       setToastAction("login");
+       setTimeout(() => setShowToast(false), 3000);
       setLoginError(error.toString());
     } finally {
       setSubmitting(false);
@@ -52,9 +62,7 @@ export default function LoginForm({ handleClose }) {
 
   return (
     <>
-      {loginError && (
-        <span className="text-danger text-bold">Login failed</span>
-      )}
+     
       <Form noValidate onSubmit={handleSubmit(onSubmit)}>
         <fieldset disabled={submitting}>
           <Form.Group controlId="exampleForm.ControlInput1">
@@ -79,6 +87,9 @@ export default function LoginForm({ handleClose }) {
             {errors.password && (
               <span className="text-danger">{errors.password.message}</span>
             )}
+            {loginError && (
+              <span className="text-danger text-bold">Login failed</span>
+            )}
           </Form.Group>
           <button className="btn btn-primary">
             {submitting ? "Loggin in..." : "Login"}
@@ -92,7 +103,7 @@ export default function LoginForm({ handleClose }) {
           </button>
         </fieldset>
       </Form>
-      
+      <Toasts type={toastType} action={toastAction} showToast={showToast} />
     </>
   );
 }

@@ -1,4 +1,4 @@
-import { React } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -6,6 +6,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 import { ENQUIRYURL } from "../../constants/Api";
+import Toasts from "../../hooks/useToasts";
 
 const url = ENQUIRYURL;
 
@@ -29,20 +30,33 @@ const schema = yup.object().shape({
 });
 
 function EnquiryForm({ handleClose, hotelName }) {
+  const [showToast, setShowToast] = useState(false);
+  const [toastType, setToastType] = useState("");
+  const [toastAction, setToastAction] = useState("");
+
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
   });
 
   async function onSubmit(data) {
-      data.Hotel = hotelName;
+    data.Hotel = hotelName;
     try {
       await axios.post(url, data).then((response) => {
         console.log(response.status);
         if (response.status === 200) {
-          handleClose();
+          setShowToast(true);
+          setToastType("success");
+          setToastAction("postMessage");
+          setTimeout(() => setShowToast(false), 3000);
+          setTimeout(() => handleClose(), 3000);
         }
       });
     } catch (error) {
+      setShowToast(true);
+      setToastType("fail");
+      setToastAction("postMessage");
+      setTimeout(() => setShowToast(false), 3000);
+      setTimeout(() => handleClose(), 3000);
       console.log("error", error);
     }
   }
@@ -97,6 +111,7 @@ function EnquiryForm({ handleClose, hotelName }) {
           Close
         </Button>
       </Form>
+      <Toasts type={toastType} action={toastAction} showToast={showToast} />
     </div>
   );
 }

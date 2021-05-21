@@ -14,7 +14,6 @@ export default function Toasts({ type, action, showToast }) {
   useEffect(
     function () {
       function updateToast() {
-        console.log("toats");
         if (type === "success") {
           setToastColor("bg-success text-center");
           if (action === "login") {
@@ -22,7 +21,7 @@ export default function Toasts({ type, action, showToast }) {
           } else if (action === "addHotel") {
             setToastMessage("You have added a new hotel");
           } else if (action === "editHotel") {
-              console.log("hotel");
+            console.log("hotel");
             setToastMessage("You have edited a hotel");
           } else if (action === "logout") {
             setToastMessage("You have logged out");
@@ -30,19 +29,23 @@ export default function Toasts({ type, action, showToast }) {
             setToastMessage("You have deleted a hotel");
           } else if (action === "postMessage") {
             setToastMessage("Your message has been sent");
+          } else if (action === "deleteMessage") {
+            setToastMessage("You have deleted a message");
           }
         } else if (type === "fail") {
           setToastColor("bg-danger text-center");
           if (action === "login") {
-           setToastMessage("Failed to logged in");
+            setToastMessage("Failed to logged in");
           } else if (action === "addHotel") {
             setToastMessage("Failed to add a new hotel");
           } else if (action === "editHotel") {
             setToastMessage("Failed to edit a hotel");
           } else if (action === "deleteHotel") {
-           setToastMessage("Failed to delete a hotel");
+            setToastMessage("Failed to delete a hotel");
           } else if (action === "deleteMessage") {
             setToastMessage("Failed to deleted a message");
+          } else if (action === "postMessage") {
+            setToastMessage("Failed to send message");
           }
         }
       }

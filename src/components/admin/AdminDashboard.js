@@ -6,6 +6,8 @@ import { Accordion, Card, Button, Modal } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import moment from "moment";
 
+import Toasts from "../../hooks/useToasts";
+
 function AdminDashboard() {
   const [auth] = useContext(AuthContext);
   const [contactForms, setContactForms] = useState([]);
@@ -20,6 +22,9 @@ function AdminDashboard() {
     setEntryID(id);
     setEntryType(type);
   }
+    const [showToast, setShowToast] = useState(false);
+    const [toastType, setToastType] = useState("");
+    const [toastAction, setToastAction] = useState("");
 
   useEffect(
     function () {
@@ -28,15 +33,19 @@ function AdminDashboard() {
         const token = auth.jwt;
 
         try {
-          axios.defaults.headers.common = { Authorization: `bearer ${token}` };
-          axios.get(CONTACTURL).then((resp) => {
-            setContactForms(resp.data);
-            console.log(resp.data);
-          });
-          axios.get(ENQUIRYURL).then((resp) => {
-            setEnquiry(resp.data);
-            console.log(resp.data);
-          });
+         
+            axios
+              .get(CONTACTURL, { headers: { Authorization: `Bearer ${token}` } })
+              .then((resp) => {
+                setContactForms(resp.data);
+                console.log(resp.data);
+              });
+          axios
+            .get(ENQUIRYURL, { headers: { Authorization: `Bearer ${token}` } })
+            .then((resp) => {
+              setEnquiry(resp.data);
+              console.log(resp.data);
+            });
         } catch (error) {
           console.log("error", error);
         }
@@ -64,10 +73,19 @@ function AdminDashboard() {
           console.log(response.status);
           if (response.status === 200) {
             handleClose();
+            setShowToast(true);
+            setToastType("success");
+            setToastAction("deleteMessage");
+            setTimeout(() => setShowToast(false), 1000);
             setUpdateList(true);
           }
         });
       } catch (error) {
+          handleClose();
+          setShowToast(true);
+          setToastType("fail");
+          setToastAction("deleteMessage");
+          setTimeout(() => setShowToast(false), 1000);
         console.log("error", error);
       }
     }
@@ -174,7 +192,7 @@ function AdminDashboard() {
                           className="accordion-title"
                           eventKey="0"
                         >
-                          { form.Hotel} - {form.Firstname} {form.Lastname}
+                          {form.Hotel} - {form.Firstname} {form.Lastname}
                         </Accordion.Toggle>
 
                         <Accordion.Collapse eventKey="0">
@@ -190,7 +208,7 @@ function AdminDashboard() {
                             <div className="my-2">
                               Name:{" "}
                               <span className="ml-3">
-                               {form.Firstname} {form.Lastname}
+                                {form.Firstname} {form.Lastname}
                               </span>
                             </div>
                             <div className="my-2">
@@ -203,7 +221,7 @@ function AdminDashboard() {
                             <Button
                               variant="danger"
                               className="my-3 rounded-corners"
-                              onClick={() => handleShow(form.id, "contact")}
+                              onClick={() => handleShow(form.id, "enquiry")}
                             >
                               Delete message
                             </Button>
@@ -231,7 +249,7 @@ function AdminDashboard() {
         <Modal.Header closeButton>
           <Modal.Title>Delete hotel?</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Do you wish to delete hotel?</Modal.Body>
+        <Modal.Body>Do you wish to delete message?</Modal.Body>
 
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -245,6 +263,7 @@ function AdminDashboard() {
           </Button>
         </Modal.Footer>
       </Modal>
+      <Toasts type={toastType} action={toastAction} showToast={showToast} />
     </>
   );
 }

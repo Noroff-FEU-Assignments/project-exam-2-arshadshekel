@@ -80,9 +80,12 @@ function AddHotelForm() {
           setToastAction("addHotel");
           setTimeout(() => setShowToast(false), 3000);
           setTimeout(() => history.push("/hotels/" + id), 3000);
-          
-        }});
+        }
+      });
     } catch (error) {
+      setShowToast(true);
+      setToastType("fail");
+      setToastAction("addHotel");
       console.log("error", error);
     }
   }
