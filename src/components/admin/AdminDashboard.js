@@ -21,15 +21,15 @@ function AdminDashboard() {
     setShow(true);
     setEntryID(id);
     setEntryType(type);
-  }
-    const [showToast, setShowToast] = useState(false);
-    const [toastType, setToastType] = useState("");
-    const [toastAction, setToastAction] = useState("");
+  };
+  const [showToast, setShowToast] = useState(false);
+  const [toastType, setToastType] = useState("");
+  const [toastAction, setToastAction] = useState("");
 
-useEffect(() => {
-  document.title = "Holidaze - Admin dashboard";
-}, []);
-  
+  useEffect(() => {
+    document.title = "Holidaze - Admin dashboard";
+  }, []);
+
   useEffect(
     function () {
       async function getForms() {
@@ -37,13 +37,12 @@ useEffect(() => {
         const token = auth.jwt;
 
         try {
-         
-            axios
-              .get(CONTACTURL, { headers: { Authorization: `Bearer ${token}` } })
-              .then((resp) => {
-                setContactForms(resp.data);
-                console.log(resp.data);
-              });
+          axios
+            .get(CONTACTURL, { headers: { Authorization: `Bearer ${token}` } })
+            .then((resp) => {
+              setContactForms(resp.data);
+              console.log(resp.data);
+            });
           axios
             .get(ENQUIRYURL, { headers: { Authorization: `Bearer ${token}` } })
             .then((resp) => {
@@ -61,38 +60,38 @@ useEffect(() => {
   );
 
   async function deleteItem(id, type) {
-      const token = auth.jwt;
+    const token = auth.jwt;
     let url = "";
-    
+
     if (type === "contact") {
       url = CONTACTURL + id;
     }
     if (type === "enquiry") {
       url = ENQUIRYURL + id;
     }
-    
-      try {
-        axios.defaults.headers.common = { Authorization: `bearer ${token}` };
-        await axios.delete(url, {}).then((response) => {
-          console.log(response.status);
-          if (response.status === 200) {
-            handleClose();
-            setShowToast(true);
-            setToastType("success");
-            setToastAction("deleteMessage");
-            setTimeout(() => setShowToast(false), 1000);
-            setUpdateList(true);
-          }
-        });
-      } catch (error) {
+
+    try {
+      axios.defaults.headers.common = { Authorization: `bearer ${token}` };
+      await axios.delete(url, {}).then((response) => {
+        console.log(response.status);
+        if (response.status === 200) {
           handleClose();
           setShowToast(true);
-          setToastType("fail");
+          setToastType("success");
           setToastAction("deleteMessage");
           setTimeout(() => setShowToast(false), 1000);
-        console.log("error", error);
-      }
+          setUpdateList(true);
+        }
+      });
+    } catch (error) {
+      handleClose();
+      setShowToast(true);
+      setToastType("fail");
+      setToastAction("deleteMessage");
+      setTimeout(() => setShowToast(false), 1000);
+      console.log("error", error);
     }
+  }
 
   return (
     <>
@@ -151,7 +150,10 @@ useEffect(() => {
                               </span>
                             </div>
                             <div className="my-2">
-                              Email: <span className="ml-3">{form.email}</span>
+                              Email:{" "}
+                              <a className="ml-3" href={"mailto:" + form.email}>
+                                {form.email}
+                              </a>
                             </div>
                             <div className="my-2">
                               Message:{" "}
@@ -216,7 +218,10 @@ useEffect(() => {
                               </span>
                             </div>
                             <div className="my-2">
-                              Email: <span className="ml-3">{form.Email}</span>
+                              Email:{" "}
+                              <a className="ml-3" href={"mailto:" + form.Email}>
+                                {form.Email}
+                              </a>
                             </div>
                             <div className="my-2">
                               Message:{" "}
