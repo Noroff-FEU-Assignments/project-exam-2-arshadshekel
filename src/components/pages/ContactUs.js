@@ -6,6 +6,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 import { CONTACTURL } from "../../constants/Api";
+import Toasts from "../../hooks/useToasts";
 
 const url = CONTACTURL;
 
@@ -28,29 +29,37 @@ const schema = yup.object().shape({
     .min(10, "The message must be at least 10 characters"),
 });
 
-
-
-
-
 function ContactUs() {
-    const [submitted, setSubmitted] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+  const [toastType, setToastType] = useState("");
+  const [toastAction, setToastAction] = useState("");
 
-    const { register, handleSubmit, errors } = useForm({
-      resolver: yupResolver(schema),
-    });
+  const { register, handleSubmit, errors } = useForm({
+    resolver: yupResolver(schema),
+  });
 
-    async function onSubmit(data) {
-      try {
-        await axios.post(url, data).then((response) => {
-          if (response.status === 200) {
-            setSubmitted(true);
-          }
-        });
-      } catch (error) {
-        console.log("error", error);
-      }
+ 
+  async function onSubmit(data) {
+    try {
+      await axios.post(url, data).then((response) => {
+        if (response.status === 200) {
+          setShowToast(true);
+          setToastType("success");
+          setToastAction("postMessage");
+          setTimeout(() => setShowToast(false), 3000);
+          setSubmitted(true);
+        }
+      });
+    } catch (error) {
+      setShowToast(true);
+      setToastType("fail");
+      setTimeout(() => setShowToast(false), 2000);
+      setToastAction("postMessage");
+      console.log("error", error);
+    }
   }
-  
+
   return (
     <div className="container my-5">
       <h1 className="text-center">Contact us</h1>
@@ -110,6 +119,7 @@ function ContactUs() {
           </Button>
         </Form>
       )}
+      <Toasts type={toastType} action={toastAction} showToast={showToast} />
     </div>
   );
 }

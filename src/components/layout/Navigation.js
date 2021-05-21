@@ -6,6 +6,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import LoginForm from "../forms/LoginForm";
 import AuthContext from "../../context/AuthContext";
 import { useHistory } from "react-router-dom";
+import Toasts from "../../hooks/useToasts";
 
 function Navigation() {
   const [show, setShow] = useState(false);
@@ -19,13 +20,21 @@ function Navigation() {
 
   const [auth, setAuth] = useContext(AuthContext);
 
+   const [showToast, setShowToast] = useState(false);
+   const [toastType, setToastType] = useState("");
+   const [toastAction, setToastAction] = useState("");
+
   const history = useHistory();
  
 
   function logout() {
     setAuth();
-    history.push("/");
-    handleCloseConfirm();
+    setShowToast(true);
+    setToastType("success");
+    setToastAction("logout");
+    setTimeout(() => setShowToast(false), 3000);
+    setTimeout(() => history.push("/"), 3000);
+    setTimeout(() => handleCloseConfirm(), 2000);;
   }
 
 
@@ -119,6 +128,7 @@ function Navigation() {
           </Button>
         </Modal.Footer>
       </Modal>
+      <Toasts type={toastType} action={toastAction} showToast={showToast} />
     </div>
   );
 }

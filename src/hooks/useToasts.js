@@ -21,7 +21,6 @@ export default function Toasts({ type, action, showToast }) {
           } else if (action === "addHotel") {
             setToastMessage("You have added a new hotel");
           } else if (action === "editHotel") {
-            console.log("hotel");
             setToastMessage("You have edited a hotel");
           } else if (action === "logout") {
             setToastMessage("You have logged out");

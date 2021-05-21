@@ -53,7 +53,7 @@ export default function LoginForm({ handleClose }) {
        setShowToast(true);
        setToastType("fail");
        setToastAction("login");
-       setTimeout(() => setShowToast(false), 3000);
+       setTimeout(() => setShowToast(false), 1000);
       setLoginError(error.toString());
     } finally {
       setSubmitting(false);

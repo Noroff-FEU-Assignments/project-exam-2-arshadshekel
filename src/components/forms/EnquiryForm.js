@@ -55,7 +55,7 @@ function EnquiryForm({ handleClose, hotelName }) {
       setShowToast(true);
       setToastType("fail");
       setToastAction("postMessage");
-      setTimeout(() => setShowToast(false), 3000);
+      setTimeout(() => setShowToast(false), 1000);
       setTimeout(() => handleClose(), 3000);
       console.log("error", error);
     }

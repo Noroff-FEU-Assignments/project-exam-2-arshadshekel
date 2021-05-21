@@ -143,7 +143,7 @@ function EditHotelForm() {
           setShowToast(true);
           setToastType("success");
           setToastAction("deleteHotel");
-          setTimeout(() => setShowToast(false), 3000);
+          setTimeout(() => setShowToast(false), 1000);
           setTimeout(() => history.push("/hotels"), 3000);
         }
       });
