@@ -69,7 +69,7 @@ function ContactUs() {
 
       {submitted ? (
         <h2 className="text-center text-bold mt-5 color-primary">
-          Thanks for submitting
+          Thanks for contacting us
         </h2>
       ) : (
         <Form noValidate onSubmit={handleSubmit(onSubmit)}>
