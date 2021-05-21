@@ -1,7 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { API } from "../../constants/Api";
 import { FaStar, FaRegStar } from "react-icons/fa";
+import { Col, Row, Modal, Button  } from "react-bootstrap";
+import EnquiryForm from "../forms/EnquiryForm";
+import { useHistory } from "react-router-dom";
+import AuthContext from "../../context/AuthContext";
 
 function Hoteldetails() {
   const [hotel, setHotel] = useState(null);
@@ -10,7 +14,12 @@ function Hoteldetails() {
 
   const { id } = useParams();
 
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+  const [show, setShow] = useState(false);
   const url = API + id;
+  let history = useHistory();
+   const [auth,] = useContext(AuthContext);
 
   useEffect(
     function () {
@@ -70,12 +79,81 @@ function Hoteldetails() {
   }
 
   return (
-    <div className="mt-5 container text-center">
-      <h1>{hotel.name}</h1>
-      {populateStars().map((star) => {
-        return star;
-      })}
-    </div>
+    <>
+      <div className="container mt-5">
+        <Row>
+          <Col xs={12} md={4}>
+            <img
+              src={hotel.picture.url}
+              alt={hotel.name}
+              width="285px"
+              className="d-block mx-auto img-fluid"
+            ></img>
+            <p className="text-center mt-3 mb-0">
+              {hotel.Address}
+            </p>
+            <p className="text-center">
+              {hotel.Zipcode} {hotel.City}
+            </p>
+          </Col>
+          <Col xs={12} md={8}>
+            <h1 className="mt-4 mt-md-0">{hotel.name}</h1>
+            {populateStars().map((star) => {
+              return star;
+            })}
+            <p className="mt-4">{hotel.description}</p>
+            <p>
+              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+              nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+              erat, sed diam voluptua. At vero eos et accusam et justo duo
+              dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
+              sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
+              consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+              invidunt ut labore et dolore magna aliquyam erat, sed diam
+              voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+            </p>
+            <p>
+              Stet clita kasd gubergren, no sea takimata sanctus est. Lorem
+              ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
+              sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+              et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
+              accusam et justo duo dolores et ea rebum.
+            </p>
+            <p className="mt-4 font-weight-bold">Price: {hotel.price}</p>
+            <Button className="mr-3 mt-3 primary-button" onClick={handleShow}>
+              Contact hotel
+            </Button>
+            {auth ? (
+               <Button
+              className="ml-3 mt-3"
+              variant="success"
+              onClick={() => history.push("/admin/edit/" + id)}
+            > Edit hotel
+            </Button>
+            ) : (
+                null
+             
+            )}
+           
+          </Col>
+        </Row>
+        <Modal
+          show={show}
+          onHide={handleClose}
+          backdrop="static"
+          keyboard={false}
+          centered
+          className="modal-background"
+        >
+          <Modal.Header className="modal-border-bottom" closeButton>
+            <h3 className="ml-auto text-white">Contact {hotel.name}</h3>
+          </Modal.Header>
+          <Modal.Body>
+            <EnquiryForm handleClose={handleClose} hotelName={hotel.name} />
+          </Modal.Body>
+        </Modal>
+      </div>
+    </>
   );
 }
 

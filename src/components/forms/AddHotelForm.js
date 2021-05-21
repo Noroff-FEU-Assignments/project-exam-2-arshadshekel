@@ -22,12 +22,25 @@ const schema = yup.object().shape({
     .string()
     .required("Please enter your last name")
     .min(2, "The name must be at least 2 characters"),
+  Address: yup
+    .string()
+    .required("Please enter an address")
+    .min(2, "The name must be at least 2 characters"),
+  City: yup
+    .string()
+    .required("Please enter a city")
+    .min(2, "The name must be at least 2 characters"),
   standard: yup
     .number()
     .positive()
     .typeError("Please enter a standard")
     .integer()
     .max(5, "The standard must be maximum 5 stars"),
+  Zipcode: yup
+    .number()
+    .positive()
+    .typeError("Please enter a zipcode")
+    .integer(),
   price: yup.number().typeError("Please enter a price").positive().integer(),
   description: yup
     .string()
@@ -104,9 +117,30 @@ function AddHotelForm() {
         </Form.Group>
         <Form.Group controlId="exampleForm.ControlInput2">
           <Form.Label>Phone</Form.Label>
-          <Form.Control placeholder="phone" name="phone" ref={register} />
+          <Form.Control placeholder="Phonenumber" name="phone" ref={register} />
           {errors.phone && (
             <span className="text-danger">{errors.phone.message}</span>
+          )}
+        </Form.Group>
+        <Form.Group controlId="exampleForm.ControlInput5">
+          <Form.Label>Address</Form.Label>
+          <Form.Control placeholder="Address" name="Address" ref={register} />
+          {errors.Address && (
+            <span className="text-danger">{errors.Address.message}</span>
+          )}
+        </Form.Group>
+        <Form.Group controlId="exampleForm.ControlInput2">
+          <Form.Label>Zipcode</Form.Label>
+          <Form.Control placeholder="Zipcode" name="Zipcode" ref={register} />
+          {errors.Zipcode && (
+            <span className="text-danger">{errors.Zipcode.message}</span>
+          )}
+        </Form.Group>
+        <Form.Group controlId="exampleForm.ControlInput2">
+          <Form.Label>City</Form.Label>
+          <Form.Control placeholder="City" name="City" ref={register} />
+          {errors.City && (
+            <span className="text-danger">{errors.City.message}</span>
           )}
         </Form.Group>
 
