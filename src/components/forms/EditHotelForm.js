@@ -10,6 +10,8 @@ import axios from "axios";
 import { ADDHOTELS } from "../../constants/Api";
 import AuthContext from "../../context/AuthContext";
 
+import Toasts from "../../hooks/useToasts";
+
 const schema = yup.object().shape({
   name: yup
     .string()
@@ -40,6 +42,7 @@ function EditHotelForm() {
   const [auth] = useContext(AuthContext);
   const [file, setFile] = useState(null);
   const [uploadedFile, setUploadedFile] = useState(null);
+  const [showToast, setShowToast] = useState(false);
 
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
@@ -61,6 +64,7 @@ function EditHotelForm() {
             console.log(json);
             setHotel(json);
             setFile(json.picture);
+               
           } else {
             setError("An error occured");
           }
@@ -98,7 +102,9 @@ function EditHotelForm() {
       await axios.put(url, formData).then((response) => {
         console.log(response.status);
         if (response.status === 200) {
-          history.push("/hotels/" + id);
+          /* history.push("/hotels/" + id); */
+          setShowToast(true);
+          setTimeout( () => setShowToast(false), 3000)
         }
       });
     } catch (error) {
@@ -281,6 +287,7 @@ function EditHotelForm() {
           </Button>
         </Modal.Footer>
       </Modal>
+      <Toasts type={"success"} action={"editHotel"} showToast={showToast} />
     </div>
   );
 }

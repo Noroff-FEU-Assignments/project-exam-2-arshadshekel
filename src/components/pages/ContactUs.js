@@ -52,8 +52,8 @@ function ContactUs() {
   }
   
   return (
-    <div className="container">
-      <h1 className="text-center my-5">Contact us</h1>
+    <div className="container my-5">
+      <h1 className="text-center">Contact us</h1>
 
       {submitted ? (
         <h2 className="text-center text-bold mt-5 color-primary">
@@ -105,7 +105,7 @@ function ContactUs() {
               <span className="text-danger">{errors.Message.message}</span>
             )}
           </Form.Group>
-          <Button className="primary-button" type="submit">
+          <Button className="primary-button mt-3" type="submit">
             Submit
           </Button>
         </Form>

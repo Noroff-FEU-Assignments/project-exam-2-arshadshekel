@@ -8,7 +8,6 @@ import {
 import { useEffect, useState } from "react";
 import { API } from "../../constants/Api";
 
-
 import Hotelcard from "../hotel/Hotelcard";
 import SearchDropDown from "../forms/SearchDropDown";
 
@@ -58,10 +57,11 @@ function HomePage() {
           <div className="overlay py-5">
             <h1 className="landingpage-title">DISCOVER BERGEN</h1>
             <h2 className="landingpage-subtitle">Book a hotel today!</h2>
-           <SearchDropDown/>
+            <SearchDropDown />
           </div>
         </Container>
       </Jumbotron>
+
       <h2 className="my-5 font-weight-bold">Some featured hotels</h2>
       <div className="px-5 my-5">
         <Row>
@@ -84,6 +84,7 @@ function HomePage() {
             }
           })}
         </Row>
+        
       </div>
     </div>
   );

@@ -174,7 +174,7 @@ function AdminDashboard() {
                           className="accordion-title"
                           eventKey="0"
                         >
-                          {form.Firstname} {form.Lastname}
+                          { form.Hotel} - {form.Firstname} {form.Lastname}
                         </Accordion.Toggle>
 
                         <Accordion.Collapse eventKey="0">
@@ -190,7 +190,7 @@ function AdminDashboard() {
                             <div className="my-2">
                               Name:{" "}
                               <span className="ml-3">
-                                {form.Firstname} {form.Lastname}
+                               {form.Firstname} {form.Lastname}
                               </span>
                             </div>
                             <div className="my-2">

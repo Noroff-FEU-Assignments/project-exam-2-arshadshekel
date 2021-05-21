@@ -7,6 +7,8 @@ import { LOGINURL } from "../../constants/Api";
 import Form from "react-bootstrap/Form";
 import AuthContext from "../../context/AuthContext";
 
+
+import Toasts from "../../hooks/useToasts"
 const url = LOGINURL;
 
 const schema = yup.object().shape({
@@ -17,6 +19,7 @@ const schema = yup.object().shape({
 export default function LoginForm({ handleClose }) {
   const [submitting, setSubmitting] = useState(false);
   const [loginError, setLoginError] = useState(null);
+  const [showToast, setShowToast] = useState(false);
 
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
@@ -36,6 +39,7 @@ export default function LoginForm({ handleClose }) {
         if (response.status === 200) {
           handleClose();
           setAuth(response.data);
+          setShowToast(true);
         }
       });
     } catch (error) {
@@ -88,6 +92,7 @@ export default function LoginForm({ handleClose }) {
           </button>
         </fieldset>
       </Form>
+      
     </>
   );
 }
