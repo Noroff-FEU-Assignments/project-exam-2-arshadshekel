@@ -1,10 +1,13 @@
 import AddHotelForm from "../forms/AddHotelForm";
 import AuthContext from "../../context/AuthContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 
 function AdminAddHotels() {
-    const [auth] = useContext(AuthContext);
+  const [auth] = useContext(AuthContext);
+   useEffect(() => {
+     document.title = "Holidaze - Add hotels";
+   }, []);
   return (
     <div>
       {auth ? (

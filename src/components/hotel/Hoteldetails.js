@@ -24,6 +24,8 @@ function Hoteldetails() {
   const [mapsAddress, setMapsAddress] = useState(null);
   const [mapsCity, setMapsCity] = useState(null);
 
+ 
+
   useEffect(
     function () {
       async function fetchData() {
@@ -47,7 +49,8 @@ function Hoteldetails() {
     },
     [url]
   );
-
+  
+  
   function convertAddress() {
     const Address = encodeURI(hotel.Address);
     setMapsAddress(Address);
@@ -85,6 +88,7 @@ function Hoteldetails() {
         );
       }
     }
+    document.title = "Holidaze - " + hotel.name;
     return stars;
   }
 

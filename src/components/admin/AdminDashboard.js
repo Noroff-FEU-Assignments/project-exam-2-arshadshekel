@@ -26,6 +26,10 @@ function AdminDashboard() {
     const [toastType, setToastType] = useState("");
     const [toastAction, setToastAction] = useState("");
 
+useEffect(() => {
+  document.title = "Holidaze - Admin dashboard";
+}, []);
+  
   useEffect(
     function () {
       async function getForms() {

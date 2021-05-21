@@ -1,9 +1,4 @@
-import {
-  Jumbotron,
-  Container,
-  Row,
-  Col,
-} from "react-bootstrap";
+import { Jumbotron, Container, Row, Col } from "react-bootstrap";
 
 import { useEffect, useState } from "react";
 import { API } from "../../constants/Api";
@@ -11,12 +6,15 @@ import { API } from "../../constants/Api";
 import Hotelcard from "../hotel/Hotelcard";
 import SearchDropDown from "../forms/SearchDropDown";
 
-
 function HomePage() {
   const [hotels, setHotels] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  useEffect(() => {
+    document.title = "Holidaze - Find hotels in Bergen";
+  }, []);
+  
   useEffect(function () {
     async function fetchData() {
       try {
@@ -84,7 +82,6 @@ function HomePage() {
             }
           })}
         </Row>
-        
       </div>
     </div>
   );

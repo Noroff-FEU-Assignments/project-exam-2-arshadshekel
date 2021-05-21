@@ -40,6 +40,10 @@ function Hotels() {
     }
   };
 
+   useEffect(() => {
+     document.title = "Holidaze - View hotels in Bergen";
+   }, []);
+
   useEffect(function () {
     async function fetchData() {
       try {

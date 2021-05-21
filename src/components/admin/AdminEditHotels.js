@@ -3,7 +3,8 @@ import AuthContext from "../../context/AuthContext";
 import {useContext} from "react";
 
 function AdminEditHotels() {
-    const [auth] = useContext(AuthContext);
+  const [auth] = useContext(AuthContext);
+  
   return (
     <div>
       {auth ? (

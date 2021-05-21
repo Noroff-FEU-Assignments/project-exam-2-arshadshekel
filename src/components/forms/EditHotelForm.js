@@ -88,6 +88,7 @@ function EditHotelForm() {
           setLoading(false);
         }
       }
+
       fetchData();
     },
     [url]
@@ -161,9 +162,9 @@ function EditHotelForm() {
         }
       });
     } catch (error) {
-         setShowToast(true);
-         setToastType("fail");
-         setToastAction("deleteHotel");
+      setShowToast(true);
+      setToastType("fail");
+      setToastAction("deleteHotel");
       console.log("error", error);
     }
   }
@@ -171,6 +172,10 @@ function EditHotelForm() {
   const handleFileChange = (event) => {
     setUploadedFile(event.target.files[0]);
   };
+
+  function updateTitle() {
+    document.title = "Holidaze - Edit - " + hotel.name;
+  }
 
   return (
     <div className="my-5 container">
@@ -297,6 +302,7 @@ function EditHotelForm() {
           height="100%"
           width="150px"
           className="mt-5 my-3"
+          onLoad={updateTitle}
         />
         <Form.Group>
           <Form.Label
