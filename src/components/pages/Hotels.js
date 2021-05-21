@@ -2,6 +2,7 @@ import { Row, Col, Form } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { API } from "../../constants/Api";
 import Hotelcard from "../hotel/Hotelcard";
+import SearchDropDown from "../forms/SearchDropDown";
 
 function Hotels() {
   const [hotels, setHotels] = useState([]);
@@ -107,9 +108,10 @@ function Hotels() {
 
   return (
     <div>
-      <h1 className="text-center my-5">Hotels</h1>
-      <div className="my-5 px-5 d-flex justify-content-center">
+      <h1 className="text-center mt-5">Hotels</h1>
+      <div className="mb-5 px-5 d-flex justify-content-center">
         <div>
+          <SearchDropDown/>
           <h4>Sort by:</h4>
           <Form noValidate>
             <Form.Row>

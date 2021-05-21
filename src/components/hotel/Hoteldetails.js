@@ -37,7 +37,11 @@ function Hoteldetails() {
   );
 
   if (loading) {
-    return <div className="mt-5">Loading...</div>;
+    return (
+      <div className="mt-5 container">
+        <h1 className="text-center">Loading...</h1>
+      </div>
+    );
   }
 
   if (error) {

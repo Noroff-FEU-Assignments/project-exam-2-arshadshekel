@@ -41,7 +41,7 @@ function HomePage() {
   if (loading) {
     return (
       <div className="mt-5 container">
-        <h1>Loading...</h1>
+        <h1 className="text-center">Loading...</h1>
       </div>
     );
   }

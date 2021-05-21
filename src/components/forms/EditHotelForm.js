@@ -251,7 +251,7 @@ function EditHotelForm() {
         />
         <Form.Group>
           <Form.Label
-            className="custom-file-upload mt-3 mb-5"
+            className="custom-file-upload mt-3 mb-4"
             htmlFor="file-upload"
             type="submit"
           >
@@ -270,16 +270,17 @@ function EditHotelForm() {
             <span className="text-danger">{errors.picture.message}</span>
           )}
         </Form.Group>
-        <Button variant="success" type="submit">
+
+        <Button variant="success" className="mb-3" type="submit">
           Update
         </Button>
         <Button
-          className="primary-button ml-3"
+          className="primary-button ml-3 mr-3 mb-3"
           onClick={() => history.push("/hotels/" + id)}
         >
           View hotel
         </Button>
-        <Button variant="danger" className=" ml-3" onClick={handleShow}>
+        <Button variant="danger" className="mb-3" onClick={handleShow}>
           Delete item
         </Button>
       </Form>
@@ -300,7 +301,13 @@ function EditHotelForm() {
           <Button className="primary-button" onClick={handleClose}>
             No
           </Button>
-          <Button variant="danger" onClick={() => { handleClose(); deleteItem()}}>
+          <Button
+            variant="danger"
+            onClick={() => {
+              handleClose();
+              deleteItem();
+            }}
+          >
             Delete
           </Button>
         </Modal.Footer>
