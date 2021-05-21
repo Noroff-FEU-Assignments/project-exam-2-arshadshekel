@@ -87,35 +87,31 @@ function AdminDashboard() {
       </LinkContainer>
 
       <h2 className="text-center text-bold mb-5">Messages received</h2>
-      <Accordion defaultActiveKey="0" className="my-3">
-        <Card>
-          <Card.Header className="accordion-title">
-            <Accordion.Toggle
-              as={Button}
-              variant="text"
-              className="accordion-link"
-              eventKey="0"
-            >
-              Messages to Holidaze
-            </Accordion.Toggle>
-          </Card.Header>
+
+      <Accordion className="my-5">
+        <Card className="my-3">
+          <Accordion.Toggle
+            as={Card.Header}
+            className="accordion-title"
+            eventKey="0"
+          >
+            Messages to Holidaze
+          </Accordion.Toggle>
           <Accordion.Collapse eventKey="0">
             <Card.Body>
               {contactForms.length !== 0 ? (
                 contactForms.map((form) => {
                   return (
                     <Accordion key={form.id}>
-                      <Card>
-                        <Card.Header className="accordion-title">
-                          <Accordion.Toggle
-                            as={Button}
-                            variant="text"
-                            eventKey="0"
-                            className="accordion-link"
-                          >
-                            {form.Firstname} {form.Lastname}
-                          </Accordion.Toggle>
-                        </Card.Header>
+                      <Card className="my-3">
+                        <Accordion.Toggle
+                          as={Card.Header}
+                          className="accordion-title"
+                          eventKey="0"
+                        >
+                          {form.Firstname} {form.Lastname}
+                        </Accordion.Toggle>
+
                         <Accordion.Collapse eventKey="0">
                           <Card.Body>
                             <div className="my-2">
@@ -158,42 +154,37 @@ function AdminDashboard() {
             </Card.Body>
           </Accordion.Collapse>
         </Card>
-      </Accordion>
-      <Accordion defaultActiveKey="0" className="my-3">
         <Card>
-          <Card.Header className="accordion-title">
-            <Accordion.Toggle
-              as={Button}
-              variant="text"
-              className="accordion-link"
-              eventKey="0"
-            >
-              Enquiries to hotels
-            </Accordion.Toggle>
-          </Card.Header>
-          <Accordion.Collapse eventKey="0">
+          <Accordion.Toggle
+            as={Card.Header}
+            eventKey="1"
+            className="accordion-title"
+          >
+            Enquires to Hotels
+          </Accordion.Toggle>
+          <Accordion.Collapse eventKey="1">
             <Card.Body>
               {enquiries.length !== 0 ? (
                 enquiries.map((form) => {
                   return (
                     <Accordion key={form.id}>
-                      <Card>
-                        <Card.Header className="accordion-title">
-                          <Accordion.Toggle
-                            as={Button}
-                            variant="text"
-                            eventKey="0"
-                            className="accordion-link"
-                          >
-                            {form.Hotel} - {form.Firstname} {form.Lastname}
-                          </Accordion.Toggle>
-                        </Card.Header>
+                      <Card className="my-3">
+                        <Accordion.Toggle
+                          as={Card.Header}
+                          className="accordion-title"
+                          eventKey="0"
+                        >
+                          {form.Firstname} {form.Lastname}
+                        </Accordion.Toggle>
+
                         <Accordion.Collapse eventKey="0">
                           <Card.Body>
                             <div className="my-2">
                               Date:{" "}
                               <span className="ml-3">
-                                {moment(form.created_at).format('MMMM Do YYYY, h:mm:ss a')}
+                                {moment(form.created_at).format(
+                                  "MMMM Do YYYY, h:mm:ss a"
+                                )}
                               </span>
                             </div>
                             <div className="my-2">
@@ -212,7 +203,7 @@ function AdminDashboard() {
                             <Button
                               variant="danger"
                               className="my-3 rounded-corners"
-                              onClick={() => handleShow(form.id, "enquiry")}
+                              onClick={() => handleShow(form.id, "contact")}
                             >
                               Delete message
                             </Button>
@@ -229,6 +220,7 @@ function AdminDashboard() {
           </Accordion.Collapse>
         </Card>
       </Accordion>
+
       <Modal
         show={show}
         onHide={handleClose}
