@@ -111,10 +111,15 @@ function Hoteldetails() {
             <p className="text-center mb-0">{hotel.phone}</p>
           </Col>
           <Col xs={12} md={7}>
-            <h1 className="mt-4 mt-md-0">{hotel.name}</h1>
-            {populateStars().map((star) => {
-              return star;
-            })}
+            <h1 className="mt-5 mt-md-0 text-center text-md-left">
+              {hotel.name}
+            </h1>
+
+            <div className="text-center text-md-left">
+              {populateStars().map((star) => {
+                return star;
+              })}
+            </div>
             <p className="mt-5">{hotel.description}</p>
             <p>
               Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
