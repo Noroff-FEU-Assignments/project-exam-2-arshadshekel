@@ -10,29 +10,33 @@ function Hotels() {
   const [minprice, setMinprice] = useState(null);
   const [maxprice, setMaxprice] = useState(null);
   const [stars, setStars] = useState(5);
-  const [validated, setValidated] = useState(false);
+  const [minpriceError, setMinpriceError] = useState(false);
+  const [maxpriceError, setMaxpriceError] = useState(false);
   const [filteredhotels, setFilteredhotels] = useState([]);
   const [nohotels, setNohotels] = useState(false);
 
   const checkPrice = (event, type) => {
-    console.log(event.target.value);
-    console.log(type);
-    if (event.target.value === "") {
-      setValidated(true);
-    } else {
-       if (type === "min") {
-         const newMinPrice = parseInt(event.target.value);
-         setMinprice(newMinPrice);
+    const reg = /^[+-]?[1-9][1-9]*|0$/;
+
+    if (reg.test(event.target.value) && event.target.value > 0) {
+      if (type === "min") {
+        const newMinPrice = parseInt(event.target.value);
+        setMinprice(newMinPrice);
+        setMinpriceError(false);
       }
       if (type === "max") {
         const newMaxPrice = parseInt(event.target.value);
         setMaxprice(newMaxPrice);
+        setMaxpriceError(false);
       }
-      setValidated(false);
+    } else {
+      if (type === "min") {
+        setMinpriceError(true);
+      }
+      if (type === "max") {
+        setMaxpriceError(true);
+      }
     }
-
-    
-    
   };
 
   useEffect(function () {
@@ -61,8 +65,8 @@ function Hotels() {
       function filterHotels() {
         const filteredHotels = hotels.filter((hotel) => {
           if (
-           hotel.standard <= stars && 
-            hotel.price >= minprice && 
+            hotel.standard <= stars &&
+            hotel.price >= minprice &&
             hotel.price <= maxprice
           ) {
             return true;
@@ -79,7 +83,7 @@ function Hotels() {
       }
       filterHotels();
     },
-    [minprice, maxprice, stars, hotels, nohotels]
+    [minprice, maxprice, stars, hotels, nohotels, minpriceError, maxpriceError]
   );
 
   if (loading) {
@@ -107,7 +111,7 @@ function Hotels() {
       <div className="my-5 px-5 d-flex justify-content-center">
         <div>
           <h4>Sort by:</h4>
-          <Form noValidate validated={validated}>
+          <Form noValidate>
             <Form.Row>
               <Form.Group as={Col} sm="4" controlId="validationCustom01">
                 <Form.Label>Min price</Form.Label>
@@ -116,7 +120,8 @@ function Hotels() {
                   type="text"
                   placeholder="Minimum price"
                   defaultValue={minprice}
-                  onKeyUp={(event) => checkPrice(event, "min")}
+                  isInvalid={minpriceError}
+                  onChange={(event) => checkPrice(event, "min")}
                 />
                 <Form.Control.Feedback type="invalid">
                   Enter a minimum price
@@ -129,7 +134,8 @@ function Hotels() {
                   type="text"
                   placeholder="Maximum price"
                   defaultValue={maxprice}
-                  onKeyUp={(event) => checkPrice(event, "max")}
+                  isInvalid={maxpriceError}
+                  onChange={(event) => checkPrice(event, "max")}
                 />
                 <Form.Control.Feedback type="invalid">
                   Enter a maximum price
@@ -158,7 +164,7 @@ function Hotels() {
           </Form>
         </div>
       </div>
-      <div className="px-5">
+      <div className="px-5 my-5">
         <Row>
           {nohotels ? (
             <Col xs={12}>
