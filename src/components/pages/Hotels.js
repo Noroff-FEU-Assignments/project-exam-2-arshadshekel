@@ -127,7 +127,7 @@ function Hotels() {
                 <Form.Control
                   required
                   type="text"
-                  placeholder="Last name"
+                  placeholder="Maximum price"
                   defaultValue={maxprice}
                   onKeyUp={(event) => checkPrice(event, "max")}
                 />
