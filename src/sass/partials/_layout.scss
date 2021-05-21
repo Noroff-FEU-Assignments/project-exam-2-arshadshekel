@@ -34,6 +34,12 @@
     color: white;
     cursor: pointer;
 }
+.accordion-subtitle {
+    background-color: white;
+    border: none;
+    color: $color-secondary;
+    cursor: pointer;
+}
 
 .btn {
     border-radius: 25px !important;
@@ -62,4 +68,8 @@
 .btn-enquiry{
     background-color: $color-primary;
     color: white;
+}
+
+.card{
+        border: 1px solid $color-secondary !important;
 }

@@ -128,7 +128,7 @@ useEffect(() => {
                       <Card className="my-3">
                         <Accordion.Toggle
                           as={Card.Header}
-                          className="accordion-title"
+                          className="accordion-subtitle"
                           eventKey="0"
                         >
                           {form.Firstname} {form.Lastname}
@@ -193,7 +193,7 @@ useEffect(() => {
                       <Card className="my-3">
                         <Accordion.Toggle
                           as={Card.Header}
-                          className="accordion-title"
+                          className="accordion-subtitle"
                           eventKey="0"
                         >
                           {form.Hotel} - {form.Firstname} {form.Lastname}
