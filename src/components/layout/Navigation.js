@@ -107,10 +107,14 @@ function Navigation() {
         <Modal.Body>Do you wish to log out?</Modal.Body>
 
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseConfirm}>
+          <Button
+            variant="secondary"
+            className="px-3"
+            onClick={handleCloseConfirm}
+          >
             No
           </Button>
-          <Button variant="primary" onClick={logout}>
+          <Button className="primary-button px-3" onClick={logout}>
             Yes
           </Button>
         </Modal.Footer>

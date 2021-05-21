@@ -1,4 +1,4 @@
-import { React, useContext } from "react";
+import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 import AdminDashboard from "./AdminDashboard";
 
@@ -11,7 +11,7 @@ function AdminPage() {
           <AdminDashboard />
         </div>
       ) : (
-        <div className="container text-center">
+        <div className="container text-center my-5">
           <h1>Not Logged in</h1>
           <p>Please log in to access admin pages</p>
         </div>
