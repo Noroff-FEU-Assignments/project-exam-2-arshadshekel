@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 import axios from "axios";
 import { ADDHOTELS } from "../../constants/Api";
 import AuthContext from "../../context/AuthContext";
-import defaultThumbnail from "../../images/hotel-thumbnail.png";
+import defaultThumbnail from "../../images/placeholder.png";
 
 const url = ADDHOTELS;
 
@@ -22,11 +22,11 @@ const schema = yup.object().shape({
     .min(2, "The name must be at least 2 characters"),
   standard: yup
     .number()
-    .required("Please enter a standard")
     .positive()
+    .typeError("Please enter a standard")
     .integer()
     .max(5, "The standard must be maximum 5 stars"),
-  price: yup.number().required("Please enter a price").positive().integer(),
+  price: yup.number().typeError("Please enter a price").positive().integer(),
   description: yup
     .string()
     .required("Please enter your message")
@@ -73,7 +73,7 @@ function AddHotelForm() {
 
   return (
     <div className="container">
-      <h1 className="text-center">Add new hotel</h1>
+      <h1 className="text-center my-5">Add new hotel</h1>
 
       <Form noValidate onSubmit={handleSubmit(onSubmit)}>
         <Form.Group controlId="exampleForm.ControlInput1">
@@ -92,7 +92,7 @@ function AddHotelForm() {
         </Form.Group>
 
         <Form.Group controlId="exampleForm.ControlInput3">
-          <Form.Label>standard</Form.Label>
+          <Form.Label>Standard</Form.Label>
           <Form.Control placeholder="standard" name="standard" ref={register} />
           {errors.standard && (
             <span className="text-danger">{errors.standard.message}</span>
@@ -128,28 +128,38 @@ function AddHotelForm() {
           id="featured"
           label="featured?"
           ref={register}
+          className="my-3"
         />
 
         <img
           src={file ? URL.createObjectURL(file) : defaultThumbnail}
           alt={file ? file.name : "Default thumbnail"}
           height="100%"
-          width="150px"
+          width="300px"
+          className="my-3"
         />
-        <Form.Group controlId="exampleForm.ControlTextarea1">
-          <Form.Label className="custom-file-upload">File</Form.Label>
+        <Form.Group>
+          <Form.Label
+            className="custom-file-upload my-3"
+            htmlFor="file-upload"
+            type="submit"
+          >
+            Upload a picture
+          </Form.Label>
 
-          <Form.Control
+          <Form.File
             name="picture"
             type="file"
             ref={register}
+            id="file-upload"
             onChange={handleInputChange}
+            accept="image/*"
           />
           {errors.picture && (
             <span className="text-danger">{errors.picture.message}</span>
           )}
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button className="primary-button mb-5" type="submit">
           Submit
         </Button>
       </Form>

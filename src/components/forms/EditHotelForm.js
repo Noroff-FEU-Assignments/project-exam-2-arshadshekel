@@ -172,7 +172,7 @@ function EditHotelForm() {
         </Form.Group>
 
         <Form.Group controlId="exampleForm.ControlInput3">
-          <Form.Label>standard</Form.Label>
+          <Form.Label>Standard</Form.Label>
           <Form.Control
             placeholder="standard"
             name="standard"
@@ -231,10 +231,10 @@ function EditHotelForm() {
           width="150px"
           className="mt-5 my-3"
         />
-        <Form.Group controlId="exampleForm.ControlTextarea1">
+        <Form.Group>
           <Form.Label
             className="custom-file-upload mt-3 mb-5"
-            for="file-upload"
+            htmlFor="file-upload"
             type="submit"
           >
             Upload a picture

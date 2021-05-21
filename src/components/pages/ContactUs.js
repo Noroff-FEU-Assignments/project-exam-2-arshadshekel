@@ -53,7 +53,7 @@ function ContactUs() {
   
   return (
     <div className="container">
-      <h1 className="text-center">Contact us</h1>
+      <h1 className="text-center my-5">Contact us</h1>
 
       {submitted ? (
         <h2 className="text-center text-bold mt-5 color-primary">
