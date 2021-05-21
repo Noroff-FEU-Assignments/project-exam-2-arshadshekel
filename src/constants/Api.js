@@ -10,4 +10,4 @@ export const CONTACTURL = "http://localhost:1337/contact-forms";
 export const ENQUIRYURL = "http://localhost:1337/Enquiries";
 export const ADDHOTELS = "http://localhost:1337/Hotels/";
  
-
+export const GMAPSAPI = "AIzaSyAno-J9N2_6rNDtoA0VmkJU5IqVXQq7DEk";

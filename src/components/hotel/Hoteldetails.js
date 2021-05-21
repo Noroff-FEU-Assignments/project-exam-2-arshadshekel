@@ -1,8 +1,8 @@
 import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { API } from "../../constants/Api";
+import { API, GMAPSAPI } from "../../constants/Api";
 import { FaStar, FaRegStar } from "react-icons/fa";
-import { Col, Row, Modal, Button  } from "react-bootstrap";
+import { Col, Row, Modal, Button } from "react-bootstrap";
 import EnquiryForm from "../forms/EnquiryForm";
 import { useHistory } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
@@ -14,12 +14,15 @@ function Hoteldetails() {
 
   const { id } = useParams();
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const [show, setShow] = useState(false);
   const url = API + id;
   let history = useHistory();
-   const [auth,] = useContext(AuthContext);
+  const [auth] = useContext(AuthContext);
+  const APIKEY = GMAPSAPI;
+  const [mapsAddress, setMapsAddress] = useState(null);
+  const [mapsCity, setMapsCity] = useState(null);
 
   useEffect(
     function () {
@@ -44,6 +47,13 @@ function Hoteldetails() {
     },
     [url]
   );
+
+  function convertAddress() {
+    const Address = encodeURI(hotel.Address);
+    setMapsAddress(Address);
+    const City = encodeURI(hotel.City);
+    setMapsCity(City);
+  }
 
   if (loading) {
     return (
@@ -81,27 +91,27 @@ function Hoteldetails() {
   return (
     <>
       <div className="container mt-5">
-        <Row>
+        <Row className="d-flex justify-content-between">
           <Col xs={12} md={4}>
             <img
               src={hotel.picture.url}
               alt={hotel.name}
               width="285px"
               className="d-block mx-auto img-fluid"
+              onLoad={convertAddress}
             ></img>
-            <p className="text-center mt-3 mb-0">
-              {hotel.Address}
-            </p>
-            <p className="text-center">
+            <p className="text-center mt-3 mb-0">{hotel.Address}</p>
+            <p className="text-center mb-0">
               {hotel.Zipcode} {hotel.City}
             </p>
+            <p className="text-center mb-0">{hotel.phone}</p>
           </Col>
-          <Col xs={12} md={8}>
+          <Col xs={12} md={7}>
             <h1 className="mt-4 mt-md-0">{hotel.name}</h1>
             {populateStars().map((star) => {
               return star;
             })}
-            <p className="mt-4">{hotel.description}</p>
+            <p className="mt-5">{hotel.description}</p>
             <p>
               Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
               nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
@@ -119,22 +129,40 @@ function Hoteldetails() {
               et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
               accusam et justo duo dolores et ea rebum.
             </p>
-            <p className="mt-4 font-weight-bold">Price: {hotel.price}</p>
-            <Button className="mr-3 mt-3 primary-button" onClick={handleShow}>
+            <p className="mt-5 font-weight-bold">Price: {hotel.price}</p>
+            <Button className="mr-3 mt-5 primary-button" onClick={handleShow}>
               Contact hotel
             </Button>
             {auth ? (
-               <Button
-              className="ml-3 mt-3"
-              variant="success"
-              onClick={() => history.push("/admin/edit/" + id)}
-            > Edit hotel
-            </Button>
-            ) : (
-                null
-             
-            )}
-           
+              <Button
+                className="ml-3 mt-5"
+                variant="success"
+                onClick={() => history.push("/admin/edit/" + id)}
+              >
+                {" "}
+                Edit hotel
+              </Button>
+            ) : null}
+
+            {mapsAddress !== null ? (
+              <iframe
+                title="gmaps"
+                width="100%"
+                height="400px"
+                style={{ border: "0" }}
+                loading="lazy"
+                allowFullScreen
+                className="my-5"
+                src={
+                  "https://www.google.com/maps/embed/v1/place?&q=" +
+                  mapsAddress +
+                  "," +
+                  mapsCity +
+                  "&key=" +
+                  APIKEY
+                }
+              ></iframe>
+            ) : null}
           </Col>
         </Row>
         <Modal
