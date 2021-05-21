@@ -23,7 +23,7 @@ function Navigation() {
  
 
   function logout() {
-    setAuth(null);
+    setAuth();
     history.push("/");
     handleCloseConfirm();
   }

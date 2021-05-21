@@ -43,6 +43,8 @@ function EditHotelForm() {
   const [file, setFile] = useState(null);
   const [uploadedFile, setUploadedFile] = useState(null);
   const [showToast, setShowToast] = useState(false);
+  const [toastType, setToastType] = useState("");
+  const [toastAction, setToastAction] = useState("");
 
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
@@ -64,7 +66,6 @@ function EditHotelForm() {
             console.log(json);
             setHotel(json);
             setFile(json.picture);
-               
           } else {
             setError("An error occured");
           }
@@ -102,12 +103,17 @@ function EditHotelForm() {
       await axios.put(url, formData).then((response) => {
         console.log(response.status);
         if (response.status === 200) {
-          /* history.push("/hotels/" + id); */
           setShowToast(true);
-          setTimeout( () => setShowToast(false), 3000)
+          setToastType("success");
+          setToastAction("editHotel");
+          setTimeout(() => setShowToast(false), 3000);
         }
       });
     } catch (error) {
+      setShow(false);
+      setShowToast(true);
+      setToastType("fail");
+      setToastAction("editHotel");
       console.log("error", error);
     }
   }
@@ -134,11 +140,17 @@ function EditHotelForm() {
       await axios.delete(url, {}).then((response) => {
         console.log(response.status);
         if (response.status === 200) {
-          handleClose();
-          history.push("/hotels");
+          setShowToast(true);
+          setToastType("success");
+          setToastAction("deleteHotel");
+          setTimeout(() => setShowToast(false), 3000);
+          setTimeout(() => history.push("/hotels"), 3000);
         }
       });
     } catch (error) {
+         setShowToast(true);
+         setToastType("fail");
+         setToastAction("deleteHotel");
       console.log("error", error);
     }
   }
@@ -258,8 +270,14 @@ function EditHotelForm() {
             <span className="text-danger">{errors.picture.message}</span>
           )}
         </Form.Group>
-        <Button className="primary-button" type="submit">
-          Submit
+        <Button variant="success" type="submit">
+          Update
+        </Button>
+        <Button
+          className="primary-button ml-3"
+          onClick={() => history.push("/hotels/" + id)}
+        >
+          View hotel
         </Button>
         <Button variant="danger" className=" ml-3" onClick={handleShow}>
           Delete item
@@ -282,12 +300,12 @@ function EditHotelForm() {
           <Button className="primary-button" onClick={handleClose}>
             No
           </Button>
-          <Button variant="danger" onClick={deleteItem}>
+          <Button variant="danger" onClick={() => { handleClose(); deleteItem()}}>
             Delete
           </Button>
         </Modal.Footer>
       </Modal>
-      <Toasts type={"success"} action={"editHotel"} showToast={showToast} />
+      <Toasts type={toastType} action={toastAction} showToast={showToast} />
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import { React, useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -8,6 +9,7 @@ import axios from "axios";
 import { ADDHOTELS } from "../../constants/Api";
 import AuthContext from "../../context/AuthContext";
 import defaultThumbnail from "../../images/placeholder.png";
+import Toasts from "../../hooks/useToasts";
 
 const url = ADDHOTELS;
 
@@ -39,6 +41,9 @@ const schema = yup.object().shape({
 function AddHotelForm() {
   const [auth] = useContext(AuthContext);
   const [file, setFile] = useState(null);
+  const [showToast, setShowToast] = useState(false);
+  const [toastType, setToastType] = useState("");
+  const [toastAction, setToastAction] = useState("");
 
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
@@ -48,6 +53,7 @@ function AddHotelForm() {
     setFile(event.target.files[0]);
   };
 
+  let history = useHistory();
   async function onSubmit(data) {
     // get JWT token from localstorage
     const token = auth.jwt;
@@ -65,7 +71,17 @@ function AddHotelForm() {
 
     try {
       axios.defaults.headers.common = { Authorization: `bearer ${token}` };
-      await axios.post(url, formData);
+      await axios.post(url, formData).then((response) => {
+        console.log(response.status);
+        const id = response.data.id;
+        if (response.status === 200) {
+          setShowToast(true);
+          setToastType("success");
+          setToastAction("addHotel");
+          setTimeout(() => setShowToast(false), 3000);
+          setTimeout(() => history.push("/hotels/" + id), 3000);
+          
+        }});
     } catch (error) {
       console.log("error", error);
     }
@@ -163,6 +179,7 @@ function AddHotelForm() {
           Submit
         </Button>
       </Form>
+      <Toasts type={toastType} action={toastAction} showToast={showToast} />
     </div>
   );
 }
