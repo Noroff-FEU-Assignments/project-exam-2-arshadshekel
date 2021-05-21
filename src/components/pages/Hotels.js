@@ -1,4 +1,4 @@
-import { Row, Col, Form, Button, InputGroup } from "react-bootstrap";
+import { Row, Col, Form } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { API } from "../../constants/Api";
 import Hotelcard from "../hotel/Hotelcard";
@@ -8,18 +8,31 @@ function Hotels() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [minprice, setMinprice] = useState(null);
-  const [maxprice, setMaxprice] = useState(0);
-
+  const [maxprice, setMaxprice] = useState(null);
+  const [stars, setStars] = useState(5);
   const [validated, setValidated] = useState(false);
+  const [filteredhotels, setFilteredhotels] = useState([]);
+  const [nohotels, setNohotels] = useState(false);
 
-  const handleSubmit = (event) => {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
+  const checkPrice = (event, type) => {
+    console.log(event.target.value);
+    console.log(type);
+    if (event.target.value === "") {
+      setValidated(true);
+    } else {
+       if (type === "min") {
+         const newMinPrice = parseInt(event.target.value);
+         setMinprice(newMinPrice);
+      }
+      if (type === "max") {
+        const newMaxPrice = parseInt(event.target.value);
+        setMaxprice(newMaxPrice);
+      }
+      setValidated(false);
     }
 
-    setValidated(true);
+    
+    
   };
 
   useEffect(function () {
@@ -29,10 +42,8 @@ function Hotels() {
 
         if (response.ok) {
           const json = await response.json();
-          console.log(json);
           setHotels(json);
           setDefaultValues(json);
-            
         } else {
           setError("An error occured");
         }
@@ -43,9 +54,33 @@ function Hotels() {
       }
     }
     fetchData();
-    
-  
   }, []);
+
+  useEffect(
+    function () {
+      function filterHotels() {
+        const filteredHotels = hotels.filter((hotel) => {
+          if (
+           hotel.standard <= stars && 
+            hotel.price >= minprice && 
+            hotel.price <= maxprice
+          ) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+        if (filteredHotels.length > 0) {
+          setNohotels(false);
+        } else {
+          setNohotels(true);
+        }
+        setFilteredhotels(filteredHotels);
+      }
+      filterHotels();
+    },
+    [minprice, maxprice, stars, hotels, nohotels]
+  );
 
   if (loading) {
     return (
@@ -66,23 +101,13 @@ function Hotels() {
     setMinprice(minValueOfHotel);
   }
 
-  function updateMinPrice(event) {
-    if (event.target.value !== "") {
-      setMinprice(event.target.value);
-    } else {
-      
-    }
-    
-    console.log(event.target.value);
-    console.log(minprice);
-  }
   return (
     <div>
       <h1 className="text-center my-5">Hotels</h1>
       <div className="my-5 px-5 d-flex justify-content-center">
         <div>
           <h4>Sort by:</h4>
-          <Form noValidate validated={validated} onSubmit={handleSubmit}>
+          <Form noValidate validated={validated}>
             <Form.Row>
               <Form.Group as={Col} sm="4" controlId="validationCustom01">
                 <Form.Label>Min price</Form.Label>
@@ -91,9 +116,11 @@ function Hotels() {
                   type="text"
                   placeholder="Minimum price"
                   defaultValue={minprice}
-                  onKeyUp={updateMinPrice}
+                  onKeyUp={(event) => checkPrice(event, "min")}
                 />
-                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  Enter a minimum price
+                </Form.Control.Feedback>
               </Form.Group>
               <Form.Group as={Col} sm="4" controlId="validationCustom02">
                 <Form.Label>Max price</Form.Label>
@@ -102,22 +129,30 @@ function Hotels() {
                   type="text"
                   placeholder="Last name"
                   defaultValue={maxprice}
+                  onKeyUp={(event) => checkPrice(event, "max")}
                 />
-                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  Enter a maximum price
+                </Form.Control.Feedback>
               </Form.Group>
 
               <Form.Group as={Col} sm="4" controlId="validationCustom05">
-                <Form.Label>Stars</Form.Label>
+                <Form.Label>Select stars (up to)</Form.Label>
                 <Form.Control
-                  type="text"
-                  placeholder="Standard"
-                  required
-                  placeholder="How many stars"
+                  as="select"
+                  custom
                   defaultValue={5}
-                /> 
-                <Form.Control.Feedback type="invalid">
-                  Please provide a valid zip.
-                </Form.Control.Feedback>
+                  onChange={(event) => {
+                    const newStar = parseInt(event.target.value);
+                    setStars(newStar);
+                  }}
+                >
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </Form.Control>
               </Form.Group>
             </Form.Row>
           </Form>
@@ -125,20 +160,26 @@ function Hotels() {
       </div>
       <div className="px-5">
         <Row>
-          {hotels.map((hotel) => {
-            return (
-              <Col xs={12} xl={6} key={hotel.id}>
-                <Hotelcard
-                  id={hotel.id}
-                  name={hotel.name}
-                  standard={hotel.standard}
-                  price={hotel.price}
-                  email={hotel.email}
-                  picture={hotel.picture.url}
-                />
-              </Col>
-            );
-          })}
+          {nohotels ? (
+            <Col xs={12}>
+              <h2 className="text-center text-danger">No hotels found</h2>
+            </Col>
+          ) : (
+            filteredhotels.map((hotel) => {
+              return (
+                <Col xs={12} xl={6} key={hotel.id}>
+                  <Hotelcard
+                    id={hotel.id}
+                    name={hotel.name}
+                    standard={hotel.standard}
+                    price={hotel.price}
+                    email={hotel.email}
+                    picture={hotel.picture.url}
+                  />
+                </Col>
+              );
+            })
+          )}
         </Row>
       </div>
     </div>
