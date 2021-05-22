@@ -1,7 +1,8 @@
 import { Navbar, Nav, Modal, Button } from "react-bootstrap";
 import logo from "../../images/logo.svg";
 import { FaUserCircle } from "react-icons/fa";
-import { useState, useContext} from "react";
+import { FiMenu, FiX } from "react-icons/fi";
+import { useState, useContext } from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import LoginForm from "../forms/LoginForm";
 import AuthContext from "../../context/AuthContext";
@@ -11,7 +12,7 @@ import Toasts from "../../hooks/useToasts";
 function Navigation() {
   const [show, setShow] = useState(false);
   const [confirmShow, setConfirmShow] = useState(false);
- 
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -20,12 +21,13 @@ function Navigation() {
 
   const [auth, setAuth] = useContext(AuthContext);
 
-   const [showToast, setShowToast] = useState(false);
-   const [toastType, setToastType] = useState("");
-   const [toastAction, setToastAction] = useState("");
+  const [showToast, setShowToast] = useState(false);
+  const [toastType, setToastType] = useState("");
+  const [toastAction, setToastAction] = useState("");
 
   const history = useHistory();
- 
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState(false);
 
   function logout() {
     setAuth("");
@@ -33,10 +35,9 @@ function Navigation() {
     setToastType("success");
     setToastAction("logout");
     setTimeout(() => setShowToast(false), 3000);
-    setTimeout(() => history.push("/"), 3000);
-    setTimeout(() => handleCloseConfirm(), 2000);;
+    setTimeout(() => history.push("/"), 2000);
+    setTimeout(() => handleCloseConfirm(), 1000);
   }
-
 
   return (
     <div className="container">
@@ -47,17 +48,33 @@ function Navigation() {
           </Navbar.Brand>
         </LinkContainer>
 
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
+        <button
+          onClick={() => setOpen(!open)}
+          aria-expanded={open}
+          className="navbar-toggler collapsed"
+        >
+          {open ? (
+            <FiX style={{ height: "35px", color: "black" }} size={30} />
+          ) : (
+            <FiMenu style={{ height: "35px", color: "black" }} size={30} />
+          )}
+        </button>
+        <Navbar.Collapse in={open}>
           <Nav className="w-100">
             <LinkContainer to="/home" className="ml-lg-auto">
-              <Nav.Link>HOME</Nav.Link>
+              <Nav.Link active={false} onClick={() => setOpen(false)}>
+                HOME
+              </Nav.Link>
             </LinkContainer>
             <LinkContainer to="/hotels">
-              <Nav.Link>HOTELS</Nav.Link>
+              <Nav.Link active={false} onClick={() => setOpen(false)}>
+                HOTELS
+              </Nav.Link>
             </LinkContainer>
             <LinkContainer to="/contact-us">
-              <Nav.Link>CONTACT US</Nav.Link>
+              <Nav.Link active={false} onClick={() => setOpen(false)}>
+                CONTACT US
+              </Nav.Link>
             </LinkContainer>
 
             {auth ? (

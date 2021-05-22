@@ -76,14 +76,62 @@
     border-radius: 0px !important;
 }
 
+/* https://jsfiddle.net/Beaniie/s8rm1f0q/5/ */
+
 .navbar-toggler {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
     border: none;
     &:focus {
         outline: none;
         background: transparent !important;
     }
+    height: 30px;
+    background: transparent !important;
+    padding: 0;
+    transform: translateY(-0.15rem);
+}
+
+.navbar-toggler .icon-bar {
+    background-color: #000;
+    transform: rotate(0deg) translate(0px, 0px);
+    transition: ease all 0.2s;
+}
+
+.navbar-toggler .icon-bar {
+    display: block;
+    width: 25px;
+    height: 2px;
+    border-radius: 1px;
+    margin: 8px 0;
+}
+
+.icon-bar:nth-child(2) {
+    width: 18px;
+    transition: ease all 0.2s;
+}
+
+.navbar-toggler:hover > .icon-bar:nth-child(2) {
+    width: 25px;
+    transition: ease all 0.2s;
+}
+
+.navbar-toggler:active > .icon-bar:nth-child(2) {
+    width: 25px;
+    transition: ease all 0.2s;
+}
+
+.navbar-toggler:not(.collapsed) .icon-bar:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 8px);
+    transition: ease all 0.2s;
+}
+
+.navbar-toggler:not(.collapsed) .icon-bar:nth-child(2) {
+    opacity: 0;
+    transition: ease all 0.2s;
+}
+
+.navbar-toggler:not(.collapsed) .icon-bar:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -8px);
+    transition: ease all 0.2s;
 }
 
 .contact-form {
@@ -111,7 +159,6 @@
     }
 }
 .modal-background .modal-content {
- 
     color: $color-secondary;
     border-radius: 8px;
     overflow: hidden;

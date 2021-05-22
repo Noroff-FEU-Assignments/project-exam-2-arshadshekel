@@ -45,7 +45,7 @@ export default function LoginForm({ handleClose }) {
            setToastType("success");
            setToastAction("login");
            setTimeout(() => setShowToast(false), 3000);
-           setTimeout(() => handleClose(), 3000);
+           setTimeout(() => handleClose(), 1500);
         }
       });
     } catch (error) {
