@@ -34,9 +34,6 @@ const SearchDropDown = () => {
 
   const history = useHistory();
   const page = useLocation();
-  console.log(page);
-
-
   
   /*Initially this was written so that I could redirect when clicking on the
     view hotel button. Or that pressing enter redirects. This was due to me using

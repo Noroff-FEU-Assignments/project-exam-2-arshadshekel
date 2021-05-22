@@ -1,4 +1,4 @@
-import { Jumbotron, Container, Row, Col } from "react-bootstrap";
+import { Jumbotron, Row, Col } from "react-bootstrap";
 
 import { useEffect, useState } from "react";
 import { API } from "../../constants/Api";
