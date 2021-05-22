@@ -13,21 +13,26 @@ function Navigation() {
   const [show, setShow] = useState(false);
   const [confirmShow, setConfirmShow] = useState(false);
 
+  // show/hide login modal
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  // show/hide logout modal
   const handleCloseConfirm = () => setConfirmShow(false);
   const handleOpenConfirm = () => setConfirmShow(true);
 
   const [auth, setAuth] = useContext(AuthContext);
 
+  // variables related to toasts
   const [showToast, setShowToast] = useState(false);
   const [toastType, setToastType] = useState("");
   const [toastAction, setToastAction] = useState("");
 
   const history = useHistory();
+  //show/hide menu
   const [open, setOpen] = useState(false);
 
+  // logout function and show toast
   function logout() {
     setAuth("");
     setShowToast(true);
@@ -111,7 +116,7 @@ function Navigation() {
         keyboard={false}
         centered
       >
-        <Modal.Header className="modal-border-bottom" closeButton>
+        <Modal.Header className="modal-no-border" closeButton>
           <h3 className="ml-auto">Login</h3>
         </Modal.Header>
 
@@ -127,21 +132,21 @@ function Navigation() {
         keyboard={false}
         centered
       >
-        <Modal.Header closeButton>
-          <Modal.Title>Logout?</Modal.Title>
+        <Modal.Header className="modal-no-border" closeButton>
+          <h3 className="ml-auto">Logout?</h3>
         </Modal.Header>
         <Modal.Body>Do you wish to log out?</Modal.Body>
 
-        <Modal.Footer>
+        <Modal.Footer className="modal-no-border mr-auto">
+          <Button className="primary-button px-3" onClick={logout}>
+            Yes
+          </Button>
           <Button
             variant="secondary"
             className="px-3"
             onClick={handleCloseConfirm}
           >
             No
-          </Button>
-          <Button className="primary-button px-3" onClick={logout}>
-            Yes
           </Button>
         </Modal.Footer>
       </Modal>

@@ -13,19 +13,21 @@ function Hoteldetails() {
   const [error, setError] = useState(null);
 
   const { id } = useParams();
-
+  //functions to show and hide modal
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  // variable to show / hide toasts
   const [show, setShow] = useState(false);
+  
   const url = API + id;
   let history = useHistory();
   const [auth] = useContext(AuthContext);
+
   const APIKEY = GMAPSAPI;
   const [mapsAddress, setMapsAddress] = useState(null);
   const [mapsCity, setMapsCity] = useState(null);
 
- 
-
+  // API call to get the current hotel
   useEffect(
     function () {
       async function fetchData() {
@@ -49,8 +51,8 @@ function Hoteldetails() {
     },
     [url]
   );
-  
-  
+
+  // Encode the address so that it can be used as query string
   function convertAddress() {
     const Address = encodeURI(hotel.Address);
     setMapsAddress(Address);
@@ -74,6 +76,10 @@ function Hoteldetails() {
     );
   }
 
+  /* Initially I tried to implement other peoples components but ended up 
+   writing one myself. I also learned that template literals end up showing
+   as text. So I got help and he suggested arrays 
+  */
   function populateStars() {
     const stars = [];
     for (let i = 0; i < 5; i++) {
@@ -186,7 +192,7 @@ function Hoteldetails() {
           centered
           className="modal-background"
         >
-          <Modal.Header className="modal-border-bottom" closeButton>
+          <Modal.Header className="modal-no-border" closeButton>
             <h3 className="ml-auto">Contact {hotel.name}</h3>
           </Modal.Header>
           <Modal.Body>

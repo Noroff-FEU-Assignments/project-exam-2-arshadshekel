@@ -5,10 +5,13 @@ import { useHistory } from "react-router-dom";
 import { Button, InputGroup, Form } from "react-bootstrap";
 import { FaSearch } from "react-icons/fa";
 
+
+// This component uses code from the react-bootstrap-typeahead examples
 const SearchDropDown = () => {
   const [options, setOptions] = useState([]);
   const searchInput = useRef();
 
+  // Get all hotels
   useEffect(function () {
     async function getHotels() {
       try {
@@ -25,11 +28,17 @@ const SearchDropDown = () => {
     getHotels();
   }, []);
 
+  // Callback function from example, adjusted for this exam
   const filterByCallback = (option, props) =>
     option.name.toLowerCase().indexOf(props.text.toLowerCase()) !== -1;
 
   const history = useHistory();
 
+  /*Initially this was written so that I could redirect when clicking on the 
+    view hotel button. Or that pressing enter redirects. This was due to me using
+    onClick in a wrong way. I later found out how to fix, but kept this function regardless
+  */
+  
     function viewHotel(event) {
         event.preventDefault();
     const findHotel = searchInput.current.props.options.filter((hotel) => {
@@ -40,6 +49,8 @@ const SearchDropDown = () => {
       }
         
     });
+      
+      // After finding the right hotel redirect to the details page
       console.log(findHotel);
       if (findHotel[0] !== undefined) {
           const hotelID = findHotel[0].id;

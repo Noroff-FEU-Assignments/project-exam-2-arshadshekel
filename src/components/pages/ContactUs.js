@@ -31,6 +31,7 @@ const schema = yup.object().shape({
 
 function ContactUs() {
   const [submitted, setSubmitted] = useState(false);
+  //toast variables
   const [showToast, setShowToast] = useState(false);
   const [toastType, setToastType] = useState("");
   const [toastAction, setToastAction] = useState("");
@@ -44,6 +45,7 @@ function ContactUs() {
     document.title = "Holidaze - Contact us";
   }, []);
 
+  // Send a message to admin and show toasts
   async function onSubmit(data) {
     try {
       await axios.post(url, data).then((response) => {
@@ -60,11 +62,9 @@ function ContactUs() {
       setToastType("fail");
       setTimeout(() => setShowToast(false), 2000);
       setToastAction("postMessage");
-       setError(error.toString());
+      setError(error.toString());
     }
   }
-  
-
 
   return (
     <div className="container my-5 contact-form">
@@ -119,8 +119,10 @@ function ContactUs() {
             {errors.Message && (
               <span className="text-danger">{errors.Message.message}</span>
             )}
-            </Form.Group>
-            {error ? (<h4 className="text-danger">Failed to send message</h4>) : (null)}
+          </Form.Group>
+          {error ? (
+            <h4 className="text-danger">Failed to send message</h4>
+          ) : null}
           <Button className="primary-button mt-3" type="submit">
             Submit
           </Button>

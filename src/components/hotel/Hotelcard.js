@@ -8,11 +8,16 @@ import { FaStar, FaRegStar } from "react-icons/fa";
 function Hotelcard(props) {
   const [show, setShow] = useState(false);
 
+  //Functions to show/hide modal
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const [auth] = useContext(AuthContext);
 
+  /* Initially I tried to implement other peoples components but ended up 
+   writing one myself. I also learned that template literals end up showing
+   as text. So I got help and he suggested arrays 
+  */
   function populateStars() {
     const stars = [];
     for (let i = 0; i < 5; i++) {
@@ -89,7 +94,7 @@ function Hotelcard(props) {
         centered
         className="modal-background"
       >
-        <Modal.Header className="modal-border-bottom" closeButton>
+        <Modal.Header className="modal-no-border" closeButton>
           <h3 className="ml-auto">Contact {props.name}</h3>
         </Modal.Header>
         <Modal.Body>

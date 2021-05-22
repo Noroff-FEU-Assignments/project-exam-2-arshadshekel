@@ -28,8 +28,9 @@ export default function LoginForm({ handleClose }) {
   });
 
   const [, setAuth] = useContext(AuthContext);
-
-  async function onSubmit(data) {
+  
+  // Send login rquest and show toast
+    async function onSubmit(data) {
     setSubmitting(true);
     setLoginError(null);
 
@@ -44,7 +45,7 @@ export default function LoginForm({ handleClose }) {
            setShowToast(true);
            setToastType("success");
            setToastAction("login");
-           setTimeout(() => setShowToast(false), 3000);
+           setTimeout(() => setShowToast(false), 1500);
            setTimeout(() => handleClose(), 1500);
         }
       });

@@ -2,15 +2,16 @@ import { Toast, Col, Row } from "react-bootstrap";
 import { useState, useEffect } from "react";
 
 export default function Toasts({ type, action, showToast }) {
-    const [show, setShow] = useState(false);
-    const [toastColor, setToastColor] = useState("");
-    const [toastMessage, setToastMessage] = useState("");
+  const [show, setShow] = useState(false);
+  const [toastColor, setToastColor] = useState("");
+  const [toastMessage, setToastMessage] = useState("");
 
+  // Show the toast and avoid infinate re-renders
+  useEffect(() => {
+    setShow(showToast);
+  }, [showToast]);
 
-    useEffect(()=>{
-    setShow(showToast)
-},[showToast]);
-
+  //Set the color and text of the toast
   useEffect(
     function () {
       function updateToast() {
@@ -77,9 +78,17 @@ export default function Toasts({ type, action, showToast }) {
               left: 0,
               right: 0,
               color: "white",
+              borderRadius: "8px",
             }}
           >
-            <Toast.Body className={toastColor}>{toastMessage}</Toast.Body>
+            <Toast.Body
+              className={toastColor}
+              style={{
+                borderRadius: "8px",
+              }}
+            >
+              {toastMessage}
+            </Toast.Body>
           </Toast>
         </Col>
       </Row>

@@ -15,6 +15,7 @@ function HomePage() {
     document.title = "Holidaze - Find hotels in Bergen";
   }, []);
   
+  // get hotels
   useEffect(function () {
     async function fetchData() {
       try {

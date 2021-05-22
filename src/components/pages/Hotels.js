@@ -16,6 +16,10 @@ function Hotels() {
   const [filteredhotels, setFilteredhotels] = useState([]);
   const [nohotels, setNohotels] = useState(false);
 
+  /* function that checks that the input is a number and converts
+  string to int. Sets the minimum/maximum price if there is an error set the variable
+  Is to be used for filtering hotels in the list
+  */
   const checkPrice = (event, type) => {
     const reg = /^[+-]?[1-9][1-9]*|0$/;
 
@@ -44,6 +48,8 @@ function Hotels() {
      document.title = "Holidaze - View hotels in Bergen";
    }, []);
 
+  /* API call to fetch all hotels and set the default values
+   min/max of the inputs */
   useEffect(function () {
     async function fetchData() {
       try {
@@ -65,6 +71,10 @@ function Hotels() {
     fetchData();
   }, []);
 
+  /* filter hotels according to inputs/select. 
+  Searchbar was implemented 2 days before delivery,
+  so no filtering based on search. Ideally I would 
+  implement that too */
   useEffect(
     function () {
       function filterHotels() {
@@ -105,8 +115,9 @@ function Hotels() {
          <h1 className="text-center text-danger">An error occured</h1>
        </div>
      );
-   }
-
+  }
+  
+  // function to set the min and max default values of inputs
   function setDefaultValues(hotels) {
     const minValueOfHotel = Math.min(...hotels.map((hotel) => hotel.price));
     const maxValueOfHotel = Math.max(...hotels.map((hotel) => hotel.price));

@@ -53,7 +53,10 @@ const schema = yup.object().shape({
 
 function AddHotelForm() {
   const [auth] = useContext(AuthContext);
+  
   const [file, setFile] = useState(null);
+
+  //toast variables
   const [showToast, setShowToast] = useState(false);
   const [toastType, setToastType] = useState("");
   const [toastAction, setToastAction] = useState("");
@@ -62,11 +65,13 @@ function AddHotelForm() {
     resolver: yupResolver(schema),
   });
 
+  // update current picture
   const handleInputChange = (event) => {
     setFile(event.target.files[0]);
   };
 
   let history = useHistory();
+
   async function onSubmit(data) {
     // get JWT token from localstorage
     const token = auth.jwt;
@@ -81,7 +86,7 @@ function AddHotelForm() {
     //Append picture and data
     formData.append(`files.picture`, file, file.name);
     formData.append("data", JSON.stringify(data));
-
+    // create hotel and show toast
     try {
       axios.defaults.headers.common = { Authorization: `bearer ${token}` };
       await axios.post(url, formData).then((response) => {

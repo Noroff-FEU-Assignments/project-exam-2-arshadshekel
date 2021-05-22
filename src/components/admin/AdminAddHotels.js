@@ -5,9 +5,11 @@ import { useContext, useEffect } from "react";
 
 function AdminAddHotels() {
   const [auth] = useContext(AuthContext);
+
    useEffect(() => {
      document.title = "Holidaze - Add hotels";
    }, []);
+  
   return (
     <div>
       {auth ? (

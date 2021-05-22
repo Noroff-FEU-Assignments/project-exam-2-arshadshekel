@@ -35,7 +35,7 @@ function AdminDashboard() {
       async function getForms() {
         // get JWT token from localstorage
         const token = auth.jwt;
-
+        // API call to get both contactmessages and enquiries
         try {
           axios
             .get(CONTACTURL, { headers: { Authorization: `Bearer ${token}` } })
@@ -59,6 +59,7 @@ function AdminDashboard() {
     [auth, updateList]
   );
 
+  // Function to delete a specific messsage
   async function deleteItem(id, type) {
     const token = auth.jwt;
     let url = "";
@@ -255,20 +256,20 @@ function AdminDashboard() {
         keyboard={false}
         centered
       >
-        <Modal.Header closeButton>
-          <Modal.Title>Delete hotel?</Modal.Title>
+        <Modal.Header className="modal-no-border" closeButton>
+          <h3 className="ml-auto">Delete message?</h3>
         </Modal.Header>
         <Modal.Body>Do you wish to delete message?</Modal.Body>
 
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            No
-          </Button>
+        <Modal.Footer className="modal-no-border mr-auto">
           <Button
             variant="danger"
             onClick={() => deleteItem(entryID, entryType)}
           >
             Delete
+          </Button>
+          <Button variant="secondary" onClick={handleClose}>
+            No
           </Button>
         </Modal.Footer>
       </Modal>

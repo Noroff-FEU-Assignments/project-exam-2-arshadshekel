@@ -55,6 +55,8 @@ function EditHotelForm() {
   const [auth] = useContext(AuthContext);
   const [file, setFile] = useState(null);
   const [uploadedFile, setUploadedFile] = useState(null);
+
+  //toast variables
   const [showToast, setShowToast] = useState(false);
   const [toastType, setToastType] = useState("");
   const [toastAction, setToastAction] = useState("");
@@ -63,11 +65,13 @@ function EditHotelForm() {
     resolver: yupResolver(schema),
   });
 
+  // functions to show and close modals
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   let history = useHistory();
 
+  // API call to fetch hotels
   useEffect(
     function () {
       async function fetchData() {
@@ -106,12 +110,12 @@ function EditHotelForm() {
     //Delete picture file which gets attached during yup validation
     delete data["picture"];
 
-    //Append picture and data
+    //Append picture if uploaded and data
     if (uploadedFile) {
       formData.append(`files.picture`, uploadedFile, uploadedFile.name);
     }
     formData.append("data", JSON.stringify(data));
-
+    // update hotel and show toast
     try {
       axios.defaults.headers.common = { Authorization: `bearer ${token}` };
       await axios.put(url, formData).then((response) => {
@@ -132,25 +136,20 @@ function EditHotelForm() {
     }
   }
 
-   if (loading) {
-     return (
-       <div className="mt-5 container">
-         <h1 className="text-center">Loading...</h1>
-       </div>
-     );
+  if (loading) {
+    return (
+      <div className="mt-5 container">
+        <h1 className="text-center">Loading...</h1>
+      </div>
+    );
   }
-  
+
   if (error) {
     return (
       <div className="mt-5 container">
         <h1>An error occured: {error}</h1>
       </div>
     );
-  }
-  function handleChange(event, field) {
-    if (field === "name") {
-      hotel.name = event.target.value;
-    }
   }
 
   async function deleteItem() {
@@ -194,7 +193,6 @@ function EditHotelForm() {
             name="name"
             ref={register}
             defaultValue={hotel.name}
-            onChange={handleChange("name")}
           />
           {errors.name && (
             <span className="text-danger">{errors.name.message}</span>
@@ -207,7 +205,6 @@ function EditHotelForm() {
             name="phone"
             ref={register}
             defaultValue={hotel.phone}
-            onChange={handleChange("phone")}
           />
           {errors.phone && (
             <span className="text-danger">{errors.phone.message}</span>
@@ -257,7 +254,6 @@ function EditHotelForm() {
             name="standard"
             ref={register}
             defaultValue={hotel.standard}
-            onChange={handleChange("standard")}
           />
           {errors.standard && (
             <span className="text-danger">{errors.standard.message}</span>
@@ -286,7 +282,6 @@ function EditHotelForm() {
             placeholder="Please enter a message"
             ref={register}
             defaultValue={hotel.description}
-            onChange={handleChange("description")}
           />
           {errors.description && (
             <span className="text-danger">{errors.description.message}</span>
@@ -354,15 +349,14 @@ function EditHotelForm() {
         keyboard={false}
         centered
       >
-        <Modal.Header closeButton>
-          <Modal.Title>Delete hotel?</Modal.Title>
+        <Modal.Header className="modal-no-border" closeButton>
+          <h3 className="ml-auto">Delete hotel?</h3>
         </Modal.Header>
-        <Modal.Body>Do you wish to delete hotel?</Modal.Body>
+        <Modal.Body className="modal-no-border">
+          Do you wish to delete hotel?
+        </Modal.Body>
 
-        <Modal.Footer>
-          <Button className="primary-button" onClick={handleClose}>
-            No
-          </Button>
+        <Modal.Footer className="modal-no-border mr-auto">
           <Button
             variant="danger"
             onClick={() => {
@@ -371,6 +365,9 @@ function EditHotelForm() {
             }}
           >
             Delete
+          </Button>
+          <Button className="primary-button px-3" onClick={handleClose}>
+            No
           </Button>
         </Modal.Footer>
       </Modal>

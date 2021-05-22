@@ -38,6 +38,7 @@ function EnquiryForm({ handleClose, hotelName }) {
     resolver: yupResolver(schema),
   });
 
+  // Send a message to a hotel and show toasts
   async function onSubmit(data) {
     data.Hotel = hotelName;
     try {

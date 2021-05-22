@@ -127,3 +127,12 @@
         color: $color-secondary !important;
     }
 }
+
+.modal-no-border {
+    border: none;
+}
+
+.modal-contact .modal-content {
+    background-color: $color-secondary;
+    color: white;
+}
