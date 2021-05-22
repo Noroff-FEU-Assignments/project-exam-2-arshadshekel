@@ -194,18 +194,14 @@ function Hotels() {
           ) : (
             filteredhotels.map((hotel) => {
               return (
-                <Col
-                  xs={12}
-                  xl={6}
-                  key={hotel.id}
-                 
-                >
+                <Col xs={12} xl={6} key={hotel.id}>
                   <Hotelcard
                     id={hotel.id}
                     name={hotel.name}
                     standard={hotel.standard}
                     price={hotel.price}
                     email={hotel.email}
+                    description={hotel.description}
                     picture={hotel.picture.url}
                   />
                 </Col>

@@ -31,7 +31,12 @@
     }
 }
 
+@media only screen and (min-width: 1200px) {
+    .hotel-card {
+        min-height: 400px;
+    }
+}
+
 .star-color {
     color: $color-secondary;
 }
-

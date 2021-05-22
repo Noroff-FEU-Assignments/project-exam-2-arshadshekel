@@ -18,7 +18,7 @@ function Hoteldetails() {
   const handleShow = () => setShow(true);
   // variable to show / hide toasts
   const [show, setShow] = useState(false);
-  
+
   const url = API + id;
   let history = useHistory();
   const [auth] = useContext(AuthContext);
@@ -130,23 +130,8 @@ function Hoteldetails() {
                 return star;
               })}
             </div>
-            <p className="mt-5">{hotel.description}</p>
-            <p>
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-              nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-              erat, sed diam voluptua. At vero eos et accusam et justo duo
-              dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-              sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-              consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-              invidunt ut labore et dolore magna aliquyam erat, sed diam
-              voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-            </p>
-            <p>
-              Stet clita kasd gubergren, no sea takimata sanctus est. Lorem
-              ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-              sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-              et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-              accusam et justo duo dolores et ea rebum.
+            <p className="mt-5" style={{ whiteSpace: "break-spaces" }}>
+              {hotel.description}
             </p>
             <p className="mt-5 font-weight-bold">Price: {hotel.price}</p>
             <Button className="mr-3 mt-5 primary-button" onClick={handleShow}>

@@ -39,6 +39,16 @@ function Hotelcard(props) {
     return stars;
   }
 
+  /* shameless copy paste form a function I used for SP2,
+     which I in turn shamelessly copied from a guide      */
+
+  function truncateString(str, num) {
+    if (str.length <= num) {
+      return str;
+    }
+    return str.slice(0, num) + "...";
+  }
+
   return (
     <div className="hotel-card rounded-corners" key={props.id}>
       <LinkContainer to={`hotels/` + props.id}>
@@ -48,7 +58,7 @@ function Hotelcard(props) {
           className="hotel-card-img mx-auto"
         />
       </LinkContainer>
-      <div className="pl-md-5 ">
+      <div className="pl-md-5 d-flex flex-column justify-content-between ">
         <LinkContainer to={`hotels/` + props.id}>
           <div>
             <h3 className="color-primary" key={props.id}>
@@ -59,32 +69,38 @@ function Hotelcard(props) {
                 return star;
               })}
             </p>
-            <p>
-              Polished hotel along Bryggen wharf, offering 2 restaurants, a
-              fitness center & free breakfast.
-            </p>
+          </div>
+        </LinkContainer>
+        <LinkContainer to={`hotels/` + props.id}>
+          <div>
+            <p>{truncateString(props.description, 100)}</p>
             <p className="font-weight-bold">Price: {props.price}</p>
           </div>
         </LinkContainer>
 
-        <Button className="mr-3 mt-3 primary-button" onClick={handleShow}>
-          Contact hotel
-        </Button>
+        <div>
+          <Button
+            className="mr-2 align-bottom primary-button"
+            onClick={handleShow}
+          >
+            Contact hotel
+          </Button>
 
-        <LinkContainer to={`hotels/` + props.id}>
-          <Button className="mr-3 mt-3 secondary-button">View more </Button>
-        </LinkContainer>
-
-        {auth ? (
-          <LinkContainer to={`admin/edit/` + props.id}>
-            <Button
-              variant="success"
-              className="mt-3 text-white rounded-corners"
-            >
-              Edit hotel{" "}
-            </Button>
+          <LinkContainer to={`hotels/` + props.id}>
+            <Button className="mr-2 mt-3 secondary-button">View more </Button>
           </LinkContainer>
-        ) : null}
+
+          {auth ? (
+            <LinkContainer to={`admin/edit/` + props.id}>
+              <Button
+                variant="success"
+                className="mt-3 text-white rounded-corners"
+              >
+                Edit hotel{" "}
+              </Button>
+            </LinkContainer>
+          ) : null}
+        </div>
       </div>
       <Modal
         show={show}

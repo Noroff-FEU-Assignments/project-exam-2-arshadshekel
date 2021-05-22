@@ -78,6 +78,7 @@ function HomePage() {
                     standard={hotel.standard}
                     price={hotel.price}
                     email={hotel.email}
+                    description={hotel.description}
                     picture={hotel.picture.url}
                   />
                 </Col>
