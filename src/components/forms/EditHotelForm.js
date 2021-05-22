@@ -297,7 +297,7 @@ function EditHotelForm() {
           type="checkbox"
           name="featured"
           id="featured"
-          label="featured?"
+          label="featured"
           defaultChecked={hotel.featured}
           ref={register}
         />

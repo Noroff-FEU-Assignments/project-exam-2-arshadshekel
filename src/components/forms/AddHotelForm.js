@@ -179,7 +179,7 @@ function AddHotelForm() {
           type="checkbox"
           name="featured"
           id="featured"
-          label="featured?"
+          label="featured"
           ref={register}
           className="my-3"
         />
