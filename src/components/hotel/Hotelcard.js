@@ -90,7 +90,7 @@ function Hotelcard(props) {
         className="modal-background"
       >
         <Modal.Header className="modal-border-bottom" closeButton>
-          <h3 className="ml-auto color-primary">Contact {props.name}</h3>
+          <h3 className="ml-auto">Contact {props.name}</h3>
         </Modal.Header>
         <Modal.Body>
           <EnquiryForm handleClose={handleClose} hotelName={props.name} />

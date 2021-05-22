@@ -62,7 +62,6 @@ export default function LoginForm({ handleClose }) {
 
   return (
     <>
-     
       <Form noValidate onSubmit={handleSubmit(onSubmit)}>
         <fieldset disabled={submitting}>
           <Form.Group controlId="exampleForm.ControlInput1">
@@ -88,15 +87,15 @@ export default function LoginForm({ handleClose }) {
               <span className="text-danger">{errors.password.message}</span>
             )}
             {loginError && (
-              <span className="text-danger text-bold">Login failed</span>
+              <h4 className="text-danger text-center mt-3 text-bold">Login failed</h4>
             )}
           </Form.Group>
-          <button className="btn btn-primary">
+          <button className="btn primary-button mt-3">
             {submitting ? "Loggin in..." : "Login"}
           </button>
           <button
             variant="secondary"
-            className="btn btn-secondary ml-3"
+            className="btn btn-secondary ml-3 mt-3"
             onClick={handleClose}
           >
             Close

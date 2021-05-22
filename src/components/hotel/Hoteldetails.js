@@ -186,7 +186,7 @@ function Hoteldetails() {
           className="modal-background"
         >
           <Modal.Header className="modal-border-bottom" closeButton>
-            <h3 className="ml-auto text-white">Contact {hotel.name}</h3>
+            <h3 className="ml-auto">Contact {hotel.name}</h3>
           </Modal.Header>
           <Modal.Body>
             <EnquiryForm handleClose={handleClose} hotelName={hotel.name} />

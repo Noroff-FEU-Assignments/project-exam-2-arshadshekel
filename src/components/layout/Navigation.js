@@ -27,7 +27,6 @@ function Navigation() {
 
   const history = useHistory();
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState(false);
 
   function logout() {
     setAuth("");
@@ -79,7 +78,7 @@ function Navigation() {
 
             {auth ? (
               <LinkContainer to="/admin" className="ml-lg-auto px-0">
-                <Nav.Link>
+                <Nav.Link active={false}>
                   {auth.user.username}
                   <Button
                     onClick={handleOpenConfirm}
@@ -95,7 +94,7 @@ function Navigation() {
                 onClick={handleShow}
                 className="ml-lg-auto"
               >
-                <Nav.Link>
+                <Nav.Link active={false}>
                   <FaUserCircle className="mr-2 login-icon" />
                   LOGIN
                 </Nav.Link>
@@ -112,9 +111,10 @@ function Navigation() {
         keyboard={false}
         centered
       >
-        <Modal.Header closeButton>
-          <Modal.Title>Login</Modal.Title>
+        <Modal.Header className="modal-border-bottom" closeButton>
+          <h3 className="ml-auto">Login</h3>
         </Modal.Header>
+
         <Modal.Body>
           <LoginForm handleClose={handleClose} />
         </Modal.Body>
