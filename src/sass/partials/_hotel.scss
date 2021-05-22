@@ -43,3 +43,10 @@
     background-color: $color-secondary;
     color: white;
 }
+
+.featured-hotels{
+    transform: translateY(-50px);
+    background-color: white;
+        border-radius: 8px !important;
+        padding-top: 1px;
+}

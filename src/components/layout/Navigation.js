@@ -92,7 +92,7 @@ function Navigation() {
               <LinkContainer
                 to="/admin"
                 onClick={handleShow}
-                className="ml-lg-auto"
+                className="ml-lg-auto px-0"
               >
                 <Nav.Link active={false}>
                   <FaUserCircle className="mr-2 login-icon" />

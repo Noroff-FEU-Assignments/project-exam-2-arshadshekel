@@ -64,8 +64,8 @@ function HomePage() {
         </Container>
       </Jumbotron>
 
-      <h2 className="my-5 font-weight-bold">Some featured hotels</h2>
-      <div className="container container-md-fluid my-5">
+      <div className="container container-md-fluid  featured-hotels">
+        <h2 className="my-5 font-weight-bold">Some featured hotels</h2>
         <Row>
           {hotels.map((hotel) => {
             if (hotel.featured) {

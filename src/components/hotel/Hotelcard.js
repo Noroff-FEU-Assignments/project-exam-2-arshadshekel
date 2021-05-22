@@ -58,7 +58,7 @@ function Hotelcard(props) {
               Polished hotel along Bryggen wharf, offering 2 restaurants, a
               fitness center & free breakfast.
             </p>
-            <p>Price: {props.price}</p>
+            <p className="font-weight-bold">Price: {props.price}</p>
           </div>
         </LinkContainer>
 
