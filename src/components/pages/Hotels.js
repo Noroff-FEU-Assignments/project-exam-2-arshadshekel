@@ -100,7 +100,11 @@ function Hotels() {
   }
 
   if (error) {
-    return <div className="mt-5">An error occured: {error}</div>;
+    return (
+      <div className="mt-5 container">
+        <h1>An error occured: {error}</h1>
+      </div>
+    );
   }
 
   function setDefaultValues(hotels) {
@@ -174,7 +178,7 @@ function Hotels() {
         <Row>
           {nohotels ? (
             <Col xs={12}>
-              <h2 className="text-center text-danger">No hotels found</h2>
+              <h2 className="text-center">No hotels found</h2>
             </Col>
           ) : (
             filteredhotels.map((hotel) => {
