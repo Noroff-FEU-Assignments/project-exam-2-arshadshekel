@@ -79,7 +79,7 @@ function Hotelcard(props) {
         <LinkContainer to={`hotels/` + props.id}>
           <div>
             <p>{truncateString(props.description, 100)}</p>
-            <p className="font-weight-bold">Price: {props.price}</p>
+            <p className="font-weight-bold">Price: {props.price} NOK</p>
           </div>
         </LinkContainer>
 

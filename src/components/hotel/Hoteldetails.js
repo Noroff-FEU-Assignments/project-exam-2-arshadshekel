@@ -133,7 +133,7 @@ function Hoteldetails() {
             <p className="mt-5" style={{ whiteSpace: "break-spaces" }}>
               {hotel.description}
             </p>
-            <p className="mt-5 font-weight-bold">Price: {hotel.price}</p>
+            <p className="mt-5 font-weight-bold">Price: {hotel.price}NOK</p>
             <Button className="mr-3 mt-5 primary-button" onClick={handleShow}>
               Contact hotel
             </Button>
