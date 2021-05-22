@@ -185,6 +185,7 @@ function EditHotelForm() {
 
   return (
     <div className="my-5 container contact-form">
+      <h1 className="my-5 text-center">Edit {hotel.name}</h1>
       <Form noValidate onSubmit={handleSubmit(onSubmit)}>
         <Form.Group controlId="exampleForm.ControlInput1">
           <Form.Label>Hotel name</Form.Label>
