@@ -138,7 +138,8 @@ function EditHotelForm() {
          <h1 className="text-center">Loading...</h1>
        </div>
      );
-   }
+  }
+  
   if (error) {
     return (
       <div className="mt-5 container">

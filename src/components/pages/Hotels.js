@@ -94,18 +94,18 @@ function Hotels() {
   if (loading) {
     return (
       <div className="mt-5 container">
-        <h1>Loading...</h1>
+        <h1 className="text-center">Loading...</h1>
       </div>
     );
   }
 
-  if (error) {
-    return (
-      <div className="mt-5 container">
-        <h1>An error occured: {error}</h1>
-      </div>
-    );
-  }
+   if (error) {
+     return (
+       <div className="mt-5 container">
+         <h1 className="text-center text-danger">An error occured</h1>
+       </div>
+     );
+   }
 
   function setDefaultValues(hotels) {
     const minValueOfHotel = Math.min(...hotels.map((hotel) => hotel.price));

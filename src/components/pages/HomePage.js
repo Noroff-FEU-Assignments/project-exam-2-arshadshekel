@@ -47,7 +47,7 @@ function HomePage() {
   if (error) {
     return (
       <div className="mt-5 container">
-        <h1>An error occured: {error}</h1>
+        <h1 className="text-center text-danger">An error occured</h1>
       </div>
     );
   }
