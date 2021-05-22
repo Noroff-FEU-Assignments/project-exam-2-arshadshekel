@@ -1,5 +1,5 @@
 .primary-button {
-    border-radius: 25px;
+    border-radius: 8px !important;
     background-color: $color-secondary;
     color: white;
 
@@ -8,7 +8,7 @@
     }
 }
 .secondary-button {
-    border-radius: 25px;
+    border-radius: 8px !important;
     background-color: white;
     border: 1px solid $color-secondary;
     color: $color-secondary;
@@ -41,35 +41,82 @@
     cursor: pointer;
 }
 
-.btn {
-    border-radius: 25px !important;
-}
 .btn-sm {
-    border-radius: none
+    border-radius: none;
 }
 
 .custom-file-upload {
-     border-radius: 25px;
+    border-radius: 25px;
     background-color: white;
     border: 1px solid $color-secondary;
     color: $color-secondary;
     padding: 6px 12px;
     &:hover {
         background-color: $color-primary;
-        color: white
+        color: white;
     }
     cursor: pointer;
 }
 
-#file-upload{
+#file-upload {
     display: none;
 }
 
-.btn-enquiry{
-    background-color: $color-primary;
-    color: white;
+.card {
+    border: 1px solid $color-secondary !important;
+    border-radius: 8px !important;
 }
 
-.card{
-        border: 1px solid $color-secondary !important;
+.form-control,
+.custom-select {
+    border-radius: 8px !important;
+}
+
+.rbt-input {
+    border-radius: 0px !important;
+}
+
+.navbar-toggler {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    border: none;
+    &:focus {
+        outline: none;
+        background: transparent !important;
+    }
+}
+
+.contact-form {
+    width: 100%;
+}
+
+@media only screen and (min-width: 576px) {
+    .contact-form {
+        width: 80%;
+    }
+}
+@media only screen and (min-width: 768px) {
+    .contact-form {
+        width: 60%;
+    }
+}
+@media only screen and (min-width: 992px) {
+    .contact-form {
+        width: 50%;
+    }
+}
+@media only screen and (min-width: 1200px) {
+    .contact-form {
+        width: 40%;
+    }
+}
+.modal-background .modal-content {
+ 
+    color: $color-secondary;
+    border-radius: 8px;
+    overflow: hidden;
+
+    .close {
+        color: $color-secondary !important;
+    }
 }

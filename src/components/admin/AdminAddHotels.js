@@ -11,7 +11,7 @@ function AdminAddHotels() {
   return (
     <div>
       {auth ? (
-        <div className="container">
+        <div>
           <AddHotelForm />
         </div>
       ) : (

@@ -8,7 +8,7 @@ function AdminEditHotels() {
   return (
     <div>
       {auth ? (
-        <div className="container">
+        <div>
           <EditHotelForm />
         </div>
       ) : (

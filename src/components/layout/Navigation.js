@@ -61,7 +61,7 @@ function Navigation() {
             </LinkContainer>
 
             {auth ? (
-              <LinkContainer to="/admin" className="ml-lg-auto">
+              <LinkContainer to="/admin" className="ml-lg-auto px-0">
                 <Nav.Link>
                   {auth.user.username}
                   <Button

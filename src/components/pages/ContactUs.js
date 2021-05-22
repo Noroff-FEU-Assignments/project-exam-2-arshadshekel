@@ -39,10 +39,10 @@ function ContactUs() {
     resolver: yupResolver(schema),
   });
 
- useEffect(() => {
-   document.title = "Holidaze - Contact us";
- }, []);
- 
+  useEffect(() => {
+    document.title = "Holidaze - Contact us";
+  }, []);
+
   async function onSubmit(data) {
     try {
       await axios.post(url, data).then((response) => {
@@ -64,7 +64,7 @@ function ContactUs() {
   }
 
   return (
-    <div className="container my-5">
+    <div className="container my-5 contact-form">
       <h1 className="text-center">Contact us</h1>
 
       {submitted ? (

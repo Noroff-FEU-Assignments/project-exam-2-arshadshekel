@@ -104,7 +104,7 @@ function AddHotelForm() {
   }
 
   return (
-    <div className="container">
+    <div className="container contact-form">
       <h1 className="text-center my-5">Add new hotel</h1>
 
       <Form noValidate onSubmit={handleSubmit(onSubmit)}>
@@ -146,7 +146,7 @@ function AddHotelForm() {
 
         <Form.Group controlId="exampleForm.ControlInput3">
           <Form.Label>Standard</Form.Label>
-          <Form.Control placeholder="standard" name="standard" ref={register} />
+          <Form.Control placeholder="Standard" name="standard" ref={register} />
           {errors.standard && (
             <span className="text-danger">{errors.standard.message}</span>
           )}
@@ -154,7 +154,7 @@ function AddHotelForm() {
 
         <Form.Group controlId="exampleForm.ControlInput3">
           <Form.Label>Price</Form.Label>
-          <Form.Control placeholder="price" name="price" ref={register} />
+          <Form.Control placeholder="Price" name="price" ref={register} />
           {errors.price && (
             <span className="text-danger">{errors.price.message}</span>
           )}

@@ -178,7 +178,7 @@ function EditHotelForm() {
   }
 
   return (
-    <div className="my-5 container">
+    <div className="my-5 container contact-form">
       <Form noValidate onSubmit={handleSubmit(onSubmit)}>
         <Form.Group controlId="exampleForm.ControlInput1">
           <Form.Label>Hotel name</Form.Label>
@@ -196,7 +196,7 @@ function EditHotelForm() {
         <Form.Group controlId="exampleForm.ControlInput2">
           <Form.Label>Phone</Form.Label>
           <Form.Control
-            placeholder="phone"
+            placeholder="Phonenumber"
             name="phone"
             ref={register}
             defaultValue={hotel.phone}
@@ -246,7 +246,7 @@ function EditHotelForm() {
         <Form.Group controlId="exampleForm.ControlInput3">
           <Form.Label>Standard</Form.Label>
           <Form.Control
-            placeholder="standard"
+            placeholder="Standard"
             name="standard"
             ref={register}
             defaultValue={hotel.standard}
@@ -260,7 +260,7 @@ function EditHotelForm() {
         <Form.Group controlId="exampleForm.ControlInput3">
           <Form.Label>Price</Form.Label>
           <Form.Control
-            placeholder="price"
+            placeholder="Price"
             name="price"
             ref={register}
             defaultValue={hotel.price}

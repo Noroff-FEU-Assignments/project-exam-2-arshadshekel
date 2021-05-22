@@ -104,7 +104,7 @@ function EnquiryForm({ handleClose, hotelName }) {
             <span className="text-danger">{errors.Message.message}</span>
           )}
         </Form.Group>
-        <Button className="btn-enquiry" type="submit">
+        <Button className="primary-button" type="submit">
           Submit
         </Button>
         <Button variant="secondary" onClick={handleClose} className="ml-3">

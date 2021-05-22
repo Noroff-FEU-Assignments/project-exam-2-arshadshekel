@@ -113,7 +113,7 @@ function Hotels() {
   return (
     <div>
       <h1 className="text-center mt-5">Hotels</h1>
-      <div className="mb-5 px-5 d-flex justify-content-center">
+      <div className="mb-5 px-md-5 container container-md-fluid d-flex justify-content-center">
         <div>
           <SearchDropDown/>
           <h4>Sort by:</h4>
@@ -170,7 +170,7 @@ function Hotels() {
           </Form>
         </div>
       </div>
-      <div className="px-5 my-5">
+      <div className="my-5 container container-md-fluid">
         <Row>
           {nohotels ? (
             <Col xs={12}>
@@ -179,7 +179,12 @@ function Hotels() {
           ) : (
             filteredhotels.map((hotel) => {
               return (
-                <Col xs={12} xl={6} key={hotel.id}>
+                <Col
+                  xs={12}
+                  xl={6}
+                  key={hotel.id}
+                 
+                >
                   <Hotelcard
                     id={hotel.id}
                     name={hotel.name}
