@@ -50,7 +50,12 @@ function Hotelcard(props) {
   }
 
   return (
-    <div className="hotel-card rounded-corners" key={props.id} style={auth ? {minHeight: "390px"}: {minHeight: "350px"}}>
+    <div
+      className={
+        auth ? "hotel-card rounded-corners hotel-card-height" : "hotel-card rounded-corners"
+      }
+      key={props.id}
+    >
       <LinkContainer to={`hotels/` + props.id}>
         <img
           src={props.picture}
