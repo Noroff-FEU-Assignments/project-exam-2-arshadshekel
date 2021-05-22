@@ -34,7 +34,7 @@ function Navigation() {
     setToastType("success");
     setToastAction("logout");
     setTimeout(() => setShowToast(false), 3000);
-    setTimeout(() => history.push("/"), 2000);
+    setTimeout(() => history.push("/home"), 2000);
     setTimeout(() => handleCloseConfirm(), 1000);
   }
 
@@ -60,7 +60,7 @@ function Navigation() {
         </button>
         <Navbar.Collapse in={open}>
           <Nav className="w-100">
-            <LinkContainer to="/home" className="ml-lg-auto">
+            <LinkContainer to="/home" className="ml-lg-auto nav-link">
               <Nav.Link active={false} onClick={() => setOpen(false)}>
                 HOME
               </Nav.Link>
