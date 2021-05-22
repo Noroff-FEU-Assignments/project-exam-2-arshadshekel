@@ -40,6 +40,7 @@ h2 {
 .overlay {
     background-color: rgba($color-primary, 0.4);
     border-radius:8px;
+       transform: translateY(-90px);
 }
 
 #submit-search {
@@ -59,4 +60,11 @@ h2 {
         font-size: 32px;
         color: white;
     }
+}
+
+.featured-hotels{
+    transform: translateY(-90px);
+    background-color: white;
+        border-radius: 8px !important;
+        padding-top: 1px;
 }
