@@ -1,7 +1,7 @@
 import { Typeahead } from "react-bootstrap-typeahead";
 import { useState, useEffect, useRef } from "react";
 import { API } from "../../constants/Api";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { Button, InputGroup, Form } from "react-bootstrap";
 import { FaSearch } from "react-icons/fa";
 
@@ -33,8 +33,12 @@ const SearchDropDown = () => {
     option.name.toLowerCase().indexOf(props.text.toLowerCase()) !== -1;
 
   const history = useHistory();
+  const page = useLocation();
+  console.log(page);
 
-  /*Initially this was written so that I could redirect when clicking on the 
+
+  
+  /*Initially this was written so that I could redirect when clicking on the
     view hotel button. Or that pressing enter redirects. This was due to me using
     onClick in a wrong way. I later found out how to fix, but kept this function regardless
   */
@@ -60,7 +64,11 @@ const SearchDropDown = () => {
 
     return (
       <Form noValidate onSubmit={viewHotel}>
-        <InputGroup className="my-5 search-max-width">
+        <InputGroup
+          className={
+            page.pathname === "/home" ? "searchbar-width my-5" : "my-5"
+          }
+        >
           <InputGroup.Prepend>
             <InputGroup.Text className="rounded-corners">
               <FaSearch />

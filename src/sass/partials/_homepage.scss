@@ -32,8 +32,8 @@ h2 {
     border-radius: 8px;
 }
 
-.search-max-width {
-    max-width: 700px;
+.searchbar-width {
+    max-width: 65%;
     margin: 0 auto;
 }
 
@@ -48,6 +48,13 @@ h2 {
     border-top-left-radius: 0px !important;
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 0px !important;
+}
+
+@media only screen and (max-width: 768px) {
+    .searchbar-width {
+        max-width: 90%;
+        margin: 0 auto;
+    }
 }
 
 @media only screen and (max-width: 824px) {

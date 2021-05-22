@@ -56,13 +56,13 @@ function HomePage() {
   return (
     <div>
       <Jumbotron className="jumbotron-img">
-        <Container className="jumbotron-content">
+        <div className="jumbotron-content container">
           <div className="overlay py-5">
             <h1 className="landingpage-title">DISCOVER BERGEN</h1>
             <h2 className="landingpage-subtitle">Book a hotel today!</h2>
-            <SearchDropDown />
+            <SearchDropDown className="searchbar-width" />
           </div>
-        </Container>
+        </div>
       </Jumbotron>
 
       <div className="container container-md-fluid  featured-hotels">
