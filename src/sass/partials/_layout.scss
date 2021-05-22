@@ -16,7 +16,7 @@
     font-weight: 700;
     &:hover {
         background-color: $color-primary;
-        color:white;
+        color: white;
     }
 }
 
@@ -108,6 +108,14 @@
         width: 60%;
     }
 }
+
+@media only screen and (max-width: 768px) {
+    .rbt-input {
+        border-top-right-radius: 8px !important;
+        border-bottom-right-radius: 8px !important;
+    }
+}
+
 @media only screen and (min-width: 992px) {
     .contact-form {
         width: 50%;

@@ -97,7 +97,7 @@ const SearchDropDown = () => {
             <InputGroup.Append>
               <Button
                 id="submit-search"
-                className="primary-button"
+                className="primary-button d-none d-md-block"
                 type="submit"
               >
                 View hotel
