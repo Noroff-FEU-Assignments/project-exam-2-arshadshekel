@@ -29,7 +29,7 @@ h2 {
 }
 
 .rounded-corners {
-    border-radius:8px;
+    border-radius: 8px;
 }
 
 .search-max-width {
@@ -39,8 +39,8 @@ h2 {
 
 .overlay {
     background-color: rgba($color-primary, 0.4);
-    border-radius:8px;
-       transform: translateY(-90px);
+    border-radius: 8px;
+    transform: translateY(-90px);
 }
 
 #submit-search {
@@ -62,9 +62,11 @@ h2 {
     }
 }
 
-.featured-hotels{
+.featured-hotels {
     transform: translateY(-90px);
+    border: 1px solid rgb(226, 226, 226);
+    box-shadow: 0 0 4px rgba(33, 33, 33, 0.2);
     background-color: white;
-        border-radius: 8px !important;
-        padding-top: 1px;
+    border-radius: 8px !important;
+    padding-top: 1px;
 }

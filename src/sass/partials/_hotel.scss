@@ -4,11 +4,11 @@
     display: flex;
     margin-bottom: 16px;
     box-shadow: 0 0 4px rgba(33, 33, 33, 0.2);
-
+    background-color: white;
     &:hover {
         box-shadow: 0 0 12px rgba(33, 33, 33, 0.2);
         cursor: pointer;
-        background-color: rgba($color-secondary, 0.2);
+        background-color: rgba($color-tertiary, 1);
     }
 
     a {
@@ -43,4 +43,3 @@
     background-color: $color-secondary;
     color: white;
 }
-
