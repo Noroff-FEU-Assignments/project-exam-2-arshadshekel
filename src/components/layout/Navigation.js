@@ -28,7 +28,7 @@ function Navigation() {
  
 
   function logout() {
-    setAuth();
+    setAuth("");
     setShowToast(true);
     setToastType("success");
     setToastAction("logout");
