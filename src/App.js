@@ -1,6 +1,6 @@
 import Navigation from "./components/layout/Navigation";
 import Footer from "./components/layout/Footer";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import HomePage from "./components/pages/HomePage";
 import Hotels from "./components/pages/Hotels";
 import "./sass/style.scss";
@@ -18,9 +18,9 @@ function App() {
         <Navigation />
         <Switch>
           <Route exact path="/">
-            <HomePage />
+            <Redirect to="/home" />
           </Route>
-          <Route exact path="/home">
+          <Route path="/home">
             <HomePage />
           </Route>
           <Route exact path="/hotels">
