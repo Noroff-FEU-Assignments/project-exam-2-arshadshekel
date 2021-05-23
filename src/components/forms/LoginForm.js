@@ -69,7 +69,7 @@ export default function LoginForm({ handleClose }) {
             <Form.Label>Username</Form.Label>
             <Form.Control
               name="identifier"
-              placeholder="admin@admin.com"
+              defaultValue="admin@admin.com"
               ref={register}
             />
             {errors.identifier && (
@@ -81,6 +81,7 @@ export default function LoginForm({ handleClose }) {
             <Form.Control
               name="password"
               placeholder="Pass1234"
+              defaultValue="Pass1234"
               ref={register}
               type="password"
             />

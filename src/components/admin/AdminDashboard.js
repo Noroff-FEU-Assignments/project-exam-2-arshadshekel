@@ -39,6 +39,8 @@ function AdminDashboard() {
         // get JWT token from localstorage
         const token = auth.jwt;
         // API call to get both contactmessages and enquiries
+        // its 2130 and I realized I could have implemented the enquiry
+        // functionality onto messages with easy. Oh well
         try {
           axios
             .get(CONTACTURL, { headers: { Authorization: `Bearer ${token}` } })
@@ -49,7 +51,6 @@ function AdminDashboard() {
             .get(ENQUIRYURL, { headers: { Authorization: `Bearer ${token}` } })
             .then((resp) => {
               setEnquiry(resp.data);
-              console.log("resp", resp.data);
             });
         } catch (error) {
           console.log("error", error);
@@ -81,7 +82,6 @@ function AdminDashboard() {
       });
 
       setFilterMessages(sortedArray);
-      console.log("sorted", sortedArray);
     }
   }, [enquiries]);
 
@@ -100,7 +100,6 @@ function AdminDashboard() {
     try {
       axios.defaults.headers.common = { Authorization: `bearer ${token}` };
       await axios.delete(url, {}).then((response) => {
-        console.log(response.status);
         if (response.status === 200) {
           handleClose();
           setShowToast(true);
@@ -179,10 +178,25 @@ function AdminDashboard() {
                       <Card className="my-3">
                         <Accordion.Toggle
                           as={Card.Header}
-                          className="accordion-subtitle"
+                          onClick={() => {
+                            if (form.new) viewMessage(form.id);
+                          }}
+                          className={
+                            form.new
+                              ? "accordion-title d-flex"
+                              : "accordion-subtitle d-flex"
+                          }
                           eventKey="0"
                         >
-                          {form.Firstname} {form.Lastname}
+                          <span className="mr-3">
+                            {form.new ? <BsEnvelope /> : <BsEnvelopeOpen />}
+                          </span>
+                          <span className="mr-3">
+                            {form.Firstname} {form.Lastname}
+                          </span>
+                          <span className="ml-auto d-none d-md-block">
+                            {moment(form.created_at).format("LLL")}
+                          </span>
                         </Accordion.Toggle>
 
                         <Accordion.Collapse eventKey="0">
