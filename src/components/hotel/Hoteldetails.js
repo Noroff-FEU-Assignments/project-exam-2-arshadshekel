@@ -12,14 +12,14 @@ function Hoteldetails() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const { id } = useParams();
+  const { slug } = useParams();
   //functions to show and hide modal
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   // variable to show / hide toasts
   const [show, setShow] = useState(false);
 
-  const url = API + id;
+  const url = API + slug;
   let history = useHistory();
   const [auth] = useContext(AuthContext);
 
@@ -141,7 +141,7 @@ function Hoteldetails() {
               <Button
                 className="ml-3 mt-5"
                 variant="success"
-                onClick={() => history.push("/admin/edit/" + id)}
+                onClick={() => history.push("/admin/edit/" + slug)}
               >
                 {" "}
                 Edit hotel

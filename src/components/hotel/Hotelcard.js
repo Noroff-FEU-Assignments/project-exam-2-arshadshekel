@@ -52,11 +52,13 @@ function Hotelcard(props) {
   return (
     <div
       className={
-        auth ? "hotel-card rounded-corners hotel-card-height" : "hotel-card rounded-corners"
+        auth
+          ? "hotel-card rounded-corners hotel-card-height"
+          : "hotel-card rounded-corners"
       }
       key={props.id}
     >
-      <LinkContainer to={`hotels/` + props.id}>
+      <LinkContainer to={`hotels/` + props.slug}>
         <img
           src={props.picture}
           alt="hotel thumbnail"
@@ -64,9 +66,9 @@ function Hotelcard(props) {
         />
       </LinkContainer>
       <div className="pl-md-5 d-flex flex-column justify-content-between ">
-        <LinkContainer to={`hotels/` + props.id}>
+        <LinkContainer to={`hotels/` + props.slug}>
           <div>
-            <h3 className="color-primary" key={props.id}>
+            <h3 className="color-primary" key={props.slug}>
               {props.name}
             </h3>
             <p>
@@ -76,7 +78,7 @@ function Hotelcard(props) {
             </p>
           </div>
         </LinkContainer>
-        <LinkContainer to={`hotels/` + props.id}>
+        <LinkContainer to={`hotels/` + props.slug}>
           <div>
             <p>{truncateString(props.description, 100)}</p>
             <p className="font-weight-bold">Price: {props.price} NOK</p>
@@ -91,12 +93,12 @@ function Hotelcard(props) {
             Contact hotel
           </Button>
 
-          <LinkContainer to={`hotels/` + props.id}>
+          <LinkContainer to={`hotels/` + props.slug}>
             <Button className="mr-2 mt-3 secondary-button">View more </Button>
           </LinkContainer>
 
           {auth ? (
-            <LinkContainer to={`admin/edit/` + props.id}>
+            <LinkContainer to={`admin/edit/` + props.slug}>
               <Button
                 variant="success"
                 className="mt-3 text-white rounded-corners"

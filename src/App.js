@@ -1,6 +1,11 @@
 import Navigation from "./components/layout/Navigation";
 import Footer from "./components/layout/Footer";
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import HomePage from "./components/pages/HomePage";
 import Hotels from "./components/pages/Hotels";
 import "./sass/style.scss";
@@ -29,7 +34,7 @@ function App() {
           <Route path="/contact-us">
             <ContactUs />
           </Route>
-          <Route path="/hotels/:id">
+          <Route path="/hotels/:slug">
             <Hoteldetails />
           </Route>
           <Route exact path="/admin">
@@ -38,7 +43,7 @@ function App() {
           <Route path="/admin/add">
             <AdminAddHotels />
           </Route>
-          <Route path="/admin/edit/:id">
+          <Route path="/admin/edit/:slug">
             <AdminEditHotels />
           </Route>
         </Switch>

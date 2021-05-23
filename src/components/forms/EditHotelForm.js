@@ -48,9 +48,9 @@ function EditHotelForm() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const { id } = useParams();
+  const { slug } = useParams();
 
-  const url = ADDHOTELS + id;
+  const url = ADDHOTELS + slug;
   const [show, setShow] = useState(false);
   const [auth] = useContext(AuthContext);
   const [file, setFile] = useState(null);
@@ -334,7 +334,7 @@ function EditHotelForm() {
         </Button>
         <Button
           className="primary-button ml-3 mr-3 mb-3"
-          onClick={() => history.push("/hotels/" + id)}
+          onClick={() => history.push("/hotels/" + slug)}
         >
           View hotel
         </Button>

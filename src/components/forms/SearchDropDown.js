@@ -19,7 +19,7 @@ const SearchDropDown = () => {
         const result = await response.json();
         const options = result.map((hotel) => ({
           avatar_url: hotel.picture.formats.thumbnail.url,
-          id: hotel.id,
+          slug: hotel.slug,
           name: hotel.name,
         }));
         setOptions(options);
@@ -54,7 +54,7 @@ const SearchDropDown = () => {
       
       // After finding the right hotel redirect to the details page
 
-      const hotelID = findHotel[0].id;
+      const hotelID = findHotel[0].slug;
       history.push(`hotels/` + hotelID);
     
     
@@ -84,14 +84,13 @@ const SearchDropDown = () => {
               renderMenuItemChildren={(option) => (
                 <div
                   onClick={() => {
-                    history.push(`hotels/` + option.id);
+                    history.push(`hotels/` + option.slug);
                   }}
-                  key={option.id}
+                  key={option.slug}
                   style={{
                     marginTop: "5px",
                     marginBottom: "5px",
                   }}
-                
                 >
                   <img
                     alt={option.name}
@@ -107,11 +106,7 @@ const SearchDropDown = () => {
               )}
             />
             <InputGroup.Append>
-              <Button
-                id="submit-search"
-                className="d-none"
-                type="submit"
-              >
+              <Button id="submit-search" className="d-none" type="submit">
                 View hotel
               </Button>
             </InputGroup.Append>
