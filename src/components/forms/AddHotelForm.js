@@ -169,7 +169,7 @@ function AddHotelForm() {
           <Form.Label>Description</Form.Label>
           <Form.Control
             as="textarea"
-            rows={3}
+            rows={12}
             name="description"
             placeholder="Please enter a message"
             ref={register}

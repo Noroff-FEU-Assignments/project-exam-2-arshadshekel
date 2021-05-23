@@ -76,12 +76,18 @@
 .form-control,
 .custom-select {
     border-radius: 8px !important;
+     &:focus{
+            box-shadow: none;
+        }
 }
 
 .rbt-input {
     border-radius: 0px !important;
     border-top-right-radius: 8px !important;
         border-bottom-right-radius: 8px !important;
+        &:focus{
+            box-shadow: none;
+        }
 }
 
 /* https://jsfiddle.net/Beaniie/s8rm1f0q/5/ */
