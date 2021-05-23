@@ -57,6 +57,29 @@ function AdminDashboard() {
     [auth, updateList]
   );
 
+  //update enquiries every 1 minute
+  useEffect(() => {
+    async function updateEnquiries() {
+      // get JWT token from localstorage
+      const token = auth.jwt;
+      // API call to get enquiries
+      try {
+        axios
+          .get(ENQUIRYURL, { headers: { Authorization: `Bearer ${token}` } })
+          .then((resp) => {
+            setEnquiry(resp.data);
+          });
+      } catch (error) {
+        console.log("error", error);
+      }
+    }
+    //Fetch new messages every 1 minute
+    setInterval(() => {
+      updateEnquiries();
+    }, 60000);
+    setUpdateList(true);
+  }, [auth]);
+
   // Function to delete a specific messsage
   async function deleteItem(id, type) {
     const token = auth.jwt;

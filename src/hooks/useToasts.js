@@ -62,9 +62,11 @@ export default function Toasts({ type, action, showToast }) {
           aria-live="polite"
           aria-atomic="true"
           style={{
-            minHeight: "100px",
+            minHeight: "45px",
+            maxWidth: "300px",
+            margin: "0 auto",
           }}
-          className="fixed-bottom"
+          className={show ? "fixed-bottom d-block" : "fixed-bottom d-none"}
         >
           <Toast
             onClose={() => setShow(false)}
@@ -78,7 +80,7 @@ export default function Toasts({ type, action, showToast }) {
               left: 0,
               right: 0,
               color: "white",
-              borderRadius: "8px",
+              borderRadius: "9px",
             }}
           >
             <Toast.Body
