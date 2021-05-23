@@ -41,13 +41,11 @@ function AdminDashboard() {
             .get(CONTACTURL, { headers: { Authorization: `Bearer ${token}` } })
             .then((resp) => {
               setContactForms(resp.data);
-              console.log(resp.data);
             });
           axios
             .get(ENQUIRYURL, { headers: { Authorization: `Bearer ${token}` } })
             .then((resp) => {
               setEnquiry(resp.data);
-              console.log(resp.data);
             });
         } catch (error) {
           console.log("error", error);

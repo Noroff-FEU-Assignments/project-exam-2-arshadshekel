@@ -201,6 +201,7 @@ function Hotels() {
                     standard={hotel.standard}
                     price={hotel.price}
                     email={hotel.email}
+                    slug={hotel.slug}
                     description={hotel.description}
                     picture={hotel.picture.url}
                   />

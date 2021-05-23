@@ -23,7 +23,6 @@ function HomePage() {
 
         if (response.ok) {
           const json = await response.json();
-          console.log(json);
           setHotels(json);
         } else {
           setError("An error occured");

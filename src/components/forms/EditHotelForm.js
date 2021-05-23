@@ -50,7 +50,7 @@ function EditHotelForm() {
 
   const { slug } = useParams();
 
-  const url = ADDHOTELS + slug;
+  const fetchurl = ADDHOTELS + "?slug=" + slug;
   const [show, setShow] = useState(false);
   const [auth] = useContext(AuthContext);
   const [file, setFile] = useState(null);
@@ -76,13 +76,12 @@ function EditHotelForm() {
     function () {
       async function fetchData() {
         try {
-          const response = await fetch(url);
+          const response = await fetch(fetchurl);
 
           if (response.ok) {
             const json = await response.json();
-            console.log(json);
-            setHotel(json);
-            setFile(json.picture);
+            setHotel(json[0]);
+            setFile(json[0].picture);
           } else {
             setError("An error occured");
           }
@@ -95,13 +94,13 @@ function EditHotelForm() {
 
       fetchData();
     },
-    [url]
+    [fetchurl]
   );
 
   async function onSubmit(data) {
     // get JWT token from localstorage
     const token = auth.jwt;
-
+    const url = ADDHOTELS + "/" + hotel.id;
     console.log(data);
 
     // Create new formData object to hold data to send in API call
@@ -119,7 +118,7 @@ function EditHotelForm() {
     try {
       axios.defaults.headers.common = { Authorization: `bearer ${token}` };
       await axios.put(url, formData).then((response) => {
-        console.log(response.status);
+   
         if (response.status === 200) {
           setShowToast(true);
           setToastType("success");
@@ -154,11 +153,11 @@ function EditHotelForm() {
 
   async function deleteItem() {
     const token = auth.jwt;
+    const url = ADDHOTELS + "/" + hotel.id;
 
     try {
       axios.defaults.headers.common = { Authorization: `bearer ${token}` };
       await axios.delete(url, {}).then((response) => {
-        console.log(response.status);
         if (response.status === 200) {
           setShowToast(true);
           setToastType("success");

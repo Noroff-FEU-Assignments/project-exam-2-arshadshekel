@@ -19,7 +19,7 @@ function Hoteldetails() {
   // variable to show / hide toasts
   const [show, setShow] = useState(false);
 
-  const url = API + slug;
+  const fetchurl = API + "?slug="+ slug;
   let history = useHistory();
   const [auth] = useContext(AuthContext);
 
@@ -32,12 +32,12 @@ function Hoteldetails() {
     function () {
       async function fetchData() {
         try {
-          const response = await fetch(url);
+          const response = await fetch(fetchurl);
 
           if (response.ok) {
             const json = await response.json();
             console.log(json);
-            setHotel(json);
+            setHotel(json[0]);
           } else {
             setError("An error occured");
           }
@@ -49,7 +49,7 @@ function Hoteldetails() {
       }
       fetchData();
     },
-    [url]
+    [fetchurl]
   );
 
   // Encode the address so that it can be used as query string
@@ -108,7 +108,7 @@ function Hoteldetails() {
         <Row className="d-flex justify-content-between">
           <Col xs={12} md={4}>
             <img
-              src={hotel.picture.url}
+              src={hotel.picture?.url}
               alt={hotel.name}
               width="285px"
               className="d-block mx-auto img-fluid"

@@ -90,14 +90,14 @@ function AddHotelForm() {
     try {
       axios.defaults.headers.common = { Authorization: `bearer ${token}` };
       await axios.post(url, formData).then((response) => {
-        console.log(response.status);
+        console.log(response);
         const slug = response.data.slug;
         if (response.status === 200) {
           setShowToast(true);
           setToastType("success");
           setToastAction("addHotel");
           setTimeout(() => setShowToast(false), 3000);
-          setTimeout(() => history.push("/hotels/" + slug), 3000);
+          setTimeout(() => history.push("/hotels/" + slug), 3000); 
         }
       });
     } catch (error) {

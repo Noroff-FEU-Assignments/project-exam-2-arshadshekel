@@ -54,8 +54,8 @@ const SearchDropDown = () => {
       
       // After finding the right hotel redirect to the details page
 
-      const hotelID = findHotel[0].slug;
-      history.push(`hotels/` + hotelID);
+      const hotelSlug = findHotel[0].slug;
+      history.push(`hotels/` + hotelSlug);
     
     
   }
