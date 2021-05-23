@@ -37,6 +37,10 @@ h2 {
     margin: 0 auto;
 }
 
+.dropdown-item:hover {
+    background-color: $color-tertiary;
+}
+
 .overlay {
     background-color: rgba($color-primary, 0.4);
     border-radius: 8px;

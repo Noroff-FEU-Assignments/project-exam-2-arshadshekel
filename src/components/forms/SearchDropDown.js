@@ -42,7 +42,8 @@ const SearchDropDown = () => {
   
     function viewHotel(event) {
         event.preventDefault();
-    const findHotel = searchInput.current.props.options.filter((hotel) => {
+      
+      const findHotel = searchInput.current.props.options.filter((hotel) => {
       if (hotel.name === searchInput.current.inputNode.defaultValue) {
         return true;
       } else {
@@ -52,11 +53,11 @@ const SearchDropDown = () => {
     });
       
       // After finding the right hotel redirect to the details page
-      console.log(findHotel);
-      if (findHotel[0] !== undefined) {
-          const hotelID = findHotel[0].id;
-            history.push(`hotels/` + hotelID);
-      }
+
+      const hotelID = findHotel[0].id;
+      history.push(`hotels/` + hotelID);
+    
+    
   }
 
     return (
@@ -78,6 +79,7 @@ const SearchDropDown = () => {
               labelKey="name"
               options={options}
               ref={searchInput}
+              onKeyUp={viewHotel}
               placeholder="Search for a hotel..."
               renderMenuItemChildren={(option) => (
                 <div
@@ -85,6 +87,11 @@ const SearchDropDown = () => {
                     history.push(`hotels/` + option.id);
                   }}
                   key={option.id}
+                  style={{
+                    marginTop: "5px",
+                    marginBottom: "5px",
+                  }}
+                
                 >
                   <img
                     alt={option.name}
