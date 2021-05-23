@@ -83,7 +83,7 @@ function Navigation() {
 
             {auth ? (
               <LinkContainer to="/admin" className="ml-lg-auto px-0">
-                <Nav.Link active={false}>
+                <Nav.Link active={false} onClick={() => setOpen(false)}>
                   {auth.user.username}
                   <Button
                     onClick={handleOpenConfirm}
@@ -99,7 +99,7 @@ function Navigation() {
                 onClick={handleShow}
                 className="ml-lg-auto px-0"
               >
-                <Nav.Link active={false}>
+                <Nav.Link active={false} onClick={() => setOpen(false)}>
                   <FaUserCircle className="mr-2 login-icon" />
                   LOGIN
                 </Nav.Link>
