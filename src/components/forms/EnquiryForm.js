@@ -41,6 +41,7 @@ function EnquiryForm({ handleClose, hotelName }) {
   // Send a message to a hotel and show toasts
   async function onSubmit(data) {
     data.Hotel = hotelName;
+    data.new = true;
     try {
       await axios.post(url, data).then((response) => {
         console.log(response.status);
