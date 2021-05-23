@@ -62,12 +62,12 @@ function Hotelcard(props) {
         <img
           src={props.picture}
           alt="hotel thumbnail"
-          className="hotel-card-img mx-auto"
+          className="hotel-card-img hotel-card-cursor mx-auto"
         />
       </LinkContainer>
       <div className="pl-md-5 d-flex flex-column justify-content-between ">
         <LinkContainer to={`hotels/` + props.slug}>
-          <div>
+          <div className="hotel-card-cursor">
             <h3 className="color-primary" key={props.slug}>
               {props.name}
             </h3>
@@ -79,7 +79,7 @@ function Hotelcard(props) {
           </div>
         </LinkContainer>
         <LinkContainer to={`hotels/` + props.slug}>
-          <div>
+          <div className="hotel-card-cursor">
             <p>{truncateString(props.description, 100)}</p>
             <p className="font-weight-bold">Price: {props.price} NOK</p>
           </div>
