@@ -80,6 +80,8 @@
 
 .rbt-input {
     border-radius: 0px !important;
+    border-top-right-radius: 8px !important;
+        border-bottom-right-radius: 8px !important;
 }
 
 /* https://jsfiddle.net/Beaniie/s8rm1f0q/5/ */
@@ -106,13 +108,6 @@
 @media only screen and (min-width: 768px) {
     .contact-form {
         width: 60%;
-    }
-}
-
-@media only screen and (max-width: 768px) {
-    .rbt-input {
-        border-top-right-radius: 8px !important;
-        border-bottom-right-radius: 8px !important;
     }
 }
 
