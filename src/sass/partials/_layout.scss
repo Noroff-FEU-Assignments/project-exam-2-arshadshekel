@@ -41,6 +41,10 @@
     border: none;
     color: $color-secondary;
     cursor: pointer;
+
+    &:hover{
+        background-color: $color-tertiary;
+    }
 }
 
 .btn {
