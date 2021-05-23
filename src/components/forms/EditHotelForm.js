@@ -50,10 +50,11 @@ function EditHotelForm() {
 
   const { slug } = useParams();
 
-  const fetchurl = ADDHOTELS + "?slug=" + slug;
   const [show, setShow] = useState(false);
   const [auth] = useContext(AuthContext);
   const [file, setFile] = useState(null);
+
+  
   const [uploadedFile, setUploadedFile] = useState(null);
 
   //toast variables
@@ -69,6 +70,7 @@ function EditHotelForm() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const [newSlug, setNewSlug] = useState("");
   let history = useHistory();
 
   // API call to fetch hotels
@@ -76,12 +78,16 @@ function EditHotelForm() {
     function () {
       async function fetchData() {
         try {
+          const fetchurl = ADDHOTELS + "?slug=" + slug;
           const response = await fetch(fetchurl);
 
           if (response.ok) {
             const json = await response.json();
+            
             setHotel(json[0]);
             setFile(json[0].picture);
+            setNewSlug(slug);
+
           } else {
             setError("An error occured");
           }
@@ -91,17 +97,16 @@ function EditHotelForm() {
           setLoading(false);
         }
       }
-
       fetchData();
+      
     },
-    [fetchurl]
+    [slug]
   );
 
   async function onSubmit(data) {
     // get JWT token from localstorage
     const token = auth.jwt;
     const url = ADDHOTELS + "/" + hotel.id;
-    console.log(data);
 
     // Create new formData object to hold data to send in API call
     let formData = new FormData();
@@ -118,14 +123,19 @@ function EditHotelForm() {
     try {
       axios.defaults.headers.common = { Authorization: `bearer ${token}` };
       await axios.put(url, formData).then((response) => {
-   
-        if (response.status === 200) {
+        
+           if (response.status === 200) {
+             console.log(response.data);
           setShowToast(true);
           setToastType("success");
           setToastAction("editHotel");
-          setTimeout(() => setShowToast(false), 3000);
-        }
+             setTimeout(() => setShowToast(false), 3000);
+             /* setTimeout(() => history.push(/hotels/resonse.data)) */
+             setNewSlug(response.data.slug);
+            
+        }  
       });
+      /*  console.log(newSlug); */
     } catch (error) {
       setShow(false);
       setShowToast(true);
@@ -183,6 +193,7 @@ function EditHotelForm() {
   }
 
   return (
+
     <div className="my-5 container contact-form">
       <h1 className="my-5 text-center">Edit {hotel.name}</h1>
       <Form noValidate onSubmit={handleSubmit(onSubmit)}>
@@ -333,7 +344,7 @@ function EditHotelForm() {
         </Button>
         <Button
           className="primary-button ml-3 mr-3 mb-3"
-          onClick={() => history.push("/hotels/" + slug)}
+          onClick={() => history.push("/hotels/" + newSlug)}
         >
           View hotel
         </Button>
