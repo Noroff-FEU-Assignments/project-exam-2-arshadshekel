@@ -111,7 +111,7 @@ function ContactUs() {
             <Form.Label>Message</Form.Label>
             <Form.Control
               as="textarea"
-              rows={3}
+              rows={8 }
               name="Message"
               placeholder="Please enter a message"
               ref={register}
